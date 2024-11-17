@@ -1,0 +1,47 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v14.0.0  # Use the version of clang-format you have installed
+    hooks:
+      - id: clang-format
+        name: clang-format C++ code
+        files: \.(cpp|hpp|cc|cxx|h|c|hxx)$
+        args: [--style=llvm]  # You can set your preferred style here
+
+  - repo: https://github.com/pre-commit/mirrors-clang-tidy
+    rev: v14.0.0
+    hooks:
+      - id: clang-tidy
+        name: clang-tidy C++ code
+        files: \.(cpp|hpp|cc|cxx|h|c|hxx)$
+        args: [--config=, --extra-arg=-std=c++17]  # Adjust as needed
+
+  - repo: https://github.com/psf/black
+    rev: 23.9.1  # Use the latest stable version
+    hooks:
+      - id: black
+        language_version: python3.8  # Adjust to your Python version
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8==6.1.0]
+        args: [--max-line-length=88]  # Adjust as per your style guide
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: custom-lint
+        name: Custom Lint
+        entry: ./scripts/custom_lint.sh
+        language: script
+        files: \.(cpp|hpp|cc|cxx|h|c|hxx|py)$
+
