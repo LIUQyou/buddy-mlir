@@ -60,32 +60,68 @@ jobs:
           echo "cmake_flags=" >> $GITHUB_OUTPUT
         fi
 
-    - name: Run Build and Tests in Docker
+    - name: Run Docker Container
+      id: run-container
       run: |
-        docker run --rm buddy-mlir-ci:${{ matrix.configuration }} \
-          /bin/bash -c "
-            set -e
-            cd /root/buddy-mlir
-            nix develop -c bash -c '
-              mkdir -p llvm/build && cd llvm/build
-              cmake -G Ninja ../llvm \
-                -DLLVM_ENABLE_PROJECTS=\"mlir;clang\" \
-                -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
-                -DLLVM_ENABLE_ASSERTIONS=ON \
-                -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags }}
-              ninja check-mlir check-clang
-              cd ../../build
-              cmake -G Ninja .. \
-                -DMLIR_DIR=\$PWD/../llvm/build/lib/cmake/mlir \
-                -DLLVM_DIR=\$PWD/../llvm/build/lib/cmake/llvm \
-                -DLLVM_ENABLE_ASSERTIONS=ON \
-                -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags }}
-              ninja
-              ninja check-buddy
-            '
-          "
+        docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
+
+    - name: Enter buddy-mlir Directory
+      run: |
+        docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          set -e
+          cd /root/buddy-mlir
+          nix develop -c bash -c 'echo Nix environment setup complete'
+        "
+
+    - name: Build LLVM
+      run: |
+        docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          set -e
+          cd /root/buddy-mlir
+          nix develop -c bash -c '
+            mkdir -p llvm/build && cd llvm/build
+            cmake -G Ninja ../llvm \
+              -DLLVM_ENABLE_PROJECTS=\"mlir;clang\" \
+              -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
+              -DLLVM_ENABLE_ASSERTIONS=ON \
+              -DCMAKE_BUILD_TYPE=Release \
+              ${{ steps.configure.outputs.cmake_flags }}
+            ninja check-mlir check-clang
+          '
+        "
+
+    - name: Check LLVM Build Path
+      run: |
+        docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          if [ ! -d /root/buddy-mlir/llvm/build ]; then
+            echo 'LLVM build directory does not exist'
+            exit 1
+          fi
+        "
+
+    - name: Build MLIR
+      run: |
+        docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          set -e
+          cd /root/buddy-mlir
+          nix develop -c bash -c '
+            mkdir -p build && cd build
+            cmake -G Ninja .. \
+              -DMLIR_DIR=\$PWD/../llvm/build/lib/cmake/mlir \
+              -DLLVM_DIR=\$PWD/../llvm/build/lib/cmake/llvm \
+              -DLLVM_ENABLE_ASSERTIONS=ON \
+              -DCMAKE_BUILD_TYPE=Release \
+              ${{ steps.configure.outputs.cmake_flags }}
+            ninja
+            ninja check-buddy
+          '
+        "
+
+    - name: Stop and Remove Docker Container
+      if: always()
+      run: |
+        docker stop buddy-mlir-ci-${{ matrix.configuration }}
+        docker rm buddy-mlir-ci-${{ matrix.configuration }}
 
     - name: Upload Test Results
       if: failure()
