@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        configuration:
+          - default
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Dependencies
+      run: |
+        apt-get update
+        apt-get install -y build-essential clang cmake ninja-build python3 python3-pip git curl gnupg ca-certificates docker.io nodejs npm
+        # Install any other dependencies your workflow requires
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        driver: docker-container
+
+
+    - name: Cache Docker layers
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ matrix.configuration }}-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-${{ matrix.configuration }}-
+
+    - name: Build Docker Image
+      run: |
+        docker buildx build \
+          --cache-from type=local,src=/tmp/.buildx-cache \
+          --cache-to type=local,dest=/tmp/.buildx-cache-new \
+          -t buddy-mlir-ci:${{ matrix.configuration }} \
+          -f ci/Dockerfile.${{ matrix.configuration }} \
+          --load \
+          .
+
+
+    - name: Load Docker Cache
+      if: steps.build.outputs.cache-hit != 'true'
+      run: |
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+    - name: Configure Build Flags
+      id: configure
+      run: |
+        if [ "${{ matrix.configuration }}" == "cuda" ]; then
+          echo "cmake_flags=-DLLVM_TARGETS_TO_BUILD='host;RISCV;NVPTX' -DMLIR_ENABLE_CUDA_RUNNER=ON" >> $GITHUB_OUTPUT
+        elif [ "${{ matrix.configuration }}" == "python-bindings" ]; then
+          echo "cmake_flags=-DMLIR_ENABLE_BINDINGS_PYTHON=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
+        elif [ "${{ matrix.configuration }}" == "lld" ]; then
+          echo "cmake_flags=-DLLVM_USE_LINKER=lld" >> $GITHUB_OUTPUT
+        else
+          echo "cmake_flags=" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Run Build and Tests in Docker
+      run: |
+        docker run --rm buddy-mlir-ci:${{ matrix.configuration }} \
+          /bin/bash -c "
+            set -e
+            cd /root/buddy-mlir
+            nix develop -c bash -c '
+              mkdir -p llvm/build && cd llvm/build
+              cmake -G Ninja ../llvm \
+                -DLLVM_ENABLE_PROJECTS=\"mlir;clang\" \
+                -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
+                -DLLVM_ENABLE_ASSERTIONS=ON \
+                -DCMAKE_BUILD_TYPE=Release \
+                ${{ steps.configure.outputs.cmake_flags }}
+              ninja check-mlir check-clang
+              cd ../../build
+              cmake -G Ninja .. \
+                -DMLIR_DIR=\$PWD/../llvm/build/lib/cmake/mlir \
+                -DLLVM_DIR=\$PWD/../llvm/build/lib/cmake/llvm \
+                -DLLVM_ENABLE_ASSERTIONS=ON \
+                -DCMAKE_BUILD_TYPE=Release \
+                ${{ steps.configure.outputs.cmake_flags }}
+              ninja
+              ninja check-buddy
+            '
+          "
+
+    - name: Upload Test Results
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.configuration }}
+        path: |
+          buddy-mlir/llvm/build/Testing/**/Testing/*.xml
+          buddy-mlir/build/Testing/**/Testing/*.xml
+
+    - name: Archive Build Artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifacts-${{ matrix.configuration }}
+        path: /root/buddy-mlir/build
+
+    - name: Cleanup Docker Cache
+      if: always()
+      run: |
+        rm -rf /tmp/.buildx-cache
