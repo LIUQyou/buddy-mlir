@@ -13,6 +13,9 @@ jobs:
       matrix:
         configuration:
           - default
+          - cuda
+          - python-bindings
+          - lld
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
@@ -51,13 +54,17 @@ jobs:
       id: configure
       run: |
         if [ "${{ matrix.configuration }}" == "cuda" ]; then
-          echo "cmake_flags=-DLLVM_TARGETS_TO_BUILD='host;RISCV;NVPTX' -DMLIR_ENABLE_CUDA_RUNNER=ON" >> $GITHUB_OUTPUT
+          echo "cmake_flags_llvm=-DLLVM_TARGETS_TO_BUILD='host;RISCV;NVPTX' -DMLIR_ENABLE_CUDA_RUNNER=ON" >> $GITHUB_OUTPUT
+          echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
         elif [ "${{ matrix.configuration }}" == "python-bindings" ]; then
-          echo "cmake_flags=-DMLIR_ENABLE_BINDINGS_PYTHON=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
+          echo "cmake_flags_llvm=-DMLIR_ENABLE_BINDINGS_PYTHON=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
+          echo "cmake_flags_buddy=-DBUDDY_MLIR_ENABLE_PYTHON_PACKAGES=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
         elif [ "${{ matrix.configuration }}" == "lld" ]; then
-          echo "cmake_flags=-DLLVM_USE_LINKER=lld" >> $GITHUB_OUTPUT
+          echo "cmake_flags_llvm=-DLLVM_USE_LINKER=lld" >> $GITHUB_OUTPUT
+          echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
         else
-          echo "cmake_flags=" >> $GITHUB_OUTPUT
+          echo "cmake_flags_llvm=" >> $GITHUB_OUTPUT
+          echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
         fi
 
     - name: Run Docker Container
@@ -85,7 +92,7 @@ jobs:
               -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
               -DLLVM_ENABLE_ASSERTIONS=ON \
               -DCMAKE_BUILD_TYPE=Release \
-              ${{ steps.configure.outputs.cmake_flags }}
+              ${{ steps.configure.outputs.cmake_flags_llvm }}
             ninja check-mlir check-clang
           '
         "
@@ -99,7 +106,7 @@ jobs:
           fi
         "
 
-    - name: Build MLIR
+    - name: Build buddy-mlir
       run: |
         docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
           set -e
@@ -111,7 +118,7 @@ jobs:
               -DLLVM_DIR=\$PWD/../llvm/build/lib/cmake/llvm \
               -DLLVM_ENABLE_ASSERTIONS=ON \
               -DCMAKE_BUILD_TYPE=Release \
-              ${{ steps.configure.outputs.cmake_flags }}
+              ${{ steps.configure.outputs.cmake_flags_buddy }}
             ninja
             ninja check-buddy
           '
