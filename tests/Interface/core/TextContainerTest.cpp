@@ -233,8 +233,7 @@ int main() {
   std::string pureStrLlama = "buddy compiler is a domain specific compiler";
   Text<size_t, 2> pureStrLlamaContainer(pureStrLlama);
   pureStrLlamaContainer.tokenizeLlama(vocabDir, 12);
-  std::string pureStrLlamaResult =
-      pureStrLlamaContainer.revertLlama();
+  std::string pureStrLlamaResult = pureStrLlamaContainer.revertLlama();
   // CHECK: 1
   fprintf(stderr, "%ld\n", pureStrLlamaContainer.getData()[0]);
   // CHECK: 8619
@@ -267,8 +266,7 @@ int main() {
   std::string puncStrLlama = "buddy compiler: a domain specific compiler!";
   Text<size_t, 2> puncStrLlamaContainer(puncStrLlama);
   puncStrLlamaContainer.tokenizeLlama(vocabDir, 12);
-  std::string puncStrLlamaResult =
-      puncStrLlamaContainer.revertLlama();
+  std::string puncStrLlamaResult = puncStrLlamaContainer.revertLlama();
   // CHECK: 1
   fprintf(stderr, "%ld\n", puncStrLlamaContainer.getData()[0]);
   // CHECK: 8619

@@ -1,0 +1,958 @@
+[INFO][m Initializing environment for https://github.com/pre-commit/mirrors-clang-format.
+[INFO][m Initializing environment for https://github.com/pocc/pre-commit-hooks.
+[INFO][m Initializing environment for https://github.com/psf/black.
+[INFO][m Initializing environment for https://github.com/PyCQA/flake8.
+[INFO][m Initializing environment for https://github.com/pre-commit/pre-commit-hooks.
+[INFO][m Installing environment for https://github.com/pre-commit/mirrors-clang-format.
+[INFO][m Once installed this environment will be reused.
+[INFO][m This may take a few minutes...
+[INFO][m Installing environment for https://github.com/pocc/pre-commit-hooks.
+[INFO][m Once installed this environment will be reused.
+[INFO][m This may take a few minutes...
+[INFO][m Installing environment for https://github.com/psf/black.
+[INFO][m Once installed this environment will be reused.
+[INFO][m This may take a few minutes...
+[INFO][m Installing environment for https://github.com/PyCQA/flake8.
+[INFO][m Once installed this environment will be reused.
+[INFO][m This may take a few minutes...
+[INFO][m Installing environment for https://github.com/pre-commit/pre-commit-hooks.
+[INFO][m Once installed this environment will be reused.
+[INFO][m This may take a few minutes...
+clang-format C++ code....................................................[42mPassed[m
+clang-tidy C++ code......................................................[41mFailed[m
+[2m- hook id: clang-tidy[m
+[2m- exit code: 1[m
+
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/MLIRGPU/ConvertMemcpyToGPU.cpp:21:10: error: 'mlir/Dialect/Arith/IR/Arith.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Arith/IR/Arith.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/MLIRGPU/ConvertMemcpyToGPU.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/MLIRGPU or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/MLIRGPU/ConvertMemcpyToGPU.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/AudioContainer.h:31:10: error: 'buddy/Core/Container.h' file not found [clang-diagnostic-error]
+#include "buddy/Core/Container.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/DAP/AudioContainer.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/AudioContainer.h.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DAP.h:24:10: error: 'buddy/DAP/AudioContainer.h' file not found [clang-diagnostic-error]
+#include "buddy/DAP/AudioContainer.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/DAP/DAP.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DAP.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/MatMulOptimization/BatchMatMulTileOptimize.cpp:20:10: error: 'mlir/Dialect/Arith/IR/Arith.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Arith/IR/Arith.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/MatMulOptimization/BatchMatMulTileOptimize.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/MatMulOptimization or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/MatMulOptimization/BatchMatMulTileOptimize.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerDAP/LowerDAPPass.cpp:21:10: error: 'mlir/Dialect/Affine/IR/AffineOps.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Affine/IR/AffineOps.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/LowerDAP/LowerDAPPass.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerDAP or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerDAP/LowerDAPPass.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/tests/Interface/core/NewImageContainerTestPng.cpp:23:10: error: 'buddy/DIP/ImgContainer.h' file not found [clang-diagnostic-error]
+#include <buddy/DIP/ImgContainer.h>
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "tests/Interface/core/NewImageContainerTestPng.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/tests/Interface/core or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/tests/Interface/core/NewImageContainerTestPng.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/ConvVectorization/CBConvVectorization.cpp:22:10: error: 'mlir/Dialect/Affine/IR/AffineOps.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Affine/IR/AffineOps.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/ConvVectorization/CBConvVectorization.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/ConvVectorization or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/ConvVectorization/CBConvVectorization.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DSP/IIRDesign.h:25:10: error: 'cmath' file not found [clang-diagnostic-error]
+#include <cmath>
+         ^~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/DAP/DSP/IIRDesign.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DSP or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DSP/IIRDesign.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Dialect/RVV/Transforms/LegalizeForLLVMExport.cpp:17:10: error: 'mlir/Conversion/LLVMCommon/ConversionTarget.h' file not found [clang-diagnostic-error]
+#include "mlir/Conversion/LLVMCommon/ConversionTarget.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Dialect/RVV/Transforms/LegalizeForLLVMExport.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Dialect/RVV/Transforms or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Dialect/RVV/Transforms/LegalizeForLLVMExport.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/examples/DAPDialect/RFFT.cpp:21:10: error: 'buddy/DAP/DAP.h' file not found [clang-diagnostic-error]
+#include <buddy/DAP/DAP.h>
+         ^~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "examples/DAPDialect/RFFT.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/examples/DAPDialect or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/examples/DAPDialect/RFFT.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DIP/imgcodecs/bitstrm.h:52:10: error: 'buddy/DIP/ImageContainer.h' file not found [clang-diagnostic-error]
+#include "buddy/DIP/ImageContainer.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/DIP/imgcodecs/bitstrm.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DIP/imgcodecs or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DIP/imgcodecs/bitstrm.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Dialect/VectorExp/VectorExpDialect.cpp:21:10: error: 'mlir/IR/Builders.h' file not found [clang-diagnostic-error]
+#include "mlir/IR/Builders.h"
+         ^~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Dialect/VectorExp/VectorExpDialect.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Dialect/VectorExp or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Dialect/VectorExp/VectorExpDialect.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/FrontendGen/include/AST.h:19:10: error: 'llvm/ADT/SmallVector.h' file not found [clang-diagnostic-error]
+#include "llvm/ADT/SmallVector.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/FrontendGen/include/CGModule.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/FrontendGen/include or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/FrontendGen/include/CGModule.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Dialect/VectorExp/VectorExpOps.cpp:21:10: error: 'VectorExp/VectorExpOps.h' file not found [clang-diagnostic-error]
+#include "VectorExp/VectorExpOps.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Dialect/VectorExp/VectorExpOps.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Dialect/VectorExp or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Dialect/VectorExp/VectorExpOps.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerGemmini/LowerGemminiPass.cpp:21:10: error: 'mlir/Conversion/AffineToStandard/AffineToStandard.h' file not found [clang-diagnostic-error]
+#include "mlir/Conversion/AffineToStandard/AffineToStandard.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/LowerGemmini/LowerGemminiPass.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerGemmini or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerGemmini/LowerGemminiPass.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerBud/LowerBudPass.cpp:21:10: error: 'mlir/Dialect/Arith/IR/Arith.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Arith/IR/Arith.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/LowerBud/LowerBudPass.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerBud or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerBud/LowerBudPass.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/FrontendGen/include/AST.h:19:10: error: 'llvm/ADT/SmallVector.h' file not found [clang-diagnostic-error]
+#include "llvm/ADT/SmallVector.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/FrontendGen/include/AST.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/FrontendGen/include or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/FrontendGen/include/AST.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/examples/DIPDialect/OpenCVAll.cpp:21:10: error: 'opencv2/opencv.hpp' file not found [clang-diagnostic-error]
+#include <opencv2/opencv.hpp>
+         ^~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "examples/DIPDialect/OpenCVAll.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/examples/DIPDialect or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/examples/DIPDialect/OpenCVAll.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/frontend/FrontendGen/lib/Lexer.cpp:17:10: error: 'Lexer.h' file not found [clang-diagnostic-error]
+#include "Lexer.h"
+         ^~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/FrontendGen/lib/Lexer.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/FrontendGen/lib or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/FrontendGen/lib/Lexer.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Utils/GPUUtils.cpp:32:10: error: 'mlir/Analysis/Liveness.h' file not found [clang-diagnostic-error]
+#include "mlir/Analysis/Liveness.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Utils/GPUUtils.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Utils or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Utils/GPUUtils.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Dialect/Gemmini/IR/GemminiDialect.cpp:21:10: error: 'mlir/Dialect/LLVMIR/LLVMTypes.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/LLVMIR/LLVMTypes.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Dialect/Gemmini/IR/GemminiDialect.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Dialect/Gemmini/IR or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Dialect/Gemmini/IR/GemminiDialect.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/midend/include/Dialect/DIP/DIPDialect.h:24:10: error: 'mlir/IR/Dialect.h' file not found [clang-diagnostic-error]
+#include "mlir/IR/Dialect.h"
+         ^~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/include/Dialect/DIP/DIPDialect.h"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/include/Dialect/DIP or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/include/Dialect/DIP/DIPDialect.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/examples/BuddyLlama/llama-main.cpp:17:10: error: 'buddy/Core/Container.h' file not found [clang-diagnostic-error]
+#include <buddy/Core/Container.h>
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "examples/BuddyLlama/llama-main.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/examples/BuddyLlama or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/examples/BuddyLlama/llama-main.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/midend/include/Dialect/RVV/RVVDialect.h:20:10: error: 'mlir/Dialect/Func/IR/FuncOps.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Func/IR/FuncOps.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/include/Dialect/RVV/RVVDialect.h"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/include/Dialect/RVV or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/include/Dialect/RVV/RVVDialect.h.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/midend/include/Target/LLVMIR/Dialect/RVV/RVVToLLVMIRTranslation.h:28:36: error: use of undeclared identifier 'mlir' [clang-diagnostic-error]
+void registerRVVDialectTranslation(mlir::DialectRegistry &registry);
+                                   ^
+/users/LiuQun/buddy-mlir/midend/include/Target/LLVMIR/Dialect/RVV/RVVToLLVMIRTranslation.h:32:36: error: use of undeclared identifier 'mlir' [clang-diagnostic-error]
+void registerRVVDialectTranslation(mlir::MLIRContext &context);
+                                   ^
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/include/Target/LLVMIR/Dialect/RVV/RVVToLLVMIRTranslation.h"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/include/Target/LLVMIR/Dialect/RVV or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+3 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/include/Target/LLVMIR/Dialect/RVV/RVVToLLVMIRTranslation.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/examples/DAPDialect/IIRLowpass.cpp:22:10: error: 'buddy/DAP/DAP.h' file not found [clang-diagnostic-error]
+#include <buddy/DAP/DAP.h>
+         ^~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "examples/DAPDialect/IIRLowpass.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/examples/DAPDialect or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/examples/DAPDialect/IIRLowpass.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/frontend/FrontendGen/frontendgen.cpp:21:10: error: 'CGModule.h' file not found [clang-diagnostic-error]
+#include "CGModule.h"
+         ^~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/FrontendGen/frontendgen.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/FrontendGen or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/FrontendGen/frontendgen.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/LLM/TextContainer.h:26:10: error: 'buddy/Core/Container.h' file not found [clang-diagnostic-error]
+#include "buddy/Core/Container.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/LLM/TextContainer.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/LLM or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/LLM/TextContainer.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/examples/DAPDialect/FIRLowpass.cpp:22:10: error: 'buddy/DAP/DAP.h' file not found [clang-diagnostic-error]
+#include <buddy/DAP/DAP.h>
+         ^~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "examples/DAPDialect/FIRLowpass.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/examples/DAPDialect or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/examples/DAPDialect/FIRLowpass.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/FrontendGen/include/Terminator.h:20:10: error: 'llvm/ADT/SmallSet.h' file not found [clang-diagnostic-error]
+#include "llvm/ADT/SmallSet.h"
+         ^~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/FrontendGen/include/Terminator.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/FrontendGen/include or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/FrontendGen/include/Terminator.h.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DSP/Biquad.h:22:10: error: 'buddy/Core/Container.h' file not found [clang-diagnostic-error]
+#include "buddy/Core/Container.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/DAP/DSP/Biquad.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DSP or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DAP/DSP/Biquad.h.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DIP/imgcodecs/utils.h:52:10: error: 'buddy/DIP/imgcodecs/replenishment.h' file not found [clang-diagnostic-error]
+#include "buddy/DIP/imgcodecs/replenishment.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/Interfaces/buddy/DIP/imgcodecs/utils.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DIP/imgcodecs or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/Interfaces/buddy/DIP/imgcodecs/utils.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Utils/Utils.cpp:25:10: error: 'mlir/Dialect/Affine/IR/AffineOps.h' file not found [clang-diagnostic-error]
+#include <mlir/Dialect/Affine/IR/AffineOps.h>
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Utils/Utils.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Utils or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Utils/Utils.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerRVV/LowerRVVPass.cpp:21:10: error: 'mlir/Conversion/LLVMCommon/ConversionTarget.h' file not found [clang-diagnostic-error]
+#include "mlir/Conversion/LLVMCommon/ConversionTarget.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/LowerRVV/LowerRVVPass.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerRVV or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/LowerRVV/LowerRVVPass.cpp.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/midend/lib/Conversion/MatMulOptimization/MatMulParallelVectorization.cpp:21:10: error: 'mlir/Dialect/Arith/IR/Arith.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Arith/IR/Arith.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/lib/Conversion/MatMulOptimization/MatMulParallelVectorization.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/lib/Conversion/MatMulOptimization or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/lib/Conversion/MatMulOptimization/MatMulParallelVectorization.cpp.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/frontend/FrontendGen/include/AST.h:19:10: error: 'llvm/ADT/SmallVector.h' file not found [clang-diagnostic-error]
+#include "llvm/ADT/SmallVector.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "frontend/FrontendGen/include/Sema.h"
+No compilation database found in /users/LiuQun/buddy-mlir/frontend/FrontendGen/include or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/frontend/FrontendGen/include/Sema.h.
+Found compiler error(s).
+error: invalid argument '-std=c++17' not allowed with 'C' [clang-diagnostic-error]
+/users/LiuQun/buddy-mlir/midend/include/Utils/DIPUtils.h:25:10: error: 'Utils/Utils.h' file not found [clang-diagnostic-error]
+#include "Utils/Utils.h"
+         ^~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "midend/include/Utils/DIPUtils.h"
+No compilation database found in /users/LiuQun/buddy-mlir/midend/include/Utils or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+2 errors generated.
+Error while processing /users/LiuQun/buddy-mlir/midend/include/Utils/DIPUtils.h.
+Found compiler error(s).
+/users/LiuQun/buddy-mlir/tools/buddy-opt/buddy-opt.cpp:21:10: error: 'mlir/Dialect/Bufferization/Transforms/Passes.h' file not found [clang-diagnostic-error]
+#include "mlir/Dialect/Bufferization/Transforms/Passes.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error while trying to load a compilation database:
+Could not auto-detect compilation database for file "tools/buddy-opt/buddy-opt.cpp"
+No compilation database found in /users/LiuQun/buddy-mlir/tools/buddy-opt or any parent directory
+fixed-compilation-database: Error while opening fixed database: No such file or directory
+json-compilation-database: Error while opening JSON database: No such file or directory
+Running without flags.
+1 error generated.
+Error while processing /users/LiuQun/buddy-mlir/tools/buddy-opt/buddy-opt.cpp.
+Found compiler error(s).
+
+black....................................................................[42mPassed[m
+flake8...................................................................[41mFailed[m
+[2m- hook id: flake8[m
+[2m- exit code: 1[m
+
+[1mbenchmark/figure.py[m[36m:[m45[36m:[m46[36m:[m [1m[31mW605[m invalid escape sequence '\d'
+[1mbenchmark/figure.py[m[36m:[m113[36m:[m89[36m:[m [1m[31mE501[m line too long (102 > 88 characters)
+[1mbenchmark/figure.py[m[36m:[m120[36m:[m89[36m:[m [1m[31mE501[m line too long (89 > 88 characters)
+[1mbenchmark/figure.py[m[36m:[m156[36m:[m17[36m:[m [1m[31mE711[m comparison to None should be 'if cond is None:'
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m23[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.passmanager import *' used; unable to detect undefined names
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.execution_engine import *' used; unable to detect undefined names
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m26[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.ir import *' used; unable to detect undefined names
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m85[36m:[m39[36m:[m [1m[31mF405[m 'Type' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m97[36m:[m10[36m:[m [1m[31mF405[m 'Context' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m97[36m:[m23[36m:[m [1m[31mF841[m local variable 'ctx' is assigned to but never used
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m99[36m:[m17[36m:[m [1m[31mF405[m 'Module' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m99[36m:[m26[36m:[m [1m[31mF405[m 'Module' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m105[36m:[m25[36m:[m [1m[31mF405[m 'Type' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m110[36m:[m21[36m:[m [1m[31mF405[m 'Module' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m113[36m:[m18[36m:[m [1m[31mF405[m 'ExecutionEngine' may be undefined, or defined from star imports: mlir.execution_engine, mlir.ir, mlir.passmanager
+[1mexamples/BuddyGPU/run-module-gpu.py[m[36m:[m135[36m:[m89[36m:[m [1m[31mE501[m line too long (92 > 88 characters)
+[1mexamples/BuddyGraph/import-dynamo-break.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mexamples/BuddyGraph/import-dynamo-break.py[m[36m:[m23[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mexamples/BuddyLlama/import-llama2.py[m[36m:[m23[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mexamples/BuddyPython/module_gen.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mexamples/BuddyWhisper/import-whisper.py[m[36m:[m23[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mexamples/MLIRPython/transformer.py[m[36m:[m1[36m:[m1[36m:[m [1m[31mF401[m 'collections' imported but unused
+[1mexamples/MLIRPython/transformer.py[m[36m:[m10[36m:[m1[36m:[m [1m[31mE402[m module level import not at top of file
+[1mexamples/MLIRPython/transformer.py[m[36m:[m11[36m:[m1[36m:[m [1m[31mF401[m 'transformers.PyTorchBenchmark' imported but unused
+[1mexamples/MLIRPython/transformer.py[m[36m:[m11[36m:[m1[36m:[m [1m[31mF401[m 'transformers.PyTorchBenchmarkArguments' imported but unused
+[1mexamples/MLIRPython/transformer.py[m[36m:[m11[36m:[m1[36m:[m [1m[31mE402[m module level import not at top of file
+[1mexamples/lit.cfg.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'platform' imported but unused
+[1mexamples/lit.cfg.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 're' imported but unused
+[1mexamples/lit.cfg.py[m[36m:[m6[36m:[m1[36m:[m [1m[31mF401[m 'subprocess' imported but unused
+[1mexamples/lit.cfg.py[m[36m:[m7[36m:[m1[36m:[m [1m[31mF401[m 'tempfile' imported but unused
+[1mexamples/lit.cfg.py[m[36m:[m14[36m:[m1[36m:[m [1m[31mF401[m 'lit.llvm.subst.FindTool' imported but unused
+[1mexamples/lit.cfg.py[m[36m:[m19[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m27[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m30[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m30[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m32[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m32[36m:[m40[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m33[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m33[36m:[m43[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m38[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m71[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m71[36m:[m39[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m74[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m76[36m:[m14[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m76[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mexamples/lit.cfg.py[m[36m:[m86[36m:[m13[36m:[m [1m[31mF821[m undefined name 'config'
+[1mfrontend/Python/frontend.py[m[36m:[m31[36m:[m1[36m:[m [1m[31mF401[m 'mlir.ir' imported but unused
+[1mfrontend/Python/frontend.py[m[36m:[m32[36m:[m1[36m:[m [1m[31mF401[m 'mlir.dialects.func' imported but unused
+[1mfrontend/Python/frontend.py[m[36m:[m33[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.passmanager import *' used; unable to detect undefined names
+[1mfrontend/Python/frontend.py[m[36m:[m34[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.execution_engine import *' used; unable to detect undefined names
+[1mfrontend/Python/frontend.py[m[36m:[m46[36m:[m1[36m:[m [1m[31mF403[m 'from .graph.operation import *' used; unable to detect undefined names
+[1mfrontend/Python/frontend.py[m[36m:[m108[36m:[m23[36m:[m [1m[31mF405[m 'OutputOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m109[36m:[m28[36m:[m [1m[31mF405[m 'PlaceholderOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m110[36m:[m29[36m:[m [1m[31mF405[m 'ArangeOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m111[36m:[m31[36m:[m [1m[31mF405[m 'ArangeOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m112[36m:[m34[36m:[m [1m[31mF405[m 'UnsqueezeOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m113[36m:[m29[36m:[m [1m[31mF405[m 'ViewOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m114[36m:[m29[36m:[m [1m[31mF405[m 'OnesOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m115[36m:[m29[36m:[m [1m[31mF405[m 'FullOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m116[36m:[m26[36m:[m [1m[31mF405[m 'LessThanOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m117[36m:[m34[36m:[m [1m[31mF405[m 'EmbeddingOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m118[36m:[m35[36m:[m [1m[31mF405[m 'MaskedFillOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m119[36m:[m29[36m:[m [1m[31mF405[m 'SliceOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m120[36m:[m31[36m:[m [1m[31mF405[m 'ExpandOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m121[36m:[m33[36m:[m [1m[31mF405[m 'ToCopyOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m122[36m:[m28[36m:[m [1m[31mF405[m 'RsubOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m123[36m:[m34[36m:[m [1m[31mF405[m 'PowOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m124[36m:[m25[36m:[m [1m[31mF405[m 'MeanOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m125[36m:[m30[36m:[m [1m[31mF405[m 'RsqrtOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m126[36m:[m27[36m:[m [1m[31mF405[m 'MulOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m127[36m:[m26[36m:[m [1m[31mF405[m 'TOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m128[36m:[m27[36m:[m [1m[31mF405[m 'MatmulOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m129[36m:[m30[36m:[m [1m[31mF405[m 'TransposeOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m130[36m:[m29[36m:[m [1m[31mF405[m 'IndexOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m131[36m:[m28[36m:[m [1m[31mF405[m 'NegOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m132[36m:[m28[36m:[m [1m[31mF405[m 'CatOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m133[36m:[m28[36m:[m [1m[31mF405[m 'SqueezeOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m134[36m:[m28[36m:[m [1m[31mF405[m 'BatchMatmulOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m135[36m:[m27[36m:[m [1m[31mF405[m 'DivOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m136[36m:[m33[36m:[m [1m[31mF405[m 'SoftmaxOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m137[36m:[m30[36m:[m [1m[31mF405[m 'CloneOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m138[36m:[m29[36m:[m [1m[31mF405[m 'SiluOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m139[36m:[m27[36m:[m [1m[31mF405[m 'AddOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m140[36m:[m30[36m:[m [1m[31mF405[m 'AddMMOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m141[36m:[m32[36m:[m [1m[31mF405[m 'PermuteOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m142[36m:[m45[36m:[m [1m[31mF405[m 'ConvertElementTypeOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m143[36m:[m32[36m:[m [1m[31mF405[m 'SumDimOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m144[36m:[m29[36m:[m [1m[31mF405[m 'TanhOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m145[36m:[m27[36m:[m [1m[31mF405[m 'SubOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m146[36m:[m36[36m:[m [1m[31mF405[m 'VarMeanOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m147[36m:[m29[36m:[m [1m[31mF405[m 'AmaxOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m148[36m:[m27[36m:[m [1m[31mF405[m 'SelectOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m149[36m:[m28[36m:[m [1m[31mF405[m 'ExpOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m150[36m:[m28[36m:[m [1m[31mF405[m 'ErfOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m151[36m:[m24[36m:[m [1m[31mF405[m 'GetItemOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m152[36m:[m36[36m:[m [1m[31mF405[m 'Conv2dOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m153[36m:[m48[36m:[m [1m[31mF405[m 'MaxPool2dWithIndicesOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m154[36m:[m29[36m:[m [1m[31mF405[m 'ReluOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m155[36m:[m29[36m:[m [1m[31mF405[m 'IotaOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m156[36m:[m32[36m:[m [1m[31mF405[m 'SigmoidOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m157[36m:[m38[36m:[m [1m[31mF405[m 'ScalarTensorOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m158[36m:[m27[36m:[m [1m[31mF405[m 'WhereOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m159[36m:[m29[36m:[m [1m[31mF405[m 'SqrtOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m160[36m:[m35[36m:[m [1m[31mF405[m 'ReciprocalOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m161[36m:[m34[36m:[m [1m[31mF405[m 'ClampMinOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m162[36m:[m34[36m:[m [1m[31mF405[m 'ClampMaxOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m163[36m:[m28[36m:[m [1m[31mF405[m 'RandIntLowOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m164[36m:[m28[36m:[m [1m[31mF405[m 'CosOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m165[36m:[m28[36m:[m [1m[31mF405[m 'SinOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m166[36m:[m31[36m:[m [1m[31mF405[m 'ArgMaxOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m167[36m:[m29[36m:[m [1m[31mF405[m 'SplitOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m168[36m:[m28[36m:[m [1m[31mF405[m 'MaxOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m169[36m:[m26[36m:[m [1m[31mF405[m 'GtOp' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m203[36m:[m21[36m:[m [1m[31mF405[m 'Tuple' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m207[36m:[m31[36m:[m [1m[31mF405[m 'Dict' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/frontend.py[m[36m:[m276[36m:[m48[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/frontend.py[m[36m:[m438[36m:[m14[36m:[m [1m[31mF405[m 'ExecutionEngine' may be undefined, or defined from star imports: .graph.operation, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/__init__.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF401[m '.graph.Graph' imported but unused
+[1mfrontend/Python/graph/__init__.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF401[m '.graph_driver.GraphDriver' imported but unused
+[1mfrontend/Python/graph/__init__.py[m[36m:[m23[36m:[m1[36m:[m [1m[31mF403[m 'from .operation import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/__init__.py[m[36m:[m23[36m:[m1[36m:[m [1m[31mF401[m '.operation.*' imported but unused
+[1mfrontend/Python/graph/__init__.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF401[m '.type.TensorDType' imported but unused
+[1mfrontend/Python/graph/__init__.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF401[m '.type.TensorMeta' imported but unused
+[1mfrontend/Python/graph/__init__.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF401[m '.type.DeviceType' imported but unused
+[1mfrontend/Python/graph/graph.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF401[m 'typing.Any' imported but unused
+[1mfrontend/Python/graph/graph.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF401[m 'typing.Optional' imported but unused
+[1mfrontend/Python/graph/graph.py[m[36m:[m29[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.passmanager import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/graph.py[m[36m:[m30[36m:[m1[36m:[m [1m[31mF403[m 'from mlir.execution_engine import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/graph.py[m[36m:[m33[36m:[m1[36m:[m [1m[31mF403[m 'from .operation import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/graph.py[m[36m:[m34[36m:[m1[36m:[m [1m[31mF403[m 'from .type import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/graph.py[m[36m:[m104[36m:[m22[36m:[m [1m[31mF405[m 'TensorMeta' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m105[36m:[m27[36m:[m [1m[31mF405[m 'TensorMeta' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m125[36m:[m26[36m:[m [1m[31mF405[m 'Dict' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m125[36m:[m36[36m:[m [1m[31mF405[m 'Op' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m136[36m:[m25[36m:[m [1m[31mF405[m 'Dict' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m136[36m:[m40[36m:[m [1m[31mF405[m 'Op' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m137[36m:[m32[36m:[m [1m[31mF405[m 'Dict' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m137[36m:[m42[36m:[m [1m[31mF405[m 'DeviceType' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m147[36m:[m30[36m:[m [1m[31mF405[m 'Op' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m175[36m:[m31[36m:[m [1m[31mF405[m 'PlaceholderOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m179[36m:[m52[36m:[m [1m[31mF405[m 'DeviceType' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m287[36m:[m18[36m:[m [1m[31mF405[m 'PassManager' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m347[36m:[m20[36m:[m [1m[31mF405[m 'Op' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m348[36m:[m22[36m:[m [1m[31mF405[m 'TensorMeta' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m349[36m:[m22[36m:[m [1m[31mF405[m 'TensorMeta' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m393[36m:[m18[36m:[m [1m[31mF405[m 'TensorDType' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m395[36m:[m18[36m:[m [1m[31mF405[m 'TensorDType' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m397[36m:[m18[36m:[m [1m[31mF405[m 'TensorDType' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m399[36m:[m18[36m:[m [1m[31mF405[m 'TensorDType' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m440[36m:[m36[36m:[m [1m[31mE712[m comparison to False should be 'if cond is False:' or 'if not cond:'
+[1mfrontend/Python/graph/graph.py[m[36m:[m452[36m:[m37[36m:[m [1m[31mF405[m 'FuncOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m464[36m:[m41[36m:[m [1m[31mF405[m 'OutputOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m471[36m:[m43[36m:[m [1m[31mF405[m 'PlaceholderOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m473[36m:[m43[36m:[m [1m[31mF405[m 'GetItemOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m523[36m:[m37[36m:[m [1m[31mF405[m 'FuncOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m533[36m:[m41[36m:[m [1m[31mF405[m 'OutputOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m540[36m:[m43[36m:[m [1m[31mF405[m 'PlaceholderOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m542[36m:[m43[36m:[m [1m[31mF405[m 'GetItemOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m556[36m:[m21[36m:[m [1m[31mF405[m 'PlaceholderOp' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/graph.py[m[36m:[m599[36m:[m32[36m:[m [1m[31mF405[m 'Op' may be undefined, or defined from star imports: .operation, .type, mlir.execution_engine, mlir.passmanager
+[1mfrontend/Python/graph/operation.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF401[m 'typing.Optional' imported but unused
+[1mfrontend/Python/graph/operation.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF401[m 'typing.Tuple' imported but unused
+[1mfrontend/Python/graph/operation.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF401[m '.type.TensorDType' imported but unused
+[1mfrontend/Python/graph/operation.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF401[m '.type.TensorMeta' imported but unused
+[1mfrontend/Python/graph/transform/__init__.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF401[m '.fuse_ops.simply_fuse' imported but unused
+[1mfrontend/Python/graph/transform/__init__.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF401[m '.useless_op_eliminate.maxpool2d_simplify' imported but unused
+[1mfrontend/Python/graph/transform/fuse_ops.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF403[m 'from ..operation import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/transform/fuse_ops.py[m[36m:[m45[36m:[m27[36m:[m [1m[31mF405[m 'PlaceholderOp' may be undefined, or defined from star imports: ..operation
+[1mfrontend/Python/graph/transform/useless_op_eliminate.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mF403[m 'from ..operation import *' used; unable to detect undefined names
+[1mfrontend/Python/graph/transform/useless_op_eliminate.py[m[36m:[m33[36m:[m29[36m:[m [1m[31mF405[m 'MaxPool2dWithIndicesOp' may be undefined, or defined from star imports: ..operation
+[1mfrontend/Python/graph/transform/useless_op_eliminate.py[m[36m:[m36[36m:[m55[36m:[m [1m[31mF405[m 'GetItemOp' may be undefined, or defined from star imports: ..operation
+[1mfrontend/Python/graph/transform/useless_op_eliminate.py[m[36m:[m44[36m:[m28[36m:[m [1m[31mF405[m 'MaxPool2dOp' may be undefined, or defined from star imports: ..operation
+[1mfrontend/Python/ops/func.py[m[36m:[m26[36m:[m1[36m:[m [1m[31mF403[m 'from .utils import *' used; unable to detect undefined names
+[1mfrontend/Python/ops/func.py[m[36m:[m29[36m:[m41[36m:[m [1m[31mF405[m 'Dict' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m37[36m:[m22[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m41[36m:[m67[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/func.py[m[36m:[m49[36m:[m22[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m56[36m:[m41[36m:[m [1m[31mF405[m 'Dict' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m69[36m:[m67[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/func.py[m[36m:[m79[36m:[m22[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m105[36m:[m9[36m:[m [1m[31mF405[m 'TensorDType' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m106[36m:[m9[36m:[m [1m[31mF405[m 'TensorDType' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/func.py[m[36m:[m140[36m:[m70[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/linalg.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF401[m 'typing.List' imported but unused
+[1mfrontend/Python/ops/linalg.py[m[36m:[m25[36m:[m1[36m:[m [1m[31mF401[m 'sys' imported but unused
+[1mfrontend/Python/ops/linalg.py[m[36m:[m25[36m:[m12[36m:[m [1m[31mE401[m multiple imports on one line
+[1mfrontend/Python/ops/linalg.py[m[36m:[m27[36m:[m1[36m:[m [1m[31mF401[m 'functools' imported but unused
+[1mfrontend/Python/ops/linalg.py[m[36m:[m29[36m:[m1[36m:[m [1m[31mF403[m 'from ..graph import *' used; unable to detect undefined names
+[1mfrontend/Python/ops/linalg.py[m[36m:[m31[36m:[m1[36m:[m [1m[31mF403[m 'from .utils import *' used; unable to detect undefined names
+[1mfrontend/Python/ops/linalg.py[m[36m:[m34[36m:[m18[36m:[m [1m[31mF405[m 'AddOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m52[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m60[36m:[m19[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m75[36m:[m11[36m:[m [1m[31mF405[m 'ArangeOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m102[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m115[36m:[m11[36m:[m [1m[31mF405[m 'UnsqueezeOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m145[36m:[m11[36m:[m [1m[31mF405[m 'ViewOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m187[36m:[m11[36m:[m [1m[31mF405[m 'EmbeddingOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m208[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m245[36m:[m11[36m:[m [1m[31mF405[m 'OnesOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m264[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m273[36m:[m11[36m:[m [1m[31mF405[m 'FullOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m293[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m302[36m:[m11[36m:[m [1m[31mF405[m 'LessThanOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m326[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m395[36m:[m11[36m:[m [1m[31mF405[m 'MaskedFillOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m418[36m:[m12[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m419[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m471[36m:[m11[36m:[m [1m[31mF405[m 'SliceOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m509[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m520[36m:[m11[36m:[m [1m[31mF405[m 'ExpandOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m545[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m572[36m:[m71[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/linalg.py[m[36m:[m576[36m:[m71[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/linalg.py[m[36m:[m606[36m:[m11[36m:[m [1m[31mF405[m 'ToCopyOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m731[36m:[m11[36m:[m [1m[31mF405[m 'RsubOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m751[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m754[36m:[m25[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m802[36m:[m11[36m:[m [1m[31mF405[m 'PowOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m825[36m:[m13[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m881[36m:[m11[36m:[m [1m[31mF405[m 'MeanOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m904[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m906[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m953[36m:[m17[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m979[36m:[m11[36m:[m [1m[31mF405[m 'RsqrtOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1002[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1046[36m:[m11[36m:[m [1m[31mF405[m 'MulOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1065[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1073[36m:[m19[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1089[36m:[m11[36m:[m [1m[31mF405[m 'TOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1112[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1121[36m:[m11[36m:[m [1m[31mF405[m 'MatmulOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1145[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1147[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1155[36m:[m11[36m:[m [1m[31mF405[m 'TransposeOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1180[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1191[36m:[m11[36m:[m [1m[31mF405[m 'IndexOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1216[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1268[36m:[m11[36m:[m [1m[31mF405[m 'NegOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1290[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1298[36m:[m11[36m:[m [1m[31mF405[m 'CatOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1326[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1362[36m:[m11[36m:[m [1m[31mF405[m 'SqueezeOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1389[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1450[36m:[m11[36m:[m [1m[31mF405[m 'BatchMatmulOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1475[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1477[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1486[36m:[m11[36m:[m [1m[31mF405[m 'DivOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1505[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1513[36m:[m19[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1529[36m:[m11[36m:[m [1m[31mF405[m 'SoftmaxOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1546[36m:[m25[36m:[m [1m[31mE712[m comparison to False should be 'if cond is False:' or 'if not cond:'
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1555[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1568[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1648[36m:[m11[36m:[m [1m[31mF405[m 'CloneOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1672[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1687[36m:[m11[36m:[m [1m[31mF405[m 'SiluOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1710[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1748[36m:[m43[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1762[36m:[m11[36m:[m [1m[31mF405[m 'WhereOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1787[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1836[36m:[m28[36m:[m [1m[31mF405[m 'ScalarTensorOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1843[36m:[m12[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1849[36m:[m20[36m:[m [1m[31mF405[m 'SplitOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1880[36m:[m89[36m:[m [1m[31mE501[m line too long (95 > 88 characters)
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1891[36m:[m22[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1909[36m:[m18[36m:[m [1m[31mF405[m 'MaxOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1922[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1944[36m:[m17[36m:[m [1m[31mF405[m 'GtOp' may be undefined, or defined from star imports: ..graph, .utils
+[1mfrontend/Python/ops/linalg.py[m[36m:[m1953[36m:[m89[36m:[m [1m[31mE501[m line too long (117 > 88 characters)
+[1mfrontend/Python/ops/tosa.py[m[36m:[m66[36m:[m1[36m:[m [1m[31mF403[m 'from .utils import *' used; unable to detect undefined names
+[1mfrontend/Python/ops/tosa.py[m[36m:[m431[36m:[m50[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/tosa.py[m[36m:[m442[36m:[m48[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/tosa.py[m[36m:[m568[36m:[m15[36m:[m [1m[31mW605[m invalid escape sequence '\s'
+[1mfrontend/Python/ops/tosa.py[m[36m:[m921[36m:[m27[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1008[36m:[m27[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1020[36m:[m9[36m:[m [1m[31mF841[m local variable 'in_channels' is assigned to but never used
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1028[36m:[m19[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1268[36m:[m15[36m:[m [1m[31mF405[m 'mlir_element_attr_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1272[36m:[m5[36m:[m [1m[31mF841[m local variable 'result_element_type' is assigned to but never used
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1272[36m:[m27[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1289[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1311[36m:[m18[36m:[m [1m[31mF405[m 'mlir_element_type_get' may be undefined, or defined from star imports: .utils
+[1mfrontend/Python/ops/tosa.py[m[36m:[m1475[36m:[m61[36m:[m [1m[31mE203[m whitespace before ':'
+[1mfrontend/Python/ops/utils.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF401[m 'typing.Dict' imported but unused
+[1mscripts/from_makefile.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mF401[m 'glob' imported but unused
+[1mscripts/from_makefile.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'json' imported but unused
+[1mscripts/to_makefile.py[m[36m:[m1[36m:[m1[36m:[m [1m[31mF401[m 'argparse' imported but unused
+[1mscripts/to_makefile.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'os' imported but unused
+[1mscripts/to_makefile.py[m[36m:[m20[36m:[m89[36m:[m [1m[31mE501[m line too long (99 > 88 characters)
+[1mtests/Python/test_addmm.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_amax.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_arange.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_arith_div.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_arith_mul.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_arith_sub.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_bmm.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_cat.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_cat.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_clone.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_convert_element_type.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_convolution_default.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_embedding.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_exp.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_full.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_index.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_index.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_iota.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_lt.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_masked_fill.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_masked_fill.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_mm.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_mm.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_neg.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_neg.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_ones.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_permute.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_pow.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_pow.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_relu.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_reshape.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_rsqrt.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_rsub.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_rsub.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_select.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_sigmoid.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_silu.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_silu.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_slice.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_softmax.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_softmax.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_squeeze.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_squeeze.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_sum.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_t.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_t.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_tanh.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_to_copy.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_to_copy.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/Python/test_transpose.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_unsqueeze.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_var_mean.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_view.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_where.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'torch._dynamo as dynamo' imported but unused
+[1mtests/Python/test_where.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 'torch._inductor.decomposition.decompositions as inductor_decomp' imported but unused
+[1mtests/lit.cfg.py[m[36m:[m4[36m:[m1[36m:[m [1m[31mF401[m 'platform' imported but unused
+[1mtests/lit.cfg.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m 're' imported but unused
+[1mtests/lit.cfg.py[m[36m:[m6[36m:[m1[36m:[m [1m[31mF401[m 'subprocess' imported but unused
+[1mtests/lit.cfg.py[m[36m:[m7[36m:[m1[36m:[m [1m[31mF401[m 'tempfile' imported but unused
+[1mtests/lit.cfg.py[m[36m:[m14[36m:[m1[36m:[m [1m[31mF401[m 'lit.llvm.subst.FindTool' imported but unused
+[1mtests/lit.cfg.py[m[36m:[m19[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m21[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m24[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m25[36m:[m4[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m26[36m:[m5[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m29[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m32[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m32[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m34[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m34[36m:[m40[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m35[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m35[36m:[m43[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m44[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m55[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m58[36m:[m1[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m58[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m62[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m64[36m:[m14[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m64[36m:[m38[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m77[36m:[m13[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m83[36m:[m21[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m91[36m:[m4[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m96[36m:[m17[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m102[36m:[m13[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m107[36m:[m4[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m110[36m:[m4[36m:[m [1m[31mF821[m undefined name 'config'
+[1mtests/lit.cfg.py[m[36m:[m112[36m:[m8[36m:[m [1m[31mF821[m undefined name 'config'
+
+fix end of files.........................................................[42mPassed[m
+trim trailing whitespace.................................................[42mPassed[m
+check for merge conflicts................................................[42mPassed[m
+check yaml...............................................................[42mPassed[m
+check for added large files..............................................[42mPassed[m
+Custom Lint..............................................................[41mFailed[m
+[2m- hook id: custom-lint[m
+[2m- exit code: 1[m
+
+frontend/Interfaces/buddy/DAP/DSP/IIRDesign.h:41:// TODO: Add bessel
+frontend/Interfaces/buddy/DAP/DSP/IIRDesign.h:42:// TODO: Add chebyshev1, chebyshev2
+Please address all TODO comments before committing.
+frontend/Interfaces/buddy/DIP/ImgContainer.h:193:      // TODO: Add batch setting.
+frontend/Interfaces/buddy/DIP/ImgContainer.h:301:      // TODO: Add batch setting.
+frontend/Interfaces/buddy/DIP/ImgContainer.h:516:      // TODO: Add batch setting.
+frontend/Interfaces/buddy/DIP/ImgContainer.h:554:      // TODO: Add batch setting.
+examples/ToyDSL/include/MLIRToyVisitor.h:440:      // [TODO][HIGH] try to use a better way to create the shape layout.
+examples/ToyDSL/include/MLIRToyVisitor.h:466:    // arguments. [TODO][LOW] add the semantic check (look up the symbol table)
+Please address all TODO comments before committing.
+frontend/Interfaces/buddy/DAP/DSP/IIR.h:32:// TODO: support both float and double.
+frontend/Interfaces/buddy/DAP/DSP/IIR.h:49:  // TODO: check input range.
+midend/lib/Dialect/GPU/TransformOps.cpp:174:  // TODO: Add pattern to propagate the extract through the scf.for
+Please address all TODO comments before committing.
+midend/lib/Conversion/ConvVectorization/CBConvVectorization.cpp:45:  // TODO: replace f32 with input type.
+midend/lib/Conversion/ConvVectorization/CBConvVectorization.cpp:184:  // TODO: replace f32 with input type.
+Please address all TODO comments before committing.
+midend/lib/Conversion/ExtendDAP/ExtendDAPPass.cpp:252:  // TODO : remove tomemref & totensor, and use insert to replace store. !!
+midend/lib/Conversion/ExtendDAP/ExtendDAPPass.cpp:3571:  // TODO: check alloc and dealloc
+midend/lib/Conversion/ExtendDAP/ExtendDAPPass.cpp:3847:  // TODO : extract operators
+frontend/Python/ops/tosa.py:975:# TODO: Rename convolution2d_op -> convolution_op
+Please address all TODO comments before committing.
+frontend/Interfaces/buddy/DAP/DSP/Biquad.h:30:// TODO: support both float and double.
+frontend/FrontendGen/lib/CGModule.cpp:119:/// TODO: Supports user-defined comment whitespace.
+Please address all TODO comments before committing.
+midend/lib/Conversion/MatMulOptimization/MatMulVectorization.cpp:129:          // TODO: Write a utils function for FMA to support both int and float.
+Please address all TODO comments before committing.
+frontend/Interfaces/buddy/DAP/DSP/Window.h:30:// TODO: implement input checks and error handling
+Please address all TODO comments before committing.
+frontend/Python/frontend.py:19:# TODO[Low]: When integrating more frameworks, `frontend.py` acts as a unified
+Please address all TODO comments before committing.
+midend/lib/Utils/AffineTransformUtils.cpp:131:  // TODO: auto config BLOCK_SZ by input type. float->32, uchar->64
+Please address all TODO comments before committing.
+midend/lib/Conversion/MLIRGPU/ConvertMemcpyToGPU.cpp:102:      // TODO: Move this out of operation, make the copy process async
+midend/lib/Conversion/MLIRGPU/ConvertMemcpyToGPU.cpp:220:          // TODO: replace with src.replaceAllUsesExcept()
+midend/lib/Conversion/LowerSche/LowerSchePass.cpp:165:      // TODO: must have the rank
+midend/lib/Conversion/LowerSche/LowerSchePass.cpp:194:      // TODO: must have the rank
+midend/lib/Conversion/LowerSche/LowerSchePass.cpp:397:            // TODO: must have the rank
+midend/lib/Conversion/LowerSche/LowerSchePass.cpp:427:      // TODO add conversion of onDeviceOp from more op
+Please address all TODO comments before committing.
+midend/lib/Conversion/LowerVectorExp/LowerVectorExpPass.cpp:194:    // TODO: Find a more reasonable way to obtain the max VL.
+Please address all TODO comments before committing.
+midend/lib/Dialect/Gemmini/Transforms/LegalizeForLLVMExport.cpp:1260:      // TODO we probably don't need quite this many nested loops for this part
+midend/lib/Dialect/Gemmini/Transforms/LegalizeForLLVMExport.cpp:1316:            // TODO There might be some unnecessary mvins here at the edge of
+Please address all TODO comments before committing.
+midend/lib/Conversion/MLIRGPU/LegalizeShmemOutlining.cpp:192:  // TODO: If cloneInto can be modified such that if a mapping for
+midend/lib/Conversion/MLIRGPU/LegalizeShmemOutlining.cpp:387:    // TODO: This code cannot use an OpBuilder because it must be inserted into
+Please address all TODO comments before committing.
+frontend/Interfaces/buddy/DAP/DSP/FIR.h:32:// TODO: support both float and double.
+frontend/Interfaces/buddy/DAP/DSP/FIR.h:46:  // TODO: setup a return enum for error handling?
+frontend/Interfaces/buddy/DAP/DSP/FIR.h:47:  // TODO: check memref rank and apply filter onto each ranks.
+frontend/Interfaces/buddy/DAP/DSP/FIR.h:50:  // TODO: check lowpass input range.
+Please address all TODO comments before committing.
+frontend/Python/graph/graph.py:193:        # TODO: discuss two fuse strategy
+Please address all TODO comments before committing.
+frontend/Python/graph/transform/fuse_ops.py:25:# TODO: classify op type for op fusion
+Please address all TODO comments before committing.
+frontend/Interfaces/buddy/DAP/AudioContainer.h:288:    // TODO: add conversion from 1 dimension to multi-dimension
+Please address all TODO comments before committing.
+midend/lib/Utils/DIPUtils.cpp:588:  // TODO: make reserved bits configurable
+frontend/Python/graph/graph_driver.py:204:        # TODO: analysis topology order to sort subgraph call.
+frontend/Interfaces/buddy/LLM/TextContainer.h:19:// TODO-LOW: Add a generic tokenizer.
+frontend/Interfaces/buddy/LLM/TextContainer.h:139:  // TODO: improve this method.
+frontend/Interfaces/buddy/LLM/TextContainer.h:384:  // TODO-LOW: If in the future, there are more vocab file types to support,
+Please address all TODO comments before committing.

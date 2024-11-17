@@ -37,7 +37,7 @@ func.func @main() -> i32 {
   // Iteration Pattern 1
   // Main Vector Loop + Scalar Remainder + Fixed Vector Type
   // ---------------------------------------------------------------------------
-  
+
   // 1. Get the total length of the workload.
   %mem_pat_1 = memref.get_global @gv_pat_1 : memref<10xf32>
   %print_mem_pat_1 = memref.cast %mem_pat_1 : memref<10xf32> to memref<*xf32>

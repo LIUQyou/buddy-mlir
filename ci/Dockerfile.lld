@@ -41,4 +41,3 @@ WORKDIR /root/buddy-mlir
 
 # Initialize submodules
 RUN git submodule update --init
-

@@ -12,7 +12,7 @@ module attributes {gpu.container_module} {
     %c64 = arith.constant 64 : index
     %c1 = arith.constant 1 : index
     %alloc = memref.alloc() {alignment = 64 : i64} : memref<32x32xf32>
-    gpu.launch_func  @matmul_kernel::@matmul_kernel blocks in (%c1, %c1, %c1) threads in (%c64, %c2, %c1)  
+    gpu.launch_func  @matmul_kernel::@matmul_kernel blocks in (%c1, %c1, %c1) threads in (%c64, %c2, %c1)
     return %alloc : memref<32x32xf32>
   }
   gpu.module @matmul_kernel {

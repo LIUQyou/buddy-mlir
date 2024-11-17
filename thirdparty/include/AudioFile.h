@@ -576,10 +576,9 @@ bool AudioFile<T>::decodeAiffFile(std::vector<uint8_t> &fileData) {
   // Endianness::BigEndian) + 8;
   std::string format(fileData.begin() + 8, fileData.begin() + 12);
 
-  int audioFormat = format == "AIFF"
-                        ? AIFFAudioFormat::Uncompressed
-                        : format == "AIFC" ? AIFFAudioFormat::Compressed
-                                           : AIFFAudioFormat::Error;
+  int audioFormat = format == "AIFF"   ? AIFFAudioFormat::Uncompressed
+                    : format == "AIFC" ? AIFFAudioFormat::Compressed
+                                       : AIFFAudioFormat::Error;
 
   // -----------------------------------------------------------
   // try and find the start points of key chunks
@@ -844,7 +843,7 @@ template <class T> bool AudioFile<T>::saveToWaveFile(std::string filePath) {
 
         if (audioFormat == WavAudioFormat::IEEEFloat)
           sampleAsInt =
-              (int32_t) reinterpret_cast<int32_t &>(getSample(channel, i));
+              (int32_t)reinterpret_cast<int32_t &>(getSample(channel, i));
         else // assume PCM
           sampleAsInt = (int32_t)(getSample(channel, i) *
                                   std::numeric_limits<int32_t>::max());

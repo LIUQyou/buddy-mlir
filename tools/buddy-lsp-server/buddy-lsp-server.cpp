@@ -1,4 +1,5 @@
-//====- buddy-lsp-server.cpp - The LSP server of buddy-mlir --------------------------===//
+//====- buddy-lsp-server.cpp - The LSP server of buddy-mlir
+//--------------------------===//
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,10 +30,10 @@
 #include "DAP/DAPOps.h"
 #include "DIP/DIPDialect.h"
 #include "DIP/DIPOps.h"
+#include "Gemmini/GemminiDialect.h"
 #include "RVV/RVVDialect.h"
 #include "VectorExp/VectorExpDialect.h"
 #include "VectorExp/VectorExpOps.h"
-#include "Gemmini/GemminiDialect.h"
 
 using namespace mlir;
 

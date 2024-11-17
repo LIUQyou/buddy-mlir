@@ -36,17 +36,17 @@ module {
     func.func private @rtclock() -> f64
 
     func.func @ie_original() {
-        %t0_original = call @rtclock() : () -> f64 
+        %t0_original = call @rtclock() : () -> f64
 
         %119 = arith.constant dense<1.0> : tensor<1x40x32x128xf32>
         %120 = tosa.identity %119 : (tensor<1x40x32x128xf32>) -> tensor<1x40x32x128xf32>
         %121 = tosa.reshape %120 {new_shape = array<i64: 1, 40, 4096>} : (tensor<1x40x32x128xf32>) -> tensor<1x40x4096xf32>
         %t1_original = call @rtclock() : () -> f64
-        
+
         %tensor_unranked = tensor.cast %121 : tensor<1x40x4096xf32> to tensor<*xf32>
         // All the elements of the MemRef are the same,
         // only check the first line to verify the correctness.
-        // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [1, 40, 4096] strides = [163840, 4096, 1] data = 
+        // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [1, 40, 4096] strides = [163840, 4096, 1] data =
         // CHECK-NEXT: [
         // CHECK-SAME: [
         // CHECK-SAME: [1{{(, 1)*}}],
@@ -58,7 +58,7 @@ module {
         %t_original = arith.subf %t1_original, %t0_original : f64
         vector.print str "original operation time: "
         vector.print %t_original : f64
-        return 
+        return
     }
 
     func.func @ie_optimized() {
@@ -71,7 +71,7 @@ module {
         %tensor_unranked = tensor.cast %121 : tensor<1x40x4096xf32> to tensor<*xf32>
         // All the elements of the MemRef are the same,
         // only check the first line to verify the correctness.
-        // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [1, 40, 4096] strides = [163840, 4096, 1] data = 
+        // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [1, 40, 4096] strides = [163840, 4096, 1] data =
         // CHECK-NEXT: [
         // CHECK-SAME: [
         // CHECK-SAME: [1{{(, 1)*}}],
@@ -83,7 +83,7 @@ module {
         %t_optimized = arith.subf %t1_optimized, %t0_optimized : f64
         vector.print str "optimized operation time: "
         vector.print %t_optimized : f64
-        return 
+        return
     }
 
     func.func @main() {
@@ -91,6 +91,6 @@ module {
         call @ie_original() : () -> ()
         call @ie_optimized() : () -> ()
 
-        return 
+        return
     }
 }

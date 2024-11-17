@@ -18,7 +18,7 @@ memref.global "private" @gv2 : memref<8xi32> = dense<[0, 1, 2, 3, 4, 5, 6, 7]>
 func.func private @printMemrefI32(memref<*xi32>)
 
 func.func @main() -> i32 {
-  // maskedload is a load with a mask, supporting to load 
+  // maskedload is a load with a mask, supporting to load
   // an 1-D vector into a n-D memref with the mask.
 
   // preparation for examples

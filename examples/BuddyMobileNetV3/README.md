@@ -46,4 +46,3 @@ $ ninja buddy-mobilenetv3-run
 $ cd bin
 $ ./buddy-mobilenetv3-run
 ```
-

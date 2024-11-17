@@ -16,15 +16,15 @@ func.func @buddy_batchmatmul_f32(){
   %b = memref.get_global @B : memref<2x3x4xf32>
   %c = memref.get_global @C : memref<2x2x4xf32>
 
-  linalg.batch_matmul 
+  linalg.batch_matmul
       ins(%a, %b: memref<2x2x3xf32>, memref<2x3x4xf32>)
       outs(%c: memref<2x2x4xf32>)
   %printed_c = memref.cast %c : memref<2x2x4xf32> to memref<*xf32>
   call @printMemrefF32(%printed_c) : (memref<*xf32>) -> ()
   // CHECK: {{Unranked Memref base@ = 0x[0-9A-Fa-f]{1,} rank = 3 offset = 0 sizes = \[2, 2, 4\] strides = \[8, 4, 1\] data =}}
-  // CHECK{LITERAL}: [[[98,    226,    292,    164], 
-  // CHECK{LITERAL}:   [12,    76,    96,    56]], 
-  // CHECK{LITERAL}:  [[48,    162,    72,    156], 
+  // CHECK{LITERAL}: [[[98,    226,    292,    164],
+  // CHECK{LITERAL}:   [12,    76,    96,    56]],
+  // CHECK{LITERAL}:  [[48,    162,    72,    156],
   // CHECK{LITERAL}:   [16,    112,    0,    104]]]
   return
 }

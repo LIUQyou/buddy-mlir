@@ -1,4 +1,5 @@
-//===- ScheOps.h - Sche Dialect Ops -------------------------------*- C++ -*-===//
+//===- ScheOps.h - Sche Dialect Ops -------------------------------*- C++
+//-*-===//
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +15,22 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This is the header file for operations in sche dialect. 
+// This is the header file for operations in sche dialect.
 //
 //===----------------------------------------------------------------------===//
 
 #ifndef SCHE_SCHEOPS_H
 #define SCHE_SCHEOPS_H
 
+#include "Dialect/Sche/ScheDialect.h"
+#include "mlir/Bytecode/BytecodeOpInterface.h"
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/Dialect.h"
 #include "mlir/IR/OpDefinition.h"
-#include "mlir/Bytecode/BytecodeOpInterface.h"
+#include "mlir/IR/OpImplementation.h"
+#include "mlir/Interfaces/ControlFlowInterfaces.h"
 #include "mlir/Interfaces/InferTypeOpInterface.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
-#include "mlir/Interfaces/ControlFlowInterfaces.h"
-#include "Dialect/Sche/ScheDialect.h"
-#include "mlir/IR/OpImplementation.h"
 
 #define GET_OP_CLASSES
 #include "Sche/ScheOps.h.inc"

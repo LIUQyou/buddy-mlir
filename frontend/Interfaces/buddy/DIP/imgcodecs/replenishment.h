@@ -79,7 +79,7 @@ enum ImreadModes {
 
 class _Size {
 public:
-  _Size(){};
+  _Size() {};
   _Size(int _width, int _height) : width(_width), height(_height) {}
   inline _Size &operator=(const _Size &rhs) {
     this->width = rhs.width;

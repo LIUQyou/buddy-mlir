@@ -43,8 +43,8 @@
 #include "llvm/ADT/StringMap.h"
 #include "llvm/TargetParser/Triple.h"
 
-namespace mlir{
-namespace buddy::gpu{
+namespace mlir {
+namespace buddy::gpu {
 static constexpr int32_t kNumGPUDims = 3;
 static constexpr int32_t kWarpSize = 32;
 

@@ -80,7 +80,8 @@ void LowerRVVToLLVMPass::runOnOperation() {
   else
     RVVIndexBitwidth = 64;
   configureRVVLegalizeForExportTarget(target);
-  populateRVVLegalizeForLLVMExportPatterns(converter, patterns, RVVIndexBitwidth);
+  populateRVVLegalizeForLLVMExportPatterns(converter, patterns,
+                                           RVVIndexBitwidth);
 
   if (failed(applyPartialConversion(module, target, std::move(patterns))))
     signalPassFailure();

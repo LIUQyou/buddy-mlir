@@ -35,7 +35,7 @@ using namespace dip;
 // - N represents the number of dimensions.
 template <typename T, size_t N> class Img : public MemRef<T, N> {
 public:
-  Img(){};
+  Img() {};
 
   /**
    * @brief overload
@@ -190,7 +190,7 @@ Img<T, N>::Img(cv::Mat image, intptr_t sizes[N], bool norm) : MemRef<T, N>() {
     this->allocated = new T[size];
     this->aligned = this->allocated;
     size_t k = 0;
-    //NCHW Layout
+    // NCHW Layout
     for (int batch = 0; batch < this->sizes[0]; batch++) {
       for (int channel = 0; channel < this->sizes[1]; channel++) {
         T *chandata = image.ptr<T>(batch, channel);

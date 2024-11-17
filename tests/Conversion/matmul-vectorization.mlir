@@ -13,14 +13,14 @@ module{
   func.func private @printMemrefF64(memref<*xf64>)
 
   func.func @matmul_f32(%a : memref<?x?xf32>, %b : memref<?x?xf32>, %c : memref<?x?xf32>) {
-    linalg.matmul 
+    linalg.matmul
       ins(%a, %b: memref<?x?xf32>, memref<?x?xf32>)
       outs(%c:memref<?x?xf32>)
     return
   }
 
   func.func @matmul_f64(%a : memref<?x?xf64>, %b : memref<?x?xf64>, %c : memref<?x?xf64>) {
-    linalg.matmul 
+    linalg.matmul
       ins(%a, %b: memref<?x?xf64>, memref<?x?xf64>)
       outs(%c:memref<?x?xf64>)
     return
@@ -96,6 +96,6 @@ module{
     memref.dealloc %B_f64 : memref<?x?xf64>
     memref.dealloc %A_f64 : memref<?x?xf64>
 
-    return 
+    return
   }
 }

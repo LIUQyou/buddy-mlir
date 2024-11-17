@@ -36,7 +36,7 @@ func.func private @rtclock() -> f64
 
 func.func @kenerl(%t0 : tensor<32x40x128xf32>, %t1 : tensor<32x128x40xf32>, %t2 : tensor<1x1x40x40xf32>, %t3 : tensor<1x32x40x128xf32>) {
   %t_start = call @rtclock() : () -> f64
-  
+
   %0 = tosa.matmul %t0, %t1 : (tensor<32x40x128xf32>, tensor<32x128x40xf32>) -> tensor<32x40x40xf32>
   %1 = tosa.reshape %0 {new_shape = array<i64: 1, 32, 40, 40>} : (tensor<32x40x40xf32>) -> tensor<1x32x40x40xf32>
   %2 = "tosa.const"() <{value = dense<11.3137083> : tensor<1x32x40x40xf32>}> : () -> tensor<1x32x40x40xf32>

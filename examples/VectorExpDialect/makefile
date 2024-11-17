@@ -109,7 +109,7 @@ vector-exp-config-run:
 		-reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=void \
 		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
-	
+
 vector-exp-predication-memory-lower:
 	@${BUDDY_OPT} ./vector-exp-predication-memory.mlir \
 		-lower-vector-exp \
@@ -339,4 +339,3 @@ vector-exp-iteration-aot:
 		--gcc-toolchain=${RISCV_GNU_TOOLCHAIN} \
 		-L${CROSS_MLIR_LIB} -lmlir_runner_utils -lmlir_c_runner_utils \
 		-o a.out
-

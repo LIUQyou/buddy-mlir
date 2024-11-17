@@ -47,7 +47,6 @@ void loadParameters(const std::string &floatParamPath,
   }
   floatParamFile.close();
 
-
   std::ifstream int64ParamFile(int64ParamPath, std::ios::in | std::ios::binary);
   if (!int64ParamFile.is_open()) {
     std::string errMsg = "Failed to open int64 param file: " +
@@ -66,7 +65,7 @@ int main() {
   /// Print the title of this example.
   const std::string title = "BERT Inference Powered by Buddy Compiler";
   std::cout << "\033[33;1m" << title << "\033[0m" << std::endl;
-  
+
   /// Load weights to MemRef container.
   MemRef<float, 1> arg0({109486854});
   MemRef<long long, 1> arg1({512});
@@ -80,7 +79,7 @@ int main() {
   std::getline(std::cin, pureStr);
   Text<long long, 2> pureStrContainer(pureStr);
 
-  /// Define vacabulary and tokenize the 
+  /// Define vacabulary and tokenize the
   std::string vocabDir = "../../examples/BuddyBert/vocab.txt";
   pureStrContainer.tokenizeBert(vocabDir, 5);
 
@@ -94,10 +93,10 @@ int main() {
   /// Execute forward inference of the model.
   _mlir_ciface_forward(&result, &arg0, &arg1, &pureStrContainer,
                        &attention_mask, &token_type_ids);
-  
+
   const auto inferenceEnd = std::chrono::high_resolution_clock::now();
   const std::chrono::duration<double, std::milli> inferenceTime =
-        inferenceEnd - inferenceStart;
+      inferenceEnd - inferenceStart;
   /// Find the selected emotion.
   int predict_label = -1;
   float max_logits = std::numeric_limits<float>::min();
@@ -116,8 +115,7 @@ int main() {
 
   /// Print the performance.
   std::cout << "\033[33;1m[Time] \033[0m";
-  std::cout << inferenceTime.count() << " ms"
-            << std::endl;
+  std::cout << inferenceTime.count() << " ms" << std::endl;
 
   return 0;
 }

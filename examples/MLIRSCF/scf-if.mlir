@@ -22,14 +22,14 @@ func.func @main() {
       %1 = arith.addf %resiter , %t : f32
       scf.yield %1 : f32
     }
-    scf.yield %res : f32           
+    scf.yield %res : f32
   } else {
     %res = scf.for %iv = %lb to %ub step %step
     iter_args(%resiter = %initial) -> f32 {
       %1 = arith.subf %resiter , %t : f32
       scf.yield %1 : f32
     }
-    scf.yield %res : f32         
+    scf.yield %res : f32
   }
   // CHECK: 50
   vector.print %final : f32

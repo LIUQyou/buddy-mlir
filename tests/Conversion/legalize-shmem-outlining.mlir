@@ -1,7 +1,7 @@
 // RUN: buddy-opt -legalize-shmem-outlining -canonicalize %s | FileCheck %s
 
 // CHECK: module attributes {gpu.container_module}
-// CHECK: gpu.launch_func  @matmul_kernel::@matmul_kernel blocks in (%c1, %c1, %c1) threads in (%c64, %c2, %c1) 
+// CHECK: gpu.launch_func  @matmul_kernel::@matmul_kernel blocks in (%c1, %c1, %c1) threads in (%c64, %c2, %c1)
 // CHECK: return %alloc : memref<32x32xf32>
 // CHECK: gpu.module @matmul_kernel {
 // CHECK-NEXT:   gpu.func @matmul_kernel() kernel attributes {gpu.known_block_size = array<i32: 64, 2, 1>, gpu.known_grid_size = array<i32: 1, 1, 1>} {

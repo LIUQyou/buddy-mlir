@@ -6,7 +6,7 @@ add_custom_command(
 set(PATTERN_ARG "test-generalize-pad-tensor")
 add_custom_command(
   OUTPUT forward.o
-  COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyWhisper/forward.mlir 
+  COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyWhisper/forward.mlir
             -pass-pipeline "builtin.module(func.func(tosa-to-linalg-named, tosa-to-linalg, tosa-to-tensor, tosa-to-arith), empty-tensor-to-alloc-tensor, convert-elementwise-to-linalg, arith-bufferize, func.func(linalg-bufferize, tensor-bufferize), func-bufferize)" |
           ${BUDDY_BINARY_DIR}/buddy-opt
             -pass-pipeline "builtin.module( func.func(buffer-deallocation-simplification, convert-linalg-to-loops),matmul-parallel-vectorization-optimize, batchmatmul-optimize, eliminate-empty-tensors,func-bufferize-dynamic-offset, func.func(llvm-request-c-wrappers),convert-scf-to-openmp, convert-openmp-to-llvm, convert-math-to-llvm, convert-math-to-libm, convert-scf-to-cf,  convert-arith-to-llvm, expand-strided-metadata, finalize-memref-to-llvm, convert-func-to-llvm, reconcile-unrealized-casts)" |
@@ -19,7 +19,7 @@ add_custom_command(
 
 add_custom_command(
     OUTPUT subgraph0.o
-    COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyWhisper/subgraph0.mlir 
+    COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyWhisper/subgraph0.mlir
               -pass-pipeline "builtin.module(func.func(tosa-to-linalg-named, tosa-to-linalg, tosa-to-tensor, tosa-to-arith))" |
             ${LLVM_TOOLS_BINARY_DIR}/mlir-opt
               -test-linalg-transform-patterns=${PATTERN_ARG} |
@@ -52,7 +52,7 @@ add_custom_command(
               -convert-openmp-to-llvm
               -convert-arith-to-llvm
               -convert-math-to-llvm
-              -convert-math-to-libm 
+              -convert-math-to-libm
               -convert-func-to-llvm
               -reconcile-unrealized-casts |
             ${LLVM_TOOLS_BINARY_DIR}/mlir-translate -mlir-to-llvmir |

@@ -14,17 +14,17 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This is the header file for operations in bud dialect. 
+// This is the header file for operations in bud dialect.
 //
 //===----------------------------------------------------------------------===//
 
 #ifndef BUD_BUDOPS_H
 #define BUD_BUDOPS_H
 
+#include "mlir/Bytecode/BytecodeOpInterface.h"
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/Dialect.h"
 #include "mlir/IR/OpDefinition.h"
-#include "mlir/Bytecode/BytecodeOpInterface.h"
 #include "mlir/Interfaces/InferTypeOpInterface.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 

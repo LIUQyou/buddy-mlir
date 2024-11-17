@@ -360,8 +360,7 @@ template <typename T, size_t N> std::string Text<T, N>::revertWhisper() {
     int id = this->aligned[i];
     // pad / start / type timestamps / language
     if (id == PAD_ID || id == CLS_ID || id == TRAN_ID ||
-        id == NOTIMESTAMPS_ID ||
-        (id >= 50259 && id <= 50357))
+        id == NOTIMESTAMPS_ID || (id >= 50259 && id <= 50357))
       continue;
     if (id == SEP_ID)
       break;

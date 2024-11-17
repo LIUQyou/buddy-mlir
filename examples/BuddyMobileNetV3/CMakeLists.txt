@@ -23,7 +23,7 @@ add_custom_command(
             convert-func-to-llvm, reconcile-unrealized-casts)" |
           ${LLVM_TOOLS_BINARY_DIR}/mlir-translate -mlir-to-llvmir |
           ${LLVM_TOOLS_BINARY_DIR}/llvm-as |
-          ${LLVM_TOOLS_BINARY_DIR}/llc -filetype=obj  -relocation-model=pic -O3 
+          ${LLVM_TOOLS_BINARY_DIR}/llc -filetype=obj  -relocation-model=pic -O3
             -o ${BUDDY_BINARY_DIR}/../examples/BuddyMobileNetV3/forward.o
   DEPENDS ${BUDDY_EXAMPLES_DIR}/BuddyMobileNetV3/forward.mlir
   COMMENT "Building forward.o"
@@ -32,10 +32,10 @@ add_custom_command(
 
 add_custom_command(
   OUTPUT subgraph0.o
-  COMMAND ${BUDDY_BINARY_DIR}/buddy-opt ${BUDDY_EXAMPLES_DIR}/BuddyMobileNetV3/subgraph0.mlir 
+  COMMAND ${BUDDY_BINARY_DIR}/buddy-opt ${BUDDY_EXAMPLES_DIR}/BuddyMobileNetV3/subgraph0.mlir
             -pass-pipeline
             "builtin.module(func.func(tosa-to-linalg-named, tosa-to-arith, tosa-to-linalg, tosa-to-tensor))" |
-          ${BUDDY_BINARY_DIR}/buddy-opt  
+          ${BUDDY_BINARY_DIR}/buddy-opt
             -convert-elementwise-to-linalg
             -func-bufferize-dynamic-offset
             -arith-bufferize
@@ -53,10 +53,10 @@ add_custom_command(
             -convert-func-to-llvm
             -expand-strided-metadata
             -finalize-memref-to-llvm
-            -reconcile-unrealized-casts | 
+            -reconcile-unrealized-casts |
           ${LLVM_TOOLS_BINARY_DIR}/mlir-translate -mlir-to-llvmir |
           ${LLVM_TOOLS_BINARY_DIR}/llvm-as |
-          ${LLVM_TOOLS_BINARY_DIR}/llc -filetype=obj -relocation-model=pic -O3 
+          ${LLVM_TOOLS_BINARY_DIR}/llc -filetype=obj -relocation-model=pic -O3
             -o ${BUDDY_BINARY_DIR}/../examples/BuddyMobileNetV3/subgraph0.o
   DEPENDS ${BUDDY_EXAMPLES_DIR}/BuddyMobileNetV3/subgraph0.mlir
           buddy-opt

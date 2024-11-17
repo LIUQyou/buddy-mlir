@@ -5,7 +5,7 @@ An MLIR-based compiler framework designed for a co-design ecosystem from DSL (do
 
 ## Getting Started
 
-The default build system uses LLVM/MLIR as an external library. 
+The default build system uses LLVM/MLIR as an external library.
 We also provide a [one-step build strategy](#one-step) for users who only want to use our tools.
 Please make sure [the dependencies](https://llvm.org/docs/GettingStarted.html#requirements) are available on your machine.
 
@@ -181,7 +181,7 @@ DIP dialect is designed for digital image processing abstraction.
 
 ### buddy-opt
 
-The buddy-opt is the driver for dialects and optimization in buddy-mlir project. 
+The buddy-opt is the driver for dialects and optimization in buddy-mlir project.
 
 ### buddy-lsp-server
 

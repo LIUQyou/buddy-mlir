@@ -26,7 +26,8 @@ from .. import DeviceType
 # OP_TYPE_FUSABLE = [OpType.BroadcastType, OpType.ElementwiseType, OpType.ReshapeType]
 # OP_TYPE_UNFUSABLE = [OpType.Unfusable, OpType.ConcatType]
 # OP_TYPE_FUSABLE_BY_SPECIFIC_PASS = []
-# ANCHOR_OP_TYPE = [] 
+# ANCHOR_OP_TYPE = []
+
 
 def simply_fuse(graph: Graph):
     """

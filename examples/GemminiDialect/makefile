@@ -1,7 +1,7 @@
 #!/bin/bash
 BUDDY_OPT := ../../build/bin/buddy-opt
 BUDDY_TRANSLATE := ../../build/bin/buddy-translate
-BUDDY_LLC := ../../build/bin/buddy-llc 
+BUDDY_LLC := ../../build/bin/buddy-llc
 INTERFACES:= ../../frontend/Interfaces
 
 mvin-mvout-run:
@@ -258,17 +258,17 @@ linalg-matmul-32x32-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=1 -DDIALECT=1 \
-	performance-test.cpp -O2 -static -o a.out -I${INTERFACES} 
-	@spike --extension=gemmini pk a.out 
+	performance-test.cpp -O2 -static -o a.out -I${INTERFACES}
+	@spike --extension=gemmini pk a.out
 
 c-matmul-32x32-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DMATMUL=1 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DMATMUL=1 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-32x32-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -282,10 +282,10 @@ linalg-matmul-32x32-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=1 \
 	-DDIALECT=1 performance-test.cpp \
-	-O2 -static -o a.out -I${INTERFACES} 
+	-O2 -static -o a.out -I${INTERFACES}
 	@spike --extension=gemmini pk a.out
 
 gemmini-matmul-32x32-gemmini-run:
@@ -296,11 +296,11 @@ gemmini-matmul-32x32-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=1 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-64x64-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -311,17 +311,17 @@ linalg-matmul-64x64-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=2 -DDIALECT=1 \
-	performance-test.cpp -O2 -static -o a.out -I${INTERFACES} 
-	@spike --extension=gemmini pk a.out 
+	performance-test.cpp -O2 -static -o a.out -I${INTERFACES}
+	@spike --extension=gemmini pk a.out
 
 c-matmul-64x64-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DMATMUL=2 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DMATMUL=2 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-64x64-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -335,10 +335,10 @@ linalg-matmul-64x64-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=2 \
 	-DDIALECT=1 performance-test.cpp \
-	-O2 -static -o a.out -I${INTERFACES} 
+	-O2 -static -o a.out -I${INTERFACES}
 	@spike --extension=gemmini pk a.out
 
 gemmini-matmul-64x64-gemmini-run:
@@ -349,12 +349,12 @@ gemmini-matmul-64x64-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=2 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
-	
+	@spike --extension=gemmini pk a.out
+
 linalg-matmul-128x128-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
 	-llvm-request-c-wrappers \
@@ -364,17 +364,17 @@ linalg-matmul-128x128-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=3 -DDIALECT=1 \
-	performance-test.cpp -O2 -static -o a.out -I${INTERFACES} 
-	@spike --extension=gemmini pk a.out 
+	performance-test.cpp -O2 -static -o a.out -I${INTERFACES}
+	@spike --extension=gemmini pk a.out
 
 c-matmul-128x128-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DMATMUL=3 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DMATMUL=3 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-128x128-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -388,10 +388,10 @@ linalg-matmul-128x128-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=3 \
 	-DDIALECT=1 performance-test.cpp \
-	-O2 -static -o a.out -I${INTERFACES} 
+	-O2 -static -o a.out -I${INTERFACES}
 	@spike --extension=gemmini pk a.out
 
 gemmini-matmul-128x128-gemmini-run:
@@ -402,11 +402,11 @@ gemmini-matmul-128x128-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=3 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-256x256-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -417,17 +417,17 @@ linalg-matmul-256x256-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=4 -DDIALECT=1 \
-	performance-test.cpp -O2 -static -o a.out -I${INTERFACES} 
-	@spike --extension=gemmini pk a.out 
+	performance-test.cpp -O2 -static -o a.out -I${INTERFACES}
+	@spike --extension=gemmini pk a.out
 
 c-matmul-256x256-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DMATMUL=4 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DMATMUL=4 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-256x256-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -441,10 +441,10 @@ linalg-matmul-256x256-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=4 \
 	-DDIALECT=1 performance-test.cpp \
-	-O2 -static -o a.out -I${INTERFACES} 
+	-O2 -static -o a.out -I${INTERFACES}
 	@spike --extension=gemmini pk a.out
 
 gemmini-matmul-256x256-gemmini-run:
@@ -455,11 +455,11 @@ gemmini-matmul-256x256-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=4 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-512x512-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -470,17 +470,17 @@ linalg-matmul-512x512-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=5 -DDIALECT=1 \
-	performance-test.cpp -O2 -static -o a.out -I${INTERFACES} 
-	@spike --extension=gemmini pk a.out 
+	performance-test.cpp -O2 -static -o a.out -I${INTERFACES}
+	@spike --extension=gemmini pk a.out
 
 c-matmul-512x512-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DMATMUL=5 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DMATMUL=5 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-512x512-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -494,10 +494,10 @@ linalg-matmul-512x512-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=5 \
 	-DDIALECT=1 performance-test.cpp \
-	-O2 -static -o a.out -I${INTERFACES} 
+	-O2 -static -o a.out -I${INTERFACES}
 	@spike --extension=gemmini pk a.out
 
 gemmini-matmul-512x512-gemmini-run:
@@ -508,11 +508,11 @@ gemmini-matmul-512x512-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=5 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-1024x1024-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -523,17 +523,17 @@ linalg-matmul-1024x1024-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=6 -DDIALECT=1 \
-	performance-test.cpp -O2 -static -o a.out -I${INTERFACES} 
-	@spike --extension=gemmini pk a.out 
+	performance-test.cpp -O2 -static -o a.out -I${INTERFACES}
+	@spike --extension=gemmini pk a.out
 
 c-matmul-1024x1024-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DMATMUL=6 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DMATMUL=6 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-matmul-1024x1024-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -547,10 +547,10 @@ linalg-matmul-1024x1024-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=6 \
 	-DDIALECT=1 performance-test.cpp \
-	-O2 -static -o a.out -I${INTERFACES} 
+	-O2 -static -o a.out -I${INTERFACES}
 	@spike --extension=gemmini pk a.out
 
 gemmini-matmul-1024x1024-gemmini-run:
@@ -561,11 +561,11 @@ gemmini-matmul-1024x1024-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DMATMUL=6 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-3x3-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -576,18 +576,18 @@ linalg-conv-3x3-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=1 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 c-conv-3x3-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DCONV=1 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DCONV=1 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-3x3-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -601,7 +601,7 @@ linalg-conv-3x3-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=1 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
@@ -615,11 +615,11 @@ gemmini-conv-3x3-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=1 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-5x5-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -630,18 +630,18 @@ linalg-conv-5x5-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=2 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 c-conv-5x5-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DCONV=2 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DCONV=2 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-5x5-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -655,7 +655,7 @@ linalg-conv-5x5-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=2 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
@@ -669,11 +669,11 @@ gemmini-conv-5x5-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=2 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-7x7-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -684,18 +684,18 @@ linalg-conv-7x7-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=3 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 c-conv-7x7-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DCONV=3 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DCONV=3 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-7x7-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -709,7 +709,7 @@ linalg-conv-7x7-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=3 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
@@ -723,11 +723,11 @@ gemmini-conv-7x7-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=3 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-9x9-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -738,18 +738,18 @@ linalg-conv-9x9-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=4 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 c-conv-9x9-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DCONV=4 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DCONV=4 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-9x9-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -763,7 +763,7 @@ linalg-conv-9x9-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=4 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
@@ -777,11 +777,11 @@ gemmini-conv-9x9-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=4 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-11x11-gemmini-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -792,18 +792,18 @@ linalg-conv-11x11-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=5 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 c-conv-11x11-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DCONV=5 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DCONV=5 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-11x11-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -817,7 +817,7 @@ linalg-conv-11x11-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=5 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
@@ -831,11 +831,11 @@ gemmini-conv-11x11-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=5 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 
 linalg-conv-13x13-gemmini-run:
@@ -847,18 +847,18 @@ linalg-conv-13x13-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=6 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out
 
 c-conv-13x13-gemmini-run:
 	@riscv64-unknown-linux-gnu-gcc performance-test.c \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests/include \
 	-I${RISCV}/../../generators/gemmini/software/gemmini-rocc-tests  \
-	-DCONV=6 -O2 -static 
-	@spike --extension=gemmini pk a.out 
+	-DCONV=6 -O2 -static
+	@spike --extension=gemmini pk a.out
 
 linalg-conv-13x13-cpu-run:
 	@${BUDDY_OPT} ./ciface.mlir \
@@ -872,7 +872,7 @@ linalg-conv-13x13-cpu-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=6 -DDIALECT=1 \
 	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
@@ -886,8 +886,8 @@ gemmini-conv-13x13-gemmini-run:
 	${BUDDY_TRANSLATE} -buddy-to-llvmir | \
 	${BUDDY_LLC} -filetype=obj -mtriple=riscv64 \
 		-mattr=+buddyext,+D -float-abi=hard \
-		-o log.o 
+		-o log.o
 	@riscv64-unknown-linux-gnu-g++ log.o -DCONV=6 \
 	-DDIALECT=2	performance-test.cpp \
 	-O2 -static -o a.out -I${INTERFACES}
-	@spike --extension=gemmini pk a.out 
+	@spike --extension=gemmini pk a.out

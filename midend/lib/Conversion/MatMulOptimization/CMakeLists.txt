@@ -22,5 +22,5 @@ add_mlir_library(MatMulParallelVectorization
 )
 
 add_mlir_library(MatMulTransposeBVec
-  MatMulTransposeBVec.cpp 
+  MatMulTransposeBVec.cpp
 )

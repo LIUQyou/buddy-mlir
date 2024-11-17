@@ -164,9 +164,9 @@ class DynamoCompiler:
             "cos.default": CosOp,
             "sin.default": SinOp,
             "argmax.default": ArgMaxOp,
-            "split.Tensor":SplitOp,
-            "max.default":MaxOp,
-            "gt.Scalar":GtOp,
+            "split.Tensor": SplitOp,
+            "max.default": MaxOp,
+            "gt.Scalar": GtOp,
         }
 
     @property
@@ -230,7 +230,9 @@ class DynamoCompiler:
                 buddy_node.add_argument(str(input_arg))
                 buddy_node.add_parent(str(input_arg))
             elif isinstance(input_arg, torch.dtype):
-                buddy_node.add_argument(self._torch_dtype_translate(str(input_arg)))
+                buddy_node.add_argument(
+                    self._torch_dtype_translate(str(input_arg))
+                )
             else:
                 buddy_node.add_argument(input_arg)
         for user in node_users:
@@ -284,7 +286,7 @@ class DynamoCompiler:
                 fake_params,
                 self._ops_registry,
                 self._func_name,
-                self._verbose
+                self._verbose,
             )
             for gm_node in _gm.graph.nodes:
                 node_users = []
@@ -305,10 +307,7 @@ class DynamoCompiler:
 
                 elif gm_node.op == "output":
                     buddy_node = self._create_node(
-                        gm_node.op,
-                        gm_node.name,
-                        gm_node.args,
-                        node_users
+                        gm_node.op, gm_node.name, gm_node.args, node_users
                     )
 
                 elif gm_node.target is operator.getitem:
@@ -328,7 +327,11 @@ class DynamoCompiler:
                     tensor_meta = gm_node.meta.get("tensor_meta")
                     val = gm_node.meta.get("val")
                     # num_returns = len(gm_node.target._schema.returns)
-                    num_returns = len(val) if isinstance(val, list) else len(gm_node.target._schema.returns)
+                    num_returns = (
+                        len(val)
+                        if isinstance(val, list)
+                        else len(gm_node.target._schema.returns)
+                    )
                     if num_returns == 1:
                         node_dtype = self._torch_dtype_translate(
                             str(tensor_meta.dtype)
@@ -438,7 +441,7 @@ class DynamoCompiler:
 
         def cast_c_ptr(outdata_ptr, memref_ptr):
             """
-            Casts a C pointer (`outdata_ptr`) to the type of another C pointer 
+            Casts a C pointer (`outdata_ptr`) to the type of another C pointer
             (`memref_ptr`).
 
             Args:
@@ -449,14 +452,14 @@ class DynamoCompiler:
 
             Returns:
             ctypes.POINTER
-                A new C pointer with the type of `memref_ptr`, representing the 
+                A new C pointer with the type of `memref_ptr`, representing the
                 same memory location as `outdata_ptr`.
 
             Example:
             outdata = ctypes.pointer(ctypes.c_int())
             memref = ctypes.pointer(ctypes.c_float())
             casted_ptr = cast_c_ptr(outdata, memref)
-            # Now `casted_ptr` points to the same memory location as `outdata`, 
+            # Now `casted_ptr` points to the same memory location as `outdata`,
             but with the type of `memref`.
             """
             outdata_addr = ctypes.addressof(outdata_ptr.contents)
@@ -465,15 +468,15 @@ class DynamoCompiler:
 
         def move_c_ptr(outdata_ptr, memref_ptr):
             """
-            Moves a C pointer (`outdata_ptr`) to the next element in memory, 
-            based on the size of the referenced type in another C pointer 
+            Moves a C pointer (`outdata_ptr`) to the next element in memory,
+            based on the size of the referenced type in another C pointer
             (`memref_ptr`).
 
             Args:
                 outdata_ptr: ctypes.POINTER
                 The C pointer whose position needs to be moved.
                 memref_ptr: ctypes.POINTER
-                The reference C pointer whose type determines the size of each 
+                The reference C pointer whose type determines the size of each
                 element for the move.
 
             Returns:
@@ -496,7 +499,7 @@ class DynamoCompiler:
 
             Returns:
             List[torch.Tensor]
-                The result of executing the graph, represented as a list of 
+                The result of executing the graph, represented as a list of
                 output tensors.
             """
             # A list of ctypes pointers representing memory references for input
@@ -509,13 +512,13 @@ class DynamoCompiler:
                 )
                 for tensor in args
             ]
-            # A list of ctypes pointers representing memory references for 
+            # A list of ctypes pointers representing memory references for
             # output tensors.
             output_memref = [
                 ctypes.pointer(ctypes.pointer(graph._output_descriptor()))
             ]
             args_memref = output_memref + input_memref
-            # Invoke the graph's function using the provided execution engine 
+            # Invoke the graph's function using the provided execution engine
             # and memory references
             ee.invoke(graph._func_name, *args_memref)
 
@@ -532,7 +535,7 @@ class DynamoCompiler:
                 # Move to the next element in memory based on the size of the
                 # current output type
                 outdata_ptr = move_c_ptr(outdata_ptr, output_ptr[0])
-            # Convert each NumPy array to a PyTorch tensor and return the list 
+            # Convert each NumPy array to a PyTorch tensor and return the list
             # of tensors
             return [torch.from_numpy(tensor) for tensor in output_tensor]
 

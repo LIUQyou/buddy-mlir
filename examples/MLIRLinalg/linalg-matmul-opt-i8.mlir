@@ -17,7 +17,7 @@ func.func @buddy_matmul_i8(){
   %b = memref.get_global @B : memref<3x4xi8>
   %c = memref.get_global @C : memref<4x4xi8>
 
-  linalg.matmul 
+  linalg.matmul
       ins(%a, %b: memref<4x3xi8>, memref<3x4xi8>)
       outs(%c: memref<4x4xi8>)
 
@@ -37,9 +37,9 @@ func.func @buddy_matmul_i8(){
   %printed_c = memref.cast %c_f32 : memref<4x4xf32> to memref<*xf32>
   call @printMemrefF32(%printed_c) : (memref<*xf32>) -> ()
   // CHECK: {{Unranked Memref base@ = 0x[0-9A-Fa-f]{1,} rank = 2 offset = 0 sizes = \[4, 4\] strides = \[4, 1\] data =}}
-  // CHECK{LITERAL}: [[98, -30, -64, -92], 
-  // CHECK{LITERAL}:  [12, 76, 96, 56], 
-  // CHECK{LITERAL}:  [51, -106, -127, 126], 
-  // CHECK{LITERAL}:  [54, -105, 81, -113]] 
+  // CHECK{LITERAL}: [[98, -30, -64, -92],
+  // CHECK{LITERAL}:  [12, 76, 96, 56],
+  // CHECK{LITERAL}:  [51, -106, -127, 126],
+  // CHECK{LITERAL}:  [54, -105, 81, -113]]
   return
 }

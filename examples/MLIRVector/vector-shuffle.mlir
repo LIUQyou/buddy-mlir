@@ -20,7 +20,7 @@ func.func @main() -> i32 {
   %2 = vector.shuffle %0, %1[1, 0, 3, 2] : vector<3x2xf32>, vector<3x2xf32>
   // CHECK: ( ( 2, 2 ), ( 2, 2 ), ( 3, 3 ), ( 2, 2 ) )
   vector.print %2 : vector<4x2xf32>
-    
+
   %3 = arith.constant dense<4.0> : vector<4x3xf32>
   // CHECK: ( ( 4, 4, 4 ), ( 4, 4, 4 ), ( 4, 4, 4 ), ( 4, 4, 4 ) )
   vector.print %3 : vector<4x3xf32>

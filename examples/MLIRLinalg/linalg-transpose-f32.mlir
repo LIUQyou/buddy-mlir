@@ -11,7 +11,7 @@ func.func @buddy_transpose_f32(){
   %a = memref.get_global @A : memref<3x4xf32>
   %b = memref.alloc() : memref<4x3xf32>
 
-  linalg.transpose 
+  linalg.transpose
       ins(%a: memref<3x4xf32>)
       outs(%b: memref<4x3xf32>)
       permutation = [1, 0]
@@ -19,9 +19,9 @@ func.func @buddy_transpose_f32(){
   call @printMemrefF32(%printed_b) : (memref<*xf32>) -> ()
   memref.dealloc %b : memref<4x3xf32>
   // CHECK: {{Unranked Memref base@ = 0x[0-9A-Fa-f]{1,} rank = 2 offset = 0 sizes = \[4, 3\] strides = \[3, 1\] data =}}
-  // CHECK{LITERAL}: [[1, 1, 6], 
-  // CHECK{LITERAL}:  [3, 8, 9], 
-  // CHECK{LITERAL}:  [8, 8, 7], 
+  // CHECK{LITERAL}: [[1, 1, 6],
+  // CHECK{LITERAL}:  [3, 8, 9],
+  // CHECK{LITERAL}:  [8, 8, 7],
   // CHECK{LITERAL}:  [0, 7, 9]]
   return
 }

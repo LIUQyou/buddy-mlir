@@ -36,6 +36,6 @@ module {
     // CHECK-NEXT:  [4, 9]
     // CHECK-SAME: ]
     func.call @printMemrefF32(%print_output0) : (memref<*xf32>) -> ()
-    func.return 
+    func.return
     }
 }

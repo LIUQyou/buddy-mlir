@@ -80,7 +80,7 @@ def Sche_ReturnOp : Sche_Op<"return", [ReturnLike, Terminator]>{
 
 def Sche_WaitOp : Sche_Op<"wait", [Sche_AsyncOpInterface]> {
   let summary = "Wait for async gpu ops to complete.";
-  
+
   let arguments = (ins Variadic<Sche_AsyncToken>:$asyncDependencies);
   let results = (outs Optional<Sche_AsyncToken>:$asyncToken);
 

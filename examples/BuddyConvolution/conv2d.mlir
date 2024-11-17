@@ -43,11 +43,11 @@ module {
     %c1 = arith.constant 1.000000e+00 : f32
     %c2 = arith.constant 2 : index
     %c3 = arith.constant 3 : index
-    
+
     %current_v1 = arith.constant 3 : index
     %current_v2 = arith.constant 8 : index
     %current_v0 = affine.apply #map0(%current_v2, %current_v1)
-    
+
     %v0 = call @alloc_f32(%current_v0, %current_v0, %c1) : (index, index, f32) -> memref<?x?xf32>
     %v1 = call @alloc_f32(%current_v1, %current_v1, %c1) : (index, index, f32) -> memref<?x?xf32>
     %v2 = call @alloc_f32(%current_v2, %current_v2, %c0) : (index, index, f32) -> memref<?x?xf32>

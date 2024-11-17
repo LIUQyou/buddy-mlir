@@ -90,7 +90,7 @@ tosa-sigmoid-lower:
 			convert-func-to-llvm, \
 			reconcile-unrealized-casts \
 		)" \
-		-o ./log.mlir		
+		-o ./log.mlir
 
 tosa-sigmoid-translate:
 	@${MLIR_OPT} ./tosa-sigmoid.mlir \

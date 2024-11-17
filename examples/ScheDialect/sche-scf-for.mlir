@@ -27,7 +27,7 @@ func.func @main() {
   scf.for %iv = %lb to %ub step %c1 {
     memref.store %c0, %A[%iv] : memref<100xf32>
   }
-  
+
   scf.for %iv = %lb to %ub step %c1 {
     %0 = arith.muli %iv, %c8 : index
     %1 = arith.addi %iv, %0  : index

@@ -22,10 +22,10 @@
 #define FRONTEND_INTERFACES_BUDDY_DIP_IMGCONTAINER
 
 #include "buddy/Core/Container.h"
+#include <array>
 #include <cstring>
 #include <fstream>
 #include <memory>
-#include <array>
 #ifdef BUDDY_ENABLE_PNG
 #include <png.h>
 #endif

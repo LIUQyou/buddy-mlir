@@ -267,7 +267,7 @@ public:
   void runOnOperation() override;
 
   void getDependentDialects(DialectRegistry &registry) const override {
-    registry.insert<linalg::LinalgDialect, scf::SCFDialect, 
+    registry.insert<linalg::LinalgDialect, scf::SCFDialect,
                     affine::AffineDialect, VectorDialect>();
   }
 

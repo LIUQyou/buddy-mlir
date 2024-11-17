@@ -61,7 +61,7 @@ module {
 
     %3 = memref.cast %output : memref<?x?x?x?xf32> to memref<*xf32>
     call @printMemrefF32(%3) : (memref<*xf32>) -> ()
-    
+
 
     memref.dealloc %output : memref<?x?x?x?xf32>
     memref.dealloc %image : memref<?x?x?x?xf32>
@@ -70,13 +70,13 @@ module {
   }
 }
 
-// CHECK: Unranked Memref base@ = {{.*}} rank = 4 offset = 0 sizes = [1, 3, 3, 2] strides = [18, 6, 2, 1] data = 
-// CHECK{LITERAL}: [[[[4,     5], 
-// CHECK{LITERAL}:    [4,     5], 
-// CHECK{LITERAL}:    [4,     5]], 
-// CHECK{LITERAL}:   [[4,     5], 
-// CHECK{LITERAL}:    [4,     5], 
-// CHECK{LITERAL}:    [4,     5]], 
-// CHECK{LITERAL}:   [[4,     5], 
-// CHECK{LITERAL}:    [4,     5], 
+// CHECK: Unranked Memref base@ = {{.*}} rank = 4 offset = 0 sizes = [1, 3, 3, 2] strides = [18, 6, 2, 1] data =
+// CHECK{LITERAL}: [[[[4,     5],
+// CHECK{LITERAL}:    [4,     5],
+// CHECK{LITERAL}:    [4,     5]],
+// CHECK{LITERAL}:   [[4,     5],
+// CHECK{LITERAL}:    [4,     5],
+// CHECK{LITERAL}:    [4,     5]],
+// CHECK{LITERAL}:   [[4,     5],
+// CHECK{LITERAL}:    [4,     5],
 // CHECK{LITERAL}:    [4,     5]]]]

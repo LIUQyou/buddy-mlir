@@ -69,7 +69,6 @@ void loadParameters(const std::string &paramFilePath,
             << std::endl;
 }
 
-
 // Softmax function.
 void softmax(float *input, size_t size) {
   size_t i;

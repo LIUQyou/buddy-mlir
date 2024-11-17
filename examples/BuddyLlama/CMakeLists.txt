@@ -6,7 +6,7 @@ add_custom_command(
 
 add_custom_command(
   OUTPUT forward.o
-  COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyLlama/forward.mlir 
+  COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyLlama/forward.mlir
             -pass-pipeline "builtin.module(func.func(tosa-to-linalg-named),func.func(tosa-to-linalg),func.func(tosa-to-tensor),func.func(tosa-to-arith))" |
           ${BUDDY_BINARY_DIR}/buddy-opt
             -arith-expand
@@ -37,7 +37,7 @@ add_custom_command(
             -convert-openmp-to-llvm
             -convert-arith-to-llvm
             -convert-math-to-llvm
-            -convert-math-to-libm 
+            -convert-math-to-libm
             -convert-func-to-llvm
             -reconcile-unrealized-casts |
         ${LLVM_TOOLS_BINARY_DIR}/mlir-translate -mlir-to-llvmir |
@@ -50,7 +50,7 @@ add_custom_command(
 
 add_custom_command(
     OUTPUT subgraph.o
-    COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyLlama/subgraph0.mlir 
+    COMMAND ${LLVM_TOOLS_BINARY_DIR}/mlir-opt ${BUDDY_EXAMPLES_DIR}/BuddyLlama/subgraph0.mlir
               -pass-pipeline "builtin.module(func.func(tosa-to-linalg-named),func.func(tosa-to-linalg),func.func(tosa-to-tensor),func.func(tosa-to-arith))" |
             ${BUDDY_BINARY_DIR}/buddy-opt
             -arith-expand
@@ -82,7 +82,7 @@ add_custom_command(
             -convert-openmp-to-llvm
             -convert-arith-to-llvm
             -convert-math-to-llvm
-            -convert-math-to-libm 
+            -convert-math-to-libm
             -convert-func-to-llvm
             -reconcile-unrealized-casts |
           ${LLVM_TOOLS_BINARY_DIR}/mlir-translate -mlir-to-llvmir |

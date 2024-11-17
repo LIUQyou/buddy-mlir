@@ -29,7 +29,7 @@ SOURCE=$(shell ls tempFile/*.mlir -v)
 OUT=$(patsubst tempFile/%.mlir, %.out, $(SOURCE))
 
 .PHONY:all
-all:$(OUT) 
+all:$(OUT)
 	$(shell rm -rf tempFile)
 
 BUDDY_OPT_OPTIONS := -conv-vectorization="strip-mining=${STRIP}" -lower-affine -convert-scf-to-cf -convert-vector-to-llvm -finalize-memref-to-llvm -convert-arith-to-llvm -convert-func-to-llvm -reconcile-unrealized-casts

@@ -42,7 +42,6 @@ void _mlir_ciface_buddy_whisperPreprocess(MemRef<float, 3> *outputFeatures,
                                           MemRef<double, 1> *inputRawSpeech);
 
 void _mlir_ciface_buddy_RFFT(MemRef<double, 1> *inputRawSpeech);
-
 }
 } // namespace detail
 
@@ -51,7 +50,6 @@ void whisperPreprocess(MemRef<double, 1> *inputRawSpeech,
                        MemRef<float, 3> *outputFeatures) {
   detail::_mlir_ciface_buddy_whisperPreprocess(outputFeatures, inputRawSpeech);
 }
-
 
 void RFFT(MemRef<double, 1> *inputRawSpeech) {
   detail::_mlir_ciface_buddy_RFFT(inputRawSpeech);

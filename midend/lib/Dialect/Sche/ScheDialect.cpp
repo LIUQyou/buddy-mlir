@@ -1,4 +1,5 @@
-//===- ScheDialect.cpp - Sche Dialect Definition-------------------*- C++ -*-===//
+//===- ScheDialect.cpp - Sche Dialect Definition-------------------*- C++
+//-*-===//
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,13 +25,13 @@
 #include "mlir/IR/MLIRContext.h"
 #include "mlir/IR/Operation.h"
 #include "mlir/IR/OperationSupport.h"
+#include "mlir/Transforms/InliningUtils.h"
 #include "llvm/ADT/TypeSwitch.h"
 #include "llvm/AsmParser/Parser.h"
 #include "llvm/IR/Attributes.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Type.h"
 #include "llvm/Support/SourceMgr.h"
-#include "mlir/Transforms/InliningUtils.h"
 
 #include "Sche/ScheDialect.h"
 #include "Sche/ScheOps.h"

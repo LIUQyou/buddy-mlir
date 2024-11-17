@@ -25,11 +25,11 @@ module {
 
     memref.store %ele, %mem1[%c3, %c1] : memref<?x?xf32>
     %print_mem =  memref.cast %mem1 : memref<?x?xf32> to memref<*xf32>
-    // CHECK: Unranked Memref base@ = {{.*}} rank = 2 offset = 0 sizes = [4, 4] strides = [4, 1] data = 
+    // CHECK: Unranked Memref base@ = {{.*}} rank = 2 offset = 0 sizes = [4, 4] strides = [4, 1] data =
     // CHECK-NEXT: [
-    // CHECK-SAME: [0,   1,   2,   3], 
-    // CHECK-NEXT: [4,   5,   6,   7],  
-    // CHECK-NEXT: [8,   9,   10,   12], 
+    // CHECK-SAME: [0,   1,   2,   3],
+    // CHECK-NEXT: [4,   5,   6,   7],
+    // CHECK-NEXT: [8,   9,   10,   12],
     // CHECK-NEXT: [13,   1,   15,   16]
     // CHECK-SAME: ]
     call @printMemrefF32(%print_mem) : (memref<*xf32>) -> ()

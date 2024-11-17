@@ -141,8 +141,7 @@ void buddy::gpu::VectorToMMAConversionOp::getEffects(
   mlir::transform::modifiesPayload(effects);
 }
 
-DiagnosedSilenceableFailure
-buddy::gpu::VectorToMMAConversionOp::applyToOne(
+DiagnosedSilenceableFailure buddy::gpu::VectorToMMAConversionOp::applyToOne(
     mlir::transform::TransformRewriter &rewriter, Operation *target,
     mlir::transform::ApplyToEachResultList &results,
     mlir::transform::TransformState &state) {

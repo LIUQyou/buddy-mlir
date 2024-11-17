@@ -12,7 +12,7 @@ module {
 
   // Definition for the batch matrix multiplication function
   func.func @buddy_batchmatmul_f32(%A: memref<?x?x?xf32>, %B: memref<?x?x?xf32>, %C: memref<?x?x?xf32>) {
-    linalg.batch_matmul 
+    linalg.batch_matmul
       ins(%A, %B: memref<?x?x?xf32>, memref<?x?x?xf32>)
       outs(%C: memref<?x?x?xf32>)
     return
@@ -54,7 +54,7 @@ module {
       memref.dealloc %C : memref<?x?x?xf32>
       memref.dealloc %B : memref<?x?x?xf32>
       memref.dealloc %A : memref<?x?x?xf32>
-      return 
+      return
   }
 }
 

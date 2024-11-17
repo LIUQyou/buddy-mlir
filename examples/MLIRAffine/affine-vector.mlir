@@ -55,7 +55,7 @@ module {
     // CHECK-NEXT:  [30, 31, 32, 33, 34],
     // CHECK-NEXT:  [40, 41, 42, 43, 44]
     // CHECK-SAME: ]
-    func.call @printMemrefF32(%print_out2) : (memref<*xf32>) -> () 
+    func.call @printMemrefF32(%print_out2) : (memref<*xf32>) -> ()
     func.return
     }
 }

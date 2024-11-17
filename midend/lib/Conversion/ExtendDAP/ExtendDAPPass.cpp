@@ -3637,8 +3637,7 @@ class DAPRFFTLowering : public OpRewritePattern<dap::RFFTOp> {
 public:
   using OpRewritePattern<dap::RFFTOp>::OpRewritePattern;
 
-  explicit DAPRFFTLowering(MLIRContext *context)
-      : OpRewritePattern(context) {}
+  explicit DAPRFFTLowering(MLIRContext *context) : OpRewritePattern(context) {}
 
   LogicalResult matchAndRewrite(dap::RFFTOp op,
                                 PatternRewriter &rewriter) const override {

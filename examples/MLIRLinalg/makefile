@@ -73,7 +73,7 @@ linalg-conv2d_nhwc_fhwc-optimize-run:
 		-convert-func-to-llvm -reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=void -shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
-		
+
 linalg-conv2d_nhwc_fhwc-tile-optimize-lower:
 	@${BUDDY_OPT} linalg-conv2d_nhwc_fhwc.mlir \
 		-conv-nhwc-fhwc-tile-optimize="vec-size=16 tiling-height=2 tiling-width=3" \

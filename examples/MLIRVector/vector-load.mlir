@@ -82,14 +82,14 @@ func.func @main() -> i32 {
   %v5 = vector.load %base5[%c1, %c1] : memref<?x?xi32>, vector<8xi32>
   // ( 5, 6, 7, 8, 9, 10, 11, 12 )
   vector.print %v5 : vector<8xi32>
-  
+
 
   // load with dynamic memref
   //    case 2: out of bound
   // The document says:
-  //    Representation-wise, the ‘vector.load’ operation permits out-of-bounds reads. 
-  //    Support and implementation of out-of-bounds vector loads is target-specific. 
-  //    No assumptions should be made on the value of elements loaded out of bounds. 
+  //    Representation-wise, the ‘vector.load’ operation permits out-of-bounds reads.
+  //    Support and implementation of out-of-bounds vector loads is target-specific.
+  //    No assumptions should be made on the value of elements loaded out of bounds.
   //    Not all targets may support out-of-bounds vector loads.
   %v6 = vector.load %base5[%c3, %c1] : memref<?x?xi32>, vector<8xi32>
   // ( 13, 14, 15, 0, 1, 2, 3, 4 )
@@ -98,7 +98,7 @@ func.func @main() -> i32 {
 
   // load with unranked memref is not allowed
   %base6 = memref.cast %base1 : memref<4x4xi32> to memref<*xi32>
-  // %v7 = vector.load %base6[%c0, %c0] : memref<*xi32>, vector<8xi32> 
+  // %v7 = vector.load %base6[%c0, %c0] : memref<*xi32>, vector<8xi32>
 
   %ret = arith.constant 0 : i32
   return %ret : i32

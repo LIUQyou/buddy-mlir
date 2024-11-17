@@ -1,4 +1,5 @@
-//===- ScheDialect.h - Sche Dialect Definition --------------------*- C++ -*-===//
+//===- ScheDialect.h - Sche Dialect Definition --------------------*- C++
+//-*-===//
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +14,7 @@
 // limitations under the License.
 //
 //===----------------------------------------------------------------------===//
-// 
+//
 // This is the header file for the sche dialect.
 //
 //===----------------------------------------------------------------------===//
@@ -24,15 +25,16 @@
 namespace buddy {
 namespace sche {
 class AsyncTokenType
-    : public ::mlir::Type::TypeBase<AsyncTokenType, ::mlir::Type, ::mlir::TypeStorage> {
+    : public ::mlir::Type::TypeBase<AsyncTokenType, ::mlir::Type,
+                                    ::mlir::TypeStorage> {
 public:
   // Used for generic hooks in TypeBase.
   using Base::Base;
 };
 
 void addAsyncDependency(::mlir::Operation *op, ::mlir::Value token);
-}
-}
+} // namespace sche
+} // namespace buddy
 
 #include "mlir/IR/Dialect.h"
 

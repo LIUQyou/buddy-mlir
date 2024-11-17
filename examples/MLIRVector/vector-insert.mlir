@@ -9,36 +9,36 @@
 // RUN: | FileCheck %s
 
 func.func @main() -> i32 {
-  // vector.insert can insert scalar/sub-vector into a vector, creating a new 
+  // vector.insert can insert scalar/sub-vector into a vector, creating a new
   // vector as result. The original vector will NOT change.
 
-  // vector.insert only support literal as indices, if you need to insert 
+  // vector.insert only support literal as indices, if you need to insert
   // something into a vector with runtime values as indices, you need to cast
   // your base vector to 1-D vector and use vector.insertelement instead.
 
-  %base = arith.constant dense<[[0, 1, 2], [10, 11, 12], [20, 21, 22]]> 
+  %base = arith.constant dense<[[0, 1, 2], [10, 11, 12], [20, 21, 22]]>
     : vector<3x3xi32>
 
 
   // Insert a scalar into a vector:
-  // It will insert scalar 100 into position [0, 0] at %base, 
+  // It will insert scalar 100 into position [0, 0] at %base,
   // replacing original value 0.
   %c0 = arith.constant 100 : i32
-  %v0 = vector.insert %c0, %base[0, 0] : i32 into vector<3x3xi32> 
+  %v0 = vector.insert %c0, %base[0, 0] : i32 into vector<3x3xi32>
   // CHECK: ( ( 100, 1, 2 ), ( 10, 11, 12 ), ( 20, 21, 22 ) )
   vector.print %v0 : vector<3x3xi32>
 
 
   // Insert a sub-vector into a vector:
-  // It will insert sub-vector %w1 into position [0, 1] at %base, 
+  // It will insert sub-vector %w1 into position [0, 1] at %base,
   // replacing original vector [10, 11, 12].
   %w1 = arith.constant dense<[100, 101, 102]> : vector<3xi32>
   %v1 = vector.insert %w1, %base[1] : vector<3xi32> into vector<3x3xi32>
   // CHECK: ( ( 0, 1, 2 ), ( 100, 101, 102 ), ( 20, 21, 22 ) )
   vector.print %v1 : vector<3x3xi32>
-    
 
-  // For edge case, you can even "insert" a vector with exactly same rank with 
+
+  // For edge case, you can even "insert" a vector with exactly same rank with
   // original vector. In this case, the result will be just the new vector itself.
   %w2 = arith.constant dense<[[200, 201, 202], [210, 211, 212], [220, 221, 222]]> : vector<3x3xi32>
   %v2 = vector.insert %w2, %base[] : vector<3x3xi32> into vector<3x3xi32>

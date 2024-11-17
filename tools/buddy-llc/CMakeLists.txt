@@ -8,7 +8,7 @@ set(LLVM_LINK_COMPONENTS
   AllTargetsCodeGens
   AllTargetsDescs
   AllTargetsInfos
-  
+
   BuddyAnalysis
   BuddyAsmParser
   BuddyAsmPrinter

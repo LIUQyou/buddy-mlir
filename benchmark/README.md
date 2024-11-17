@@ -1,5 +1,5 @@
 # Benchmark
-To help researchers test convolution operations more efficiently, we provide a benchmark to test performance of MLIR convolution operations. It can calculate the running time of the program and print the GFLOPS value. 
+To help researchers test convolution operations more efficiently, we provide a benchmark to test performance of MLIR convolution operations. It can calculate the running time of the program and print the GFLOPS value.
 ## Run test
 ```
 cd benchmark
@@ -58,7 +58,7 @@ python3 figure.py
 ```
 This will use the default parameters to perform the test, and the three test results will be averaged for drawing(also save in `benchmark/data_<your parameter>.csv`). The generated figure is saved in `benchmark/figure_<your parameter>.png`.
 
-Similarly, you can still use custom parameters. 
+Similarly, you can still use custom parameters.
 
 ```
 python3 figure.py -PASS 5 -STRIP 64 -OUTPUT_min 128 -FILTER_max 5

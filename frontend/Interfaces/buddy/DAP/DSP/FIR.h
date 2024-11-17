@@ -31,8 +31,8 @@ namespace detail {
 extern "C" {
 // TODO: support both float and double.
 void _mlir_ciface_buddy_fir(MemRef<float, 1> *inputBuddyConv1D,
-                               MemRef<float, 1> *kernelBuddyConv1D,
-                               MemRef<float, 1> *outputBuddyConv1D);
+                            MemRef<float, 1> *kernelBuddyConv1D,
+                            MemRef<float, 1> *outputBuddyConv1D);
 }
 } // namespace detail
 

@@ -15,7 +15,7 @@ func.func @main() {
   %i2 = memref.rank %mem2 : memref<*xf32>
   // CHECK: 1
   vector.print %i0 : index
-  // CHECK: 2 
+  // CHECK: 2
   vector.print %i1 : index
   // CHECK: 2
   vector.print %i2 : index

@@ -40,6 +40,7 @@ class GraphDriver:
     - _subgraphs_outputs (dict): A dictionary mapping subgraph names to their
     output op's result.
     """
+
     def __init__(self, graph: Graph) -> None:
         """
         Initialize the GraphDriver object with a given computational graph.
@@ -94,7 +95,7 @@ class GraphDriver:
             if isinstance(node, OutputOp):
                 for arg in node.args:
                     output_node.append(arg)
-        
+
         # Identify outputs for each subgraph
         for subgraph_name in self._graph.op_groups.keys():
             subgraphs_outputs[subgraph_name] = []
@@ -127,11 +128,11 @@ class GraphDriver:
                     if inp in node._parents:
                         placeholder_node.add_children(op.name)
                 subgraph_body.append(placeholder_node)
-            
+
             # Add operations to subgraph body
             for op in self._graph.op_groups[subgraph_name]:
                 subgraph_body.append(op)
-            
+
             # Construct output node
             output_node = OutputOp()
             output_node.name = "output"
@@ -142,7 +143,11 @@ class GraphDriver:
 
             # Create subgraph and add it to the dictionary
             subgraph = Graph(
-                subgraph_input, [], self._graph._ops_registry, subgraph_name, verbose=self._graph._verbose
+                subgraph_input,
+                [],
+                self._graph._ops_registry,
+                subgraph_name,
+                verbose=self._graph._verbose,
             )
             subgraph.body = subgraph_body
             for op in subgraph_body:
@@ -172,7 +177,7 @@ class GraphDriver:
             self._graph._fake_params,
             self._graph._ops_registry,
             self._graph._func_name,
-            self._graph._verbose
+            self._graph._verbose,
         )
 
         # Adding FuncOp nodes for each subgraph
@@ -190,12 +195,12 @@ class GraphDriver:
                     self._graph.node_table[output].tensor_meta["dtype"]
                 )
             main_graph.body.append(func_node)
-        
+
         # Adding placeholder operations from the original graph
         for op in self._graph.body:
             if isinstance(op, PlaceholderOp):
                 main_graph.body.append(op)
-        
+
         # TODO: analysis topology order to sort subgraph call.
         if len(self._subgraphs) == 1:
             # Adding CallOp to invoke the single subgraph
@@ -216,14 +221,16 @@ class GraphDriver:
 
             # Adding GetItemOps to retrieve individual output tensors
             output_node = OutputOp()
-            for i, output in enumerate(list(self._subgraphs_outputs.values())[0]):
+            for i, output in enumerate(
+                list(self._subgraphs_outputs.values())[0]
+            ):
                 getitem_node = GetItemOp()
                 getitem_node.add_argument(call_node.name)
                 getitem_node.add_argument(i)
                 getitem_node.name = "getitem{}".format(i)
                 output_node.add_argument(getitem_node.name)
                 main_graph.body.append(getitem_node)
-            
+
             # Marking the final output of the main graph
             output_node.name = "output"
             main_graph.body.append(output_node)

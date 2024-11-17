@@ -27,9 +27,9 @@ func.func @main() -> i32 {
 
   %kernelAnchorX = arith.constant 1 : index
   %kernelAnchorY = arith.constant 1 : index
-  %c = arith.constant 0 : i32 
+  %c = arith.constant 0 : i32
   dip.corr_2d <CONSTANT_PADDING> %input, %identity, %output, %kernelAnchorX, %kernelAnchorY, %c : memref<3x3xi32>, memref<3x3xi32>, memref<3x3xi32>, index, index, i32
-  
+
   %printed_output = memref.cast %output : memref<3x3xi32> to memref<*xi32>
   call @printMemrefI32(%printed_output) : (memref<*xi32>) -> ()
   // CHECK: {{Unranked Memref base@ = 0x[0-9A-Fa-f]{1,} rank = 2 offset = 0 sizes = \[3, 3\] strides = \[3, 1\] data =}}

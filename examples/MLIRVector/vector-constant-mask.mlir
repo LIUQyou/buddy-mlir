@@ -8,8 +8,8 @@
 // RUN: | FileCheck %s
 
 func.func @main() -> i32 {
-  // constant_mask is the constant version of create_mask, with additional bound 
-  // check. It accepts a list of bounds for each dimension, to create a 
+  // constant_mask is the constant version of create_mask, with additional bound
+  // check. It accepts a list of bounds for each dimension, to create a
   // hyper-rectangular region with 1s, and the rest of 0s.
 
   // This will create a [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
@@ -20,7 +20,7 @@ func.func @main() -> i32 {
   // This will create a 2x2x2 region of 1s, and the rest for 0s.
   %mask2 = vector.constant_mask [2, 2, 2] : vector<3x3x3xi1>
   // CHECK: ( ( ( 1, 1, 0 ), ( 1, 1, 0 ), ( 0, 0, 0 ) ),
-  // CHECK-SAME: ( ( 1, 1, 0 ), ( 1, 1, 0 ), ( 0, 0, 0 ) ), 
+  // CHECK-SAME: ( ( 1, 1, 0 ), ( 1, 1, 0 ), ( 0, 0, 0 ) ),
   // CHECK-SAME: ( ( 0, 0, 0 ), ( 0, 0, 0 ), ( 0, 0, 0 ) ) )
   vector.print %mask2 : vector<3x3x3xi1>
 

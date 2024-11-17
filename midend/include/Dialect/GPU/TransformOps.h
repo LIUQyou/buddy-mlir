@@ -59,8 +59,7 @@ void registerBuddyGPUTransformOps(mlir::DialectRegistry &registry);
 namespace gpu {
 
 class TransformExtensions
-    : public mlir::transform::TransformDialectExtension<
-          TransformExtensions> {
+    : public mlir::transform::TransformDialectExtension<TransformExtensions> {
 public:
   TransformExtensions();
 };

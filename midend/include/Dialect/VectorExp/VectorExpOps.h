@@ -14,17 +14,17 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This is the header file for operations in vector experiment dialect. 
+// This is the header file for operations in vector experiment dialect.
 //
 //===----------------------------------------------------------------------===//
 
 #ifndef VECTOREXP_VECTOREXPOPS_H
 #define VECTOREXP_VECTOREXPOPS_H
 
+#include "mlir/Bytecode/BytecodeOpInterface.h"
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/Dialect.h"
 #include "mlir/IR/OpDefinition.h"
-#include "mlir/Bytecode/BytecodeOpInterface.h"
 #include "mlir/Interfaces/InferTypeOpInterface.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 

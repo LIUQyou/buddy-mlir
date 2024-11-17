@@ -298,7 +298,7 @@ vector-splat-run:
 		-split-input-file -verify-diagnostics \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}		
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
 vector-insert-lower:
 	@${MLIR_OPT} ./vector-insert.mlir \
@@ -321,8 +321,8 @@ vector-insert-run:
 		-split-input-file -verify-diagnostics \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}		
-	
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
+
 vector-reduction-lower:
 	@${MLIR_OPT} ./vector-reduction.mlir \
 		--convert-vector-to-scf --lower-affine --convert-scf-to-cf \
@@ -344,7 +344,7 @@ vector-reduction-run:
 		-split-input-file -verify-diagnostics \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}	
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
 vector-outerproduct-lower:
 	@${MLIR_OPT} ./vector-outerproduct.mlir \
@@ -367,7 +367,7 @@ vector-outerproduct-run:
 		-split-input-file -verify-diagnostics \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}	
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
 vector-create-mask-lower:
 	@${MLIR_OPT} ./vector-create-mask.mlir \
@@ -389,7 +389,7 @@ vector-create-mask-run:
 		--convert-vector-to-llvm --finalize-memref-to-llvm --convert-func-to-llvm \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}	
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
 vector-extract-lower:
 	@${MLIR_OPT} ./vector-extract.mlir \
@@ -502,7 +502,7 @@ vector-constant-mask-run:
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
 		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
-	
+
 vector-expandload-lower:
 	@${MLIR_OPT} ./vector-expandload.mlir \
 		--convert-vector-to-scf --lower-affine --convert-scf-to-cf \
@@ -523,7 +523,7 @@ vector-expandload-run:
 		--convert-vector-to-llvm --finalize-memref-to-llvm --convert-func-to-llvm \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}	
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
 vector-compressstore-lower:
 	@${MLIR_OPT} ./vector-compressstore.mlir \
@@ -567,7 +567,7 @@ vector-insert-strided-slice-run:
 		--convert-vector-to-llvm --finalize-memref-to-llvm --convert-func-to-llvm \
 		--reconcile-unrealized-casts | \
 	${MLIR_CPU_RUNNER} ${OPT_FLAG} -e main -entry-point-result=i32 \
-		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}		
+		-shared-libs=${MLIR_RUNNER_UTILS} -shared-libs=${MLIR_C_RUNNER_UTILS}
 
 vector-scatter-lower:
 	@${MLIR_OPT} ./vector-scatter.mlir \

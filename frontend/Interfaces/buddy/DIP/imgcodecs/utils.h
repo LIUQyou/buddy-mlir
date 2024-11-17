@@ -74,7 +74,7 @@ struct PaletteEntry {
   (((uchar *)(ptr))[0] = (clr).b, ((uchar *)(ptr))[1] = (clr).g,               \
    ((uchar *)(ptr))[2] = (clr).r)
 
-#define descale(x, n) (((x) + (1 << ((n)-1))) >> (n))
+#define descale(x, n) (((x) + (1 << ((n) - 1))) >> (n))
 #define saturate(x) (uchar)(((x) & ~255) == 0 ? (x) : ~((x) >> 31))
 
 inline void icvCvt_BGR2Gray_8u_C3C1R(const uchar *bgr, int bgr_step,

@@ -21,8 +21,8 @@
 #include "mlir/IR/Operation.h"
 #include "mlir/Target/LLVMIR/ModuleTranslation.h"
 
-#include "llvm/IR/IRBuilder.h"
 #include "backend/include/llvm/IR/IntrinsicsRISCV.h"
+#include "llvm/IR/IRBuilder.h"
 
 #include "Gemmini/GemminiDialect.h"
 #include "Gemmini/GemminiOps.h"

@@ -37,53 +37,55 @@ using namespace vector;
 //===----------------------------------------------------------------------===//
 
 namespace {
-class MatMulTransposeBVecPattern : public ConversionPattern{
+class MatMulTransposeBVecPattern : public ConversionPattern {
 public:
-    explicit MatMulTransposeBVecPattern(MLIRContext *context,int64_t vecSizeparam)
-        : ConversionPattern(linalg::MatmulTransposeBOp::getOperationName(),1,context){
-            vecSize = vecSizeparam;
-        }
-    
-    LogicalResult
-    matchAndRewrite(Operation *op,ArrayRef<Value> /*operands*/,
-                ConversionPatternRewriter &rewriter) const override{
-        auto loc = op->getLoc();
-        auto ctx = op->getContext();
-        // Get input A, B, C.
-        Value A = op->getOperand(0);
-        Value B = op->getOperand(1);
-        Value C = op->getOperand(2);
+  explicit MatMulTransposeBVecPattern(MLIRContext *context,
+                                      int64_t vecSizeparam)
+      : ConversionPattern(linalg::MatmulTransposeBOp::getOperationName(), 1,
+                          context) {
+    vecSize = vecSizeparam;
+  }
 
-        // Get shape of input and output.
-        ShapedType ATy = A.getType().cast<ShapedType>();
-        Type eleTy = ATy.getElementType();
+  LogicalResult
+  matchAndRewrite(Operation *op, ArrayRef<Value> /*operands*/,
+                  ConversionPatternRewriter &rewriter) const override {
+    auto loc = op->getLoc();
+    auto ctx = op->getContext();
+    // Get input A, B, C.
+    Value A = op->getOperand(0);
+    Value B = op->getOperand(1);
+    Value C = op->getOperand(2);
 
-        // the element type for mask vector.
-        IntegerType i1 = IntegerType::get(ctx, 1);
-        
-        VectorType vectorTy = mlir::VectorType::get({vecSize}, eleTy);
-        VectorType vectorMaskTy = VectorType::get({vecSize}, i1);
-        
-        const Value c0 =
-            rewriter.create<arith::ConstantOp>(loc, rewriter.getIndexAttr(0));
-        const Value c1 =
-            rewriter.create<arith::ConstantOp>(loc, rewriter.getIndexAttr(1));
-        const Value step = rewriter.create<arith::ConstantIndexOp>(loc, vecSize);
-        
-        const Value c0Ele = buddy::insertZeroConstantOp(ctx, rewriter, loc, eleTy);
-        Value passthruVec = rewriter.create<SplatOp>(loc, vectorTy, c0Ele);
+    // Get shape of input and output.
+    ShapedType ATy = A.getType().cast<ShapedType>();
+    Type eleTy = ATy.getElementType();
 
-        const Value aRow = rewriter.create<memref::DimOp>(loc, A, c0);
-        const Value bRow = rewriter.create<memref::DimOp>(loc, B, c0);
-        const Value bCol = rewriter.create<memref::DimOp>(loc, B, c1);
-        
-        AffineExpr d0;
-        bindDims(ctx, d0);
-        AffineMap vecTailMap = AffineMap::get(1, 0, {d0.ceilDiv(vecSize)}, ctx);
-        SmallVector<Value, 8> lowerBounds(2, c0);
-        SmallVector<Value, 8> uperBounds{aRow, bRow};
-        SmallVector<int64_t, 8> steps(2, 1);
-        // clang-format off
+    // the element type for mask vector.
+    IntegerType i1 = IntegerType::get(ctx, 1);
+
+    VectorType vectorTy = mlir::VectorType::get({vecSize}, eleTy);
+    VectorType vectorMaskTy = VectorType::get({vecSize}, i1);
+
+    const Value c0 =
+        rewriter.create<arith::ConstantOp>(loc, rewriter.getIndexAttr(0));
+    const Value c1 =
+        rewriter.create<arith::ConstantOp>(loc, rewriter.getIndexAttr(1));
+    const Value step = rewriter.create<arith::ConstantIndexOp>(loc, vecSize);
+
+    const Value c0Ele = buddy::insertZeroConstantOp(ctx, rewriter, loc, eleTy);
+    Value passthruVec = rewriter.create<SplatOp>(loc, vectorTy, c0Ele);
+
+    const Value aRow = rewriter.create<memref::DimOp>(loc, A, c0);
+    const Value bRow = rewriter.create<memref::DimOp>(loc, B, c0);
+    const Value bCol = rewriter.create<memref::DimOp>(loc, B, c1);
+
+    AffineExpr d0;
+    bindDims(ctx, d0);
+    AffineMap vecTailMap = AffineMap::get(1, 0, {d0.ceilDiv(vecSize)}, ctx);
+    SmallVector<Value, 8> lowerBounds(2, c0);
+    SmallVector<Value, 8> uperBounds{aRow, bRow};
+    SmallVector<int64_t, 8> steps(2, 1);
+    // clang-format off
         affine::buildAffineLoopNest(
             rewriter, loc, lowerBounds, uperBounds, steps,
             [&](OpBuilder &builder, Location loc, ValueRange ivs) {
@@ -102,7 +104,7 @@ public:
                         bindDims(ctx, m, n, k);
                         AffineMap BVectorMap = AffineMap::get(
                             /*dimCount=*/3, /*symbolCount=*/0, {m, k * vecSize}, ctx);
-                        
+
                         // Calculate the tail.
                         Value bColCur = builder.create<arith::MulIOp>(loc, iv, step);
                         Value tailLen = builder.create<arith::SubIOp>(loc, bCol, bColCur);
@@ -121,11 +123,11 @@ public:
                             Value res2 = builder.create<memref::LoadOp>(
                                 loc, C, ValueRange{ivs[0], ivs[1]});
                             Value sum = builder.create<arith::AddFOp>(loc, res1, res2);
-                            builder.create<memref::StoreOp>(loc, sum, 
+                            builder.create<memref::StoreOp>(loc, sum,
                                 C, ValueRange{ivs[0], ivs[1]});
                             builder.create<scf::YieldOp>(loc);
                             },
-                        // The else branch 
+                        // The else branch
                         [&](OpBuilder &builder, Location loc) {
                             Value aVec = builder.create<affine::AffineVectorLoadOp>(
                                 loc, vectorTy, A, AVectorMap, ValueRange{ivs[0], ivs[1], iv});
@@ -137,11 +139,11 @@ public:
                             Value aVecTail = builder.create<MaskedLoadOp>(
                                 loc, vectorTy, A, ValueRange{ivs[0], ColIdxTail},
                                 maskVec, passthruVec);
-                            
+
                             Value bVecTail = builder.create<MaskedLoadOp>(
                                 loc, vectorTy, B, ValueRange{ivs[1], ColIdxTail},
                                 maskVec, passthruVec);
-                        
+
                             Value resvec = builder.create<arith::MulFOp>(loc,aVecTail,bVecTail);
                             Value res1 = builder.create<mlir::vector::ReductionOp>(
                                 loc,mlir::vector::CombiningKind::ADD,resvec);
@@ -154,12 +156,13 @@ public:
                         builder.create<affine::AffineYieldOp>(loc);
                 });
         });
-        // clang-format on
-        rewriter.eraseOp(op);
-        return success();
-    }
+    // clang-format on
+    rewriter.eraseOp(op);
+    return success();
+  }
+
 private:
-    int64_t vecSize;
+  int64_t vecSize;
 };
 } // end anonymous namespace
 
@@ -167,41 +170,45 @@ private:
 // MatMulVectorizationPass
 //===----------------------------------------------------------------------===//
 
-namespace{
-    class MatMulTransposeBVecPass
-        :public PassWrapper<MatMulTransposeBVecPass,OperationPass<ModuleOp>>{
+namespace {
+class MatMulTransposeBVecPass
+    : public PassWrapper<MatMulTransposeBVecPass, OperationPass<ModuleOp>> {
 public:
-    MLIR_DEFINE_EXPLICIT_INTERNAL_INLINE_TYPE_ID(MatMulTransposeBVecPass)
-    StringRef getArgument() const final{ return "matmul-transpose-b-vectorization"; }
-    StringRef getDescription() const final { return "vectorize linalg MatmulTransposeBOp"; }
-    MatMulTransposeBVecPass() = default;
-    MatMulTransposeBVecPass(const MatMulTransposeBVecPass &) {}
-    void runOnOperation()   override;
-    void getDependentDialects(DialectRegistry &registry) const override{
-        registry.insert<linalg::LinalgDialect,scf::SCFDialect,
-            affine::AffineDialect,VectorDialect>();
-    }
-    Option<int64_t> vecSize{*this,"vec-size",
-                            llvm::cl::desc("The size of vectorization"),
-                            llvm::cl::init(32)};
-                            
+  MLIR_DEFINE_EXPLICIT_INTERNAL_INLINE_TYPE_ID(MatMulTransposeBVecPass)
+  StringRef getArgument() const final {
+    return "matmul-transpose-b-vectorization";
+  }
+  StringRef getDescription() const final {
+    return "vectorize linalg MatmulTransposeBOp";
+  }
+  MatMulTransposeBVecPass() = default;
+  MatMulTransposeBVecPass(const MatMulTransposeBVecPass &) {}
+  void runOnOperation() override;
+  void getDependentDialects(DialectRegistry &registry) const override {
+    registry.insert<linalg::LinalgDialect, scf::SCFDialect,
+                    affine::AffineDialect, VectorDialect>();
+  }
+  Option<int64_t> vecSize{*this, "vec-size",
+                          llvm::cl::desc("The size of vectorization"),
+                          llvm::cl::init(32)};
 };
-}
+} // namespace
 
-void MatMulTransposeBVecPass::runOnOperation(){
-    MLIRContext *context = &getContext();
-    ModuleOp module = getOperation();
+void MatMulTransposeBVecPass::runOnOperation() {
+  MLIRContext *context = &getContext();
+  ModuleOp module = getOperation();
 
-    ConversionTarget target(*context);
-    target.addLegalDialect<arith::ArithDialect, affine::AffineDialect,
+  ConversionTarget target(*context);
+  target
+      .addLegalDialect<arith::ArithDialect, affine::AffineDialect,
                        scf::SCFDialect, memref::MemRefDialect, VectorDialect>();
-    target.addLegalOp<ModuleOp,func::FuncOp,func::ReturnOp>();
-    target.addLegalOp<linalg::FillOp>();
+  target.addLegalOp<ModuleOp, func::FuncOp, func::ReturnOp>();
+  target.addLegalOp<linalg::FillOp>();
 
-    RewritePatternSet patterns(context);
-    patterns.add<MatMulTransposeBVecPattern>(context,vecSize);
+  RewritePatternSet patterns(context);
+  patterns.add<MatMulTransposeBVecPattern>(context, vecSize);
 
-    if (failed(applyPartialConversion(module, target, std::move(patterns))))
+  if (failed(applyPartialConversion(module, target, std::move(patterns))))
     signalPassFailure();
 }
 

@@ -20,8 +20,8 @@
 func.func private @printMemrefF32(memref<*xf32>)
 
 func.func @batch_matmul(%arg0: memref<?x?x?xf32>, %arg1: memref<?x?x?xf32>, %arg2: memref<?x?x?xf32>) {
-  linalg.batch_matmul 
-    ins(%arg0, %arg1 : memref<?x?x?xf32>, memref<?x?x?xf32>) 
+  linalg.batch_matmul
+    ins(%arg0, %arg1 : memref<?x?x?xf32>, memref<?x?x?xf32>)
     outs(%arg2 : memref<?x?x?xf32>)
   return
 }
@@ -58,7 +58,7 @@ func.func @main(){
 
   %printed_m2 = memref.cast %m2 : memref<?x?x?xf32> to memref<*xf32>
 
-  // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [1, 1, 1024] strides = [1024, 1024, 1] data = 
+  // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [1, 1, 1024] strides = [1024, 1024, 1] data =
   // CHECK-NEXT: [
   // CHECK: [
   // CHECK: [3456{{(, 3456)*}}]

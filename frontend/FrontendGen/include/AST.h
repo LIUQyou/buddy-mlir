@@ -36,7 +36,7 @@ protected:
   llvm::SMLoc loc;
 
 public:
-  virtual ~AntlrBase(){};
+  virtual ~AntlrBase() {};
   AntlrBase(llvm::StringRef name, llvm::SMLoc loc, baseKind kind)
       : kind(kind), name(name), loc(loc) {}
   llvm::StringRef getName() { return name; }
@@ -126,7 +126,7 @@ class DAG {
   llvm::StringMap<llvm::StringRef> values;
 
 public:
-  DAG(){};
+  DAG() {};
   DAG(const DAG &dag) {
     this->dagOperator = dag.dagOperator;
     this->operands = dag.operands;

@@ -10,17 +10,17 @@
 func.func @main() -> i32 {
   // vector.extract can get scalar/sub-vector from a vector.
 
-  // vector.extract only support literal as indices, if you need to extract 
+  // vector.extract only support literal as indices, if you need to extract
   // something from a vector with runtime values as indices, you need to cast
   // your base vector to 1-D vector and use vector.extractelement instead.
 
-  %base = arith.constant dense<[[0, 1, 2], [10, 11, 12], [20, 21, 22]]> 
+  %base = arith.constant dense<[[0, 1, 2], [10, 11, 12], [20, 21, 22]]>
     : vector<3x3xi32>
 
-  
+
   // Extract a scalar:
   %c0 = vector.extract %base[1, 1] : i32 from vector<3x3xi32>
-  // CHECK: 11 
+  // CHECK: 11
   vector.print %c0 : i32
 
 

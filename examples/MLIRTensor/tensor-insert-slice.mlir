@@ -10,7 +10,7 @@
 // RUN:     -shared-libs=%mlir_runner_utils_dir/libmlir_c_runner_utils%shlibext \
 // RUN: | FileCheck %s
 
-func.func private @printMemrefF32(%ptr : tensor<*xf32>) 
+func.func private @printMemrefF32(%ptr : tensor<*xf32>)
 
 func.func @main() {
   %t0 = arith.constant dense<[[[0., 1., 2.],
@@ -26,7 +26,7 @@ func.func @main() {
   %t2 = tensor.insert_slice %t1 into %t0[0, 0, 0][1, 3, 3][1, 1, 1] :
   tensor<3x3xf32> into tensor<3x3x3xf32>
   %print_out0 = tensor.cast %t2 : tensor<3x3x3xf32> to tensor<*xf32>
-  // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [3, 3, 3] strides = [9, 3, 1] data = 
+  // CHECK: Unranked Memref base@ = {{.*}} rank = 3 offset = 0 sizes = [3, 3, 3] strides = [9, 3, 1] data =
   // TODO: Printed results with errors, currently skipping value test.
   // CHECK: {{.*}}
   func.call @printMemrefF32(%print_out0) : (tensor<*xf32>) -> ()

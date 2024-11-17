@@ -146,7 +146,7 @@ $ cd examples/RVVDialect/
 $ make rvv-mul-add-run
 
 // Expected Output:
-Unranked Memref base@ = 0x55555729aaa0 rank = 1 offset = 0 sizes = [20] strides = [1] data = 
+Unranked Memref base@ = 0x55555729aaa0 rank = 1 offset = 0 sizes = [20] strides = [1] data =
 [0,  12,  26,  42,  60,  80,  102,  126,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]
 ```
 

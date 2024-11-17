@@ -11,7 +11,7 @@
 func.func @main() {
   %c1 = arith.constant 1.0 : f32
   %res = math.atan2 %c1, %c1 : f32
-  // Since floating point precision may differ across various hardware platforms, 
+  // Since floating point precision may differ across various hardware platforms,
   // we are only verifying results to three decimal places of precision here.
   // CHECK: {{0.785[0-9]+}}
   vector.print %res : f32

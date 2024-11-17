@@ -603,8 +603,7 @@ std::unique_ptr<BaseImageEncoder<T, N>> JpegEncoder<T, N>::newEncoder() const {
 }
 
 template <typename T, size_t N>
-bool JpegEncoder<T, N>::write(Img<T, N> &img,
-                              const std::vector<int> &params) {
+bool JpegEncoder<T, N>::write(Img<T, N> &img, const std::vector<int> &params) {
 
   this->m_last_error.clear();
 

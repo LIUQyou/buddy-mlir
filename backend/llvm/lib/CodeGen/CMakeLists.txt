@@ -251,7 +251,7 @@ add_llvm_component_library(LLVMBuddyCodeGen
   Support
   BuddyTarget
   BuddyTransformUtils
-  
+
   )
 
 add_subdirectory(SelectionDAG)

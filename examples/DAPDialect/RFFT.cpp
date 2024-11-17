@@ -65,8 +65,7 @@ int main() {
   const std::chrono::duration<double, std::milli> loadTime =
       loadEnd - loadStart;
   printLogLabel();
-  std::cout << "RFFT time: " << (double)(loadTime.count()) / 1000
-            << "s\n"
+  std::cout << "RFFT time: " << (double)(loadTime.count()) / 1000 << "s\n"
             << std::endl;
 
   printResult(inputMemRef);

@@ -65,4 +65,3 @@
     env:
     input: STDIN
     output: STDOUT
-    

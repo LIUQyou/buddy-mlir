@@ -10,7 +10,7 @@
 
 func.func @main() -> i32 {
   %0 = arith.constant dense<[12, 13, 14, 15, 16, 90]> : vector<6xi32>
-  // CHECK: ( 12, 13, 14, 15, 16, 90 ) 
+  // CHECK: ( 12, 13, 14, 15, 16, 90 )
   vector.print %0 : vector<6xi32>
 
   %sum = vector.reduction <add>, %0 : vector<6xi32> into i32

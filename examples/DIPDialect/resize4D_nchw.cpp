@@ -23,9 +23,9 @@
 //===----------------------------------------------------------------------===//
 #include "buddy/DIP/imgcodecs/loadsave.h"
 #include <buddy/Core/Container.h>
-#include <buddy/DIP/ImgContainer.h>
 #include <buddy/DIP/DIP.h>
 #include <buddy/DIP/ImageContainer.h>
+#include <buddy/DIP/ImgContainer.h>
 #include <iostream>
 #include <math.h>
 

@@ -12,7 +12,7 @@
 func.func @main() {
   %v0 = arith.constant dense<[1., 2., 3., 4., 5., 6., 7., 8.]> : vector<8xf32>
   %0 = math.rsqrt %v0 : vector<8xf32>
-  // Since floating point precision may differ across various hardware platforms, 
+  // Since floating point precision may differ across various hardware platforms,
   // we are only verifying results to three decimal places of precision here.
   // CHECK: {{( 1, 0.707[0-9]*, 0.577[0-9]*, 0.5, 0.447[0-9]*, 0.408[0-9]*, 0.377[0-9]*, 0.353[0-9]* )}}
   vector.print %0 : vector<8xf32>
