@@ -1,0 +1,43 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    clang \
+    cmake \
+    ninja-build \
+    python3 \
+    python3-pip \
+    git \
+    curl \
+    gnupg \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get install -y python3-dev python3-venv
+
+# Use Bash shell
+SHELL ["/bin/bash", "-c"]
+
+# Install Nix package manager
+RUN curl -L https://nixos.org/nix/install | sh -s -- --daemon
+
+# Add Nix to the PATH
+ENV PATH=/root/.nix-profile/bin:/root/.nix-profile/sbin:/nix/var/nix/profiles/default/bin:$PATH
+
+# Enable Nix flakes
+RUN mkdir -p /etc/nix && echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
+
+# Set up the environment
+ENV USER=root
+ENV HOME=/root
+WORKDIR /root
+
+# Clone your repository
+RUN git clone https://github.com/buddy-compiler/buddy-mlir.git
+WORKDIR /root/buddy-mlir
+
+# Initialize submodules
+RUN git submodule update --init
