@@ -21,7 +21,7 @@ repos:
     rev: 24.10.0  # Use the latest stable version
     hooks:
       - id: black
-        language_version: python3.10  # Adjusted to your Python version
+        language_version: python3.10
 
   - repo: https://github.com/PyCQA/flake8
     rev: 6.1.0  # Set the rev to match the desired flake8 version
