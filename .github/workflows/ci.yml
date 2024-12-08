@@ -44,6 +44,7 @@ jobs:
       if: steps.build.outputs.cache-hit != 'true'
       run: |
         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
     - name: Configure Build Flags
       id: configure
       run: |
@@ -60,10 +61,12 @@ jobs:
           echo "cmake_flags_llvm=" >> $GITHUB_OUTPUT
           echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
         fi
+
     - name: Run Docker Container
       id: run-container
       run: |
         docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
+
     - name: Enter buddy-mlir Directory
       run: |
         docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -71,6 +74,7 @@ jobs:
           cd /root/buddy-mlir
           nix develop -c bash -c 'echo Nix environment setup complete'
         "
+
     - name: Build LLVM
       run: |
         docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -87,6 +91,7 @@ jobs:
             ninja check-mlir check-clang
           '
         "
+
     - name: Check LLVM Build Path
       run: |
         docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -95,6 +100,7 @@ jobs:
             exit 1
           fi
         "
+
     - name: Build buddy-mlir
       run: |
         docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -112,11 +118,20 @@ jobs:
             ninja check-buddy
           '
         "
+
+    # Copy artifacts from the container to the host
+    - name: Copy build artifacts to host
+      run: |
+        mkdir -p ${GITHUB_WORKSPACE}/buddy-mlir/llvm
+        docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/buddy-mlir/llvm/build
+        docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/build ${GITHUB_WORKSPACE}/buddy-mlir/build
+
     - name: Stop and Remove Docker Container
       if: always()
       run: |
         docker stop buddy-mlir-ci-${{ matrix.configuration }}
         docker rm buddy-mlir-ci-${{ matrix.configuration }}
+
     - name: Upload Test Results
       if: failure()
       uses: actions/upload-artifact@v3
@@ -125,12 +140,13 @@ jobs:
         path: |
           buddy-mlir/llvm/build/Testing/**/Testing/*.xml
           buddy-mlir/build/Testing/**/Testing/*.xml
+
     - name: Archive Build Artifacts
       if: always()
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts-${{ matrix.configuration }}
-        path: /root/buddy-mlir/build
+        path: buddy-mlir/build
 
     - name: Cleanup Docker Cache
       if: always()
