@@ -13,6 +13,9 @@ jobs:
       matrix:
         configuration:
           - default
+          - cuda
+          - python-bindings
+          - lld
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
