@@ -43,6 +43,7 @@ jobs:
     - name: Load Docker Cache
       if: steps.build.outputs.cache-hit != 'true'
       run: |
+        rm -rf /tmp/.buildx-cache
         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
     - name: Configure Build Flags
