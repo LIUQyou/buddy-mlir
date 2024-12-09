@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         configuration:
+          - default
           - lld
           - python-bindings
 
