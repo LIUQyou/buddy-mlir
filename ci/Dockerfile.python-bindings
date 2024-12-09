@@ -41,3 +41,6 @@ WORKDIR /root/buddy-mlir
 
 # Initialize submodules
 RUN git submodule update --init
+
+# Copy requirements.txt and install Python libraries
+RUN pip3 install -r /root/buddy-mlir/requirements.txt
