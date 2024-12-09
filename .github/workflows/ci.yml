@@ -12,7 +12,8 @@ jobs:
     strategy:
       matrix:
         configuration:
-          - default
+          - lld
+          - python-bindings
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
