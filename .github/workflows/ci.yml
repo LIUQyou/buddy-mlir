@@ -14,6 +14,7 @@ jobs:
         configuration:
           - lld
           - python-bindings
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
@@ -27,12 +28,33 @@ jobs:
       uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-base-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-base-
+
+    # Build the base image once
+    - name: Build Base Image
+      run: |
+        docker buildx build \
+          --cache-from type=local,src=/tmp/.buildx-cache \
+          --cache-to type=local,dest=/tmp/.buildx-cache-new \
+          -t buddycompiler-base:v1.0 \
+          -f ci/Dockerfile.base \
+          --load \
+          .
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+    # Now build the matrix images which use buddycompiler-base:v1.0
+    - name: Cache Docker layers for matrix
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
         key: ${{ runner.os }}-buildx-${{ matrix.configuration }}-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-buildx-${{ matrix.configuration }}-
-        fail-on-cache-miss: false
 
-    - name: Build Docker Image
+    - name: Build Docker Image for Matrix Configuration
       run: |
         docker buildx build \
           --cache-from type=local,src=/tmp/.buildx-cache \
@@ -41,7 +63,9 @@ jobs:
           -f ci/Dockerfile.${{ matrix.configuration }} \
           --load \
           .
-    - name: Load Docker Cache
+      id: build
+
+    - name: Load Docker Cache for Matrix
       if: steps.build.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/.buildx-cache
@@ -121,7 +145,6 @@ jobs:
           '
         "
 
-    # Copy artifacts from the container to the host
     - name: Copy build artifacts to host
       run: |
         mkdir -p ${GITHUB_WORKSPACE}/buddy-mlir/llvm
