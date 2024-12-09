@@ -1,12 +1,12 @@
 { stdenv
 , cmake
 , ninja
-, python3
+, python310
 , fetchFromGitHub
 }:
 
 let
-  pythonEnv = python3.withPackages (ps: [
+  pythonEnv = python310.withPackages (ps: [
     ps.numpy
     ps.pybind11
     ps.pyyaml
@@ -27,6 +27,7 @@ stdenv.mkDerivation rec {
 
   propagatedBuildInputs = [
     pythonEnv
+    stdenv.cc.cc.lib
   ];
 
   nativeBuildInputs = [
