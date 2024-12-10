@@ -114,7 +114,7 @@ jobs:
       - name: Initialize Nix Environment Inside the Container
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            sudo chown -R root:root /root/buddy-mlir
+            chown -R root:root /root/buddy-mlir
             set -e
             nix develop -c bash -c 'echo Nix environment setup complete'
           "
@@ -147,7 +147,7 @@ jobs:
       # 16. Verify LLVM Build Directory Exists
       - name: Check LLVM Build Path
         run: |
-          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          docker exec buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
             if [ ! -d /root/buddy-mlir/llvm/build ]; then
               echo 'LLVM build directory does not exist'
               exit 1
