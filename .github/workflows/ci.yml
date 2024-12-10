@@ -30,12 +30,25 @@ jobs:
           driver: docker
           buildkitd-flags: --allow-insecure-entitlement security.insecure
 
-      # 3. (Optional) Create and Use the Buildx Builder named 'mybuilder'
-      # Uncomment if you need a custom builder
-      # - name: Create Buildx Builder
-      #   run: |
-      #     docker buildx create --name mybuilder --driver docker --use
-      #     docker buildx inspect mybuilder --bootstrap
+      # 3. Create and Use the Buildx Builder named 'mybuilder'
+      - name: Create Buildx Builder
+        run: |
+          docker buildx create --name mybuilder --driver docker --use
+          docker buildx inspect mybuilder --bootstrap
+
+      # 3.1. Inspect Buildx Builders
+      - name: Inspect Buildx Builders
+        run: |
+          docker buildx ls
+
+      # 3.2. Remove Conflicting Builders
+      - name: Remove Conflicting Builders
+        run: |
+          for builder in $(docker buildx ls --format '{{.Name}}'); do
+            if [ "$builder" != "mybuilder" ]; then
+              docker buildx rm "$builder" || true
+            fi
+          done
 
       # 4. Restore Buildx Cache
       - name: Restore Buildx Cache
@@ -50,6 +63,7 @@ jobs:
       - name: Build Base Image with Buildx and Caching
         run: |
           docker buildx build \
+            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddycompiler-base:v1.0 \
@@ -66,6 +80,7 @@ jobs:
       - name: Build Docker Image for Matrix Configuration with Caching
         run: |
           docker buildx build \
+            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
