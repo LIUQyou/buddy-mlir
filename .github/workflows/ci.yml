@@ -49,9 +49,9 @@ jobs:
       - name: Check Docker Daemon Status
         run: docker info
 
-      # 5b. Detailed Builder Inspection
+      # 5b. Detailed Builder Inspection (Removed --verbose)
       - name: Detailed Builder Inspection
-        run: docker buildx inspect mybuilder --verbose
+        run: docker buildx inspect mybuilder
 
       # 6. Build the Base Image with Buildx and Caching
       - name: Build Base Image with Buildx and Caching
