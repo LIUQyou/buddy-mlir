@@ -162,7 +162,7 @@ jobs:
       # 17. Build buddy-mlir Inside the Container
       - name: Build buddy-mlir
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
             set -e
             nix develop -c bash -c '
               mkdir -p build && cd build
@@ -177,21 +177,14 @@ jobs:
             '
           "
 
-      # 18. Copy Build Artifacts from Container to Host
-      - name: Copy build artifacts to host
-        run: |
-          mkdir -p ${GITHUB_WORKSPACE}/llvm
-          docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/llvm/build
-          docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/build ${GITHUB_WORKSPACE}/build
-
-      # 19. Stop and Remove Docker Container
+      # 18. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
         if: always()
         run: |
           docker stop buddy-mlir-ci-${{ matrix.configuration }}
           docker rm buddy-mlir-ci-${{ matrix.configuration }}
 
-      # 20. Upload Test Results if the Build Fails
+      # 19. Upload Test Results if the Build Fails
       - name: Upload Test Results
         if: failure()
         uses: actions/upload-artifact@v3
@@ -201,7 +194,7 @@ jobs:
             llvm/build/Testing/**/Testing/*.xml
             build/Testing/**/Testing/*.xml
 
-      # 21. Archive Build Artifacts Regardless of Success or Failure
+      # 20. Archive Build Artifacts Regardless of Success or Failure
       - name: Archive Build Artifacts
         if: always()
         uses: actions/upload-artifact@v3
