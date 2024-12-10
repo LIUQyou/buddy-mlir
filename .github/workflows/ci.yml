@@ -23,12 +23,11 @@ jobs:
         with:
           submodules: true
 
-      # 2. Set Up Docker Buildx with docker-container Driver
+      # 2. Set Up Docker Buildx with docker driver
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
-          driver: docker-container
-          buildkitd-flags: --allow-insecure-entitlement security.insecure
+          driver: docker
 
       # 3. Restore Buildx Cache
       - name: Restore Buildx Cache
