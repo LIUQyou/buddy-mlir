@@ -26,7 +26,6 @@ stdenv.mkDerivation rec {
   requiredSystemFeatures = [ "big-parallel" ];
 
   propagatedBuildInputs = [
-    python310
     pythonEnv
     stdenv.cc.cc.lib
   ];
@@ -46,6 +45,7 @@ stdenv.mkDerivation rec {
     "-DMLIR_ENABLE_BINDINGS_PYTHON=ON"
     # required for not, FileCheck...
     "-DLLVM_INSTALL_UTILS=ON"
+    "-DPython3_EXECUTABLE=${pythonEnv}/bin/python3"
   ];
 
   outputs = [ "out" "lib" "dev" ];
