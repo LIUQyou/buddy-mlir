@@ -13,5 +13,3 @@ WORKDIR /root
 
 # Set the working directory to /root
 WORKDIR /root
-
-RUN pip3 install -r /root/buddy-mlir/requirements.txt

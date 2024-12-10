@@ -118,8 +118,16 @@ jobs:
             nix develop -c bash -c 'echo Nix environment setup complete'
           "
 
-      # 15. Build LLVM Inside the Container
-      - name: Build LLVM
+      # Install Python requirements for python-bindings configuration
+      - name: Install Python Requirements
+        if: ${{ matrix.configuration == 'python-bindings' }}
+        run: |
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+            pip3 install -r /root/buddy-mlir/requirements.txt
+          "
+
+      # 15. Build LLVM
+        - name: Build LLVM
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
             set -e
