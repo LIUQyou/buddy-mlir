@@ -23,18 +23,19 @@ jobs:
         with:
           submodules: true
 
-      # 2. Set Up Docker Buildx with docker-container driver
+      # 2. Set up Docker Buildx with docker driver
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
-          driver: docker-container
+          driver: docker
           buildkitd-flags: --allow-insecure-entitlement security.insecure
 
-      # 3. Create and Use the Buildx Builder named 'mybuilder'
-      - name: Create Buildx Builder
-        run: |
-          docker buildx create --name mybuilder --driver docker-container --use
-          docker buildx inspect mybuilder --bootstrap
+      # 3. (Optional) Create and Use the Buildx Builder named 'mybuilder'
+      # Uncomment if you need a custom builder
+      # - name: Create Buildx Builder
+      #   run: |
+      #     docker buildx create --name mybuilder --driver docker --use
+      #     docker buildx inspect mybuilder --bootstrap
 
       # 4. Restore Buildx Cache
       - name: Restore Buildx Cache
@@ -49,7 +50,6 @@ jobs:
       - name: Build Base Image with Buildx and Caching
         run: |
           docker buildx build \
-            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddycompiler-base:v1.0 \
@@ -57,11 +57,10 @@ jobs:
             --output=type=docker \
             .
 
-      # 6. Build Docker Images for Each Matrix Configuration with Caching
+      # 6. Build Docker Image for Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
         run: |
           docker buildx build \
-            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
@@ -102,7 +101,7 @@ jobs:
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
           fi
 
-      # 10. Run the Docker Container for the Current Configuration
+      # 10. Run Docker Container
       - name: Run Docker Container
         run: |
           docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
@@ -110,7 +109,7 @@ jobs:
             -w "/root/buddy-mlir" \
             buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
-      # 11. Initialize the Nix Environment Inside the Container
+      # 11. Initialize Nix Environment Inside the Container
       - name: Initialize Nix Environment Inside the Container
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -170,7 +169,7 @@ jobs:
           docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/llvm/build
           docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/build ${GITHUB_WORKSPACE}/build
 
-      # 16. Stop and Remove the Docker Container
+      # 16. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
         if: always()
         run: |
