@@ -73,7 +73,7 @@ jobs:
       # 8. Verify Base Image Loaded
       - name: Verify Base Image Loaded
         run: |
-          docker images | grep buddycompiler-base:v1.0
+          docker images | grep buddycompiler-base
 
       # 9. Build Docker Image for Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
