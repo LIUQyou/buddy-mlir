@@ -26,8 +26,8 @@ stdenv.mkDerivation rec {
   requiredSystemFeatures = [ "big-parallel" ];
 
   propagatedBuildInputs = [
+    python310
     pythonEnv
-    python310.dev
     stdenv.cc.cc.lib
   ];
 
