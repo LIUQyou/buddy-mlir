@@ -152,7 +152,7 @@ jobs:
       # 16. Verify LLVM Build Directory Exists
       - name: Check LLVM Build Path
         run: |
-          docker exec buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
             if [ ! -d /root/buddy-mlir/llvm/build ]; then
               echo 'LLVM build directory does not exist'
               exit 1
