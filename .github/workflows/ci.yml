@@ -54,10 +54,15 @@ jobs:
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddycompiler-base:v1.0 \
             -f ci/Dockerfile.base \
-            --output=type=docker \
+            --load \
             .
 
-      # 6. Build Docker Image for Matrix Configuration with Caching
+      # 6. Verify Base Image Loaded
+      - name: Verify Base Image Loaded
+        run: |
+          docker images | grep buddycompiler-base:v1.0
+
+      # 7. Build Docker Image for Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
         run: |
           docker buildx build \
@@ -65,16 +70,16 @@ jobs:
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
             -f ci/Dockerfile.${{ matrix.configuration }} \
-            --output=type=docker \
+            --load \
             .
 
-      # 7. Save the Updated Buildx Cache
+      # 8. Save the Updated Buildx Cache
       - name: Save Buildx Cache
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      # 8. Cache the Updated Buildx Cache for Future Runs
+      # 9. Cache the Updated Buildx Cache for Future Runs
       - name: Cache Buildx Cache
         uses: actions/cache@v3
         with:
@@ -83,7 +88,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-cache-
 
-      # 9. Configure Build Flags Based on Matrix Configuration
+      # 10. Configure Build Flags Based on Matrix Configuration
       - name: Configure Build Flags
         id: configure
         run: |
@@ -101,7 +106,7 @@ jobs:
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
           fi
 
-      # 10. Run Docker Container
+      # 11. Run Docker Container
       - name: Run Docker Container
         run: |
           docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
@@ -109,7 +114,7 @@ jobs:
             -w "/root/buddy-mlir" \
             buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
-      # 11. Initialize Nix Environment Inside the Container
+      # 12. Initialize Nix Environment Inside the Container
       - name: Initialize Nix Environment Inside the Container
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -117,7 +122,7 @@ jobs:
             nix develop -c bash -c 'echo Nix environment setup complete'
           "
 
-      # 12. Build LLVM Inside the Container
+      # 13. Build LLVM Inside the Container
       - name: Build LLVM
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -134,7 +139,7 @@ jobs:
             '
           "
 
-      # 13. Verify LLVM Build Directory Exists
+      # 14. Verify LLVM Build Directory Exists
       - name: Check LLVM Build Path
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -144,7 +149,7 @@ jobs:
             fi
           "
 
-      # 14. Build buddy-mlir Inside the Container
+      # 15. Build buddy-mlir Inside the Container
       - name: Build buddy-mlir
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -162,34 +167,34 @@ jobs:
             '
           "
 
-      # 15. Copy Build Artifacts from Container to Host
+      # 16. Copy Build Artifacts from Container to Host
       - name: Copy build artifacts to host
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/llvm
           docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/llvm/build
           docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/build ${GITHUB_WORKSPACE}/build
 
-      # 16. Stop and Remove Docker Container
+      # 17. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
         if: always()
         run: |
           docker stop buddy-mlir-ci-${{ matrix.configuration }}
           docker rm buddy-mlir-ci-${{ matrix.configuration }}
 
-      # 17. Upload Test Results if the Build Fails
+      # 18. Upload Test Results if the Build Fails
       - name: Upload Test Results
         if: failure()
         uses: actions/upload-artifact@v3
         with:
           name: test-results-${{ matrix.configuration }}
           path: |
-            buddy-mlir/llvm/build/Testing/**/Testing/*.xml
-            buddy-mlir/build/Testing/**/Testing/*.xml
+            llvm/build/Testing/**/Testing/*.xml
+            build/Testing/**/Testing/*.xml
 
-      # 18. Archive Build Artifacts Regardless of Success or Failure
+      # 19. Archive Build Artifacts Regardless of Success or Failure
       - name: Archive Build Artifacts
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts-${{ matrix.configuration }}
-          path: buddy-mlir/build
+          path: build
