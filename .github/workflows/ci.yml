@@ -114,7 +114,7 @@ jobs:
           "
 
       # 11. Build LLVM Inside the Container
-        - name: Build LLVM
+      - name: Build LLVM
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
             set -e
