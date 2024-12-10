@@ -23,11 +23,13 @@ jobs:
         with:
           submodules: true
 
-      # 2. Set Up Docker Buildx with docker driver
+      # 2. Set Up Docker Buildx with docker-container driver and named builder
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
-          driver: docker
+          driver: docker-container
+          buildkitd-flags: --allow-insecure-entitlement security.insecure
+          builder: mybuilder
 
       # 3. Restore Buildx Cache
       - name: Restore Buildx Cache
@@ -42,22 +44,24 @@ jobs:
       - name: Build Base Image with Buildx and Caching
         run: |
           docker buildx build \
+            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddycompiler-base:v1.0 \
             -f ci/Dockerfile.base \
-            --load \
+            --output=type=docker \
             .
 
       # 5. Build Docker Images for Each Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
         run: |
           docker buildx build \
+            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
             -f ci/Dockerfile.${{ matrix.configuration }} \
-            --load \
+            --output=type=docker \
             .
 
       # 6. Save the Updated Buildx Cache
@@ -110,9 +114,9 @@ jobs:
           "
 
       # 11. Build LLVM Inside the Container
-      - name: Build LLVM
+        - name: Build LLVM
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
             set -e
             nix develop -c bash -c '
               mkdir -p llvm/build && cd llvm/build
