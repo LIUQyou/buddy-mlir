@@ -27,6 +27,7 @@ stdenv.mkDerivation rec {
 
   propagatedBuildInputs = [
     pythonEnv
+    python310.dev
     stdenv.cc.cc.lib
   ];
 
