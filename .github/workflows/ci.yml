@@ -23,7 +23,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
       with:
-        driver: docker-container
+        driver: docker
 
     - name: Cache Docker layers
       uses: actions/cache@v3
@@ -37,12 +37,11 @@ jobs:
     - name: Build Base Image
       run: |
         docker buildx build \
-          --cache-from type=local,src=/tmp/.buildx-cache \
-          --cache-to type=local,dest=/tmp/.buildx-cache-new \
+          --output type=docker \
           -t buddycompiler-base:v1.0 \
           -f ci/Dockerfile.base \
-          --load \
           .
+
         rm -rf /tmp/.buildx-cache
         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
