@@ -102,18 +102,19 @@ jobs:
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
           fi
 
-      # 13. Run Docker Container with Updated Mount Point
+      # 13. Run Docker Container
       - name: Run Docker Container
         run: |
           docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
-            -v "${GITHUB_WORKSPACE}:/buddy-mlir" \
-            -w "/buddy-mlir" \
+            -v "${GITHUB_WORKSPACE}:/root/buddy-mlir" \
+            -w "/root/buddy-mlir" \
             buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
       # 14. Initialize Nix Environment Inside the Container
       - name: Initialize Nix Environment Inside the Container
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+            sudo chown -R root:root /root/buddy-mlir
             set -e
             nix develop -c bash -c 'echo Nix environment setup complete'
           "
@@ -123,13 +124,13 @@ jobs:
         if: ${{ matrix.configuration == 'python-bindings' }}
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            pip3 install -r /buddy-mlir/requirements.txt
+            pip3 install -r /root/buddy-mlir/requirements.txt
           "
 
       # 15. Build LLVM
       - name: Build LLVM
         run: |
-          docker exec -w "/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
             set -e
             nix develop -c bash -c '
               mkdir -p llvm/build && cd llvm/build
@@ -147,7 +148,7 @@ jobs:
       - name: Check LLVM Build Path
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            if [ ! -d /buddy-mlir/llvm/build ]; then
+            if [ ! -d /root/buddy-mlir/llvm/build ]; then
               echo 'LLVM build directory does not exist'
               exit 1
             fi
@@ -156,7 +157,7 @@ jobs:
       # 17. Build buddy-mlir Inside the Container
       - name: Build buddy-mlir
         run: |
-          docker exec -w "/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci:${{ matrix.configuration }} /bin/bash -c "
             set -e
             nix develop -c bash -c '
               mkdir -p build && cd build
@@ -175,8 +176,8 @@ jobs:
       - name: Copy build artifacts to host
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/llvm
-          docker cp buddy-mlir-ci-${{ matrix.configuration }}:/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/llvm/build
-          docker cp buddy-mlir-ci-${{ matrix.configuration }}:/buddy-mlir/build ${GITHUB_WORKSPACE}/build
+          docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/llvm/build
+          docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/build ${GITHUB_WORKSPACE}/build
 
       # 19. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
