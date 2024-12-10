@@ -28,17 +28,17 @@ jobs:
         run: |
           docker buildx rm mybuilder || true
 
-      # 3. Set up Docker Buildx with docker-container driver
+      # 3. Set up Docker Buildx with default docker driver
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
-          driver: docker-container
+          driver: docker
           buildkitd-flags: --allow-insecure-entitlement security.insecure
 
       # 4. Create and Use the Buildx Builder named 'mybuilder'
       - name: Create and Use Buildx Builder 'mybuilder'
         run: |
-          docker buildx create --name mybuilder --driver docker-container --use
+          docker buildx create --name mybuilder --driver docker --use
           docker buildx inspect mybuilder --bootstrap
 
       # 5. Inspect Buildx Builders to Confirm Configuration
@@ -62,7 +62,7 @@ jobs:
             --cache-to=type=gha,mode=max \
             -t buddycompiler-base:v1.0 \
             -f ci/Dockerfile.base \
-            --output=type=docker \
+            --load \
             --progress=plain \
             .
 
@@ -73,7 +73,7 @@ jobs:
       # 8. Verify Base Image Loaded
       - name: Verify Base Image Loaded
         run: |
-          docker images | grep buddycompiler-base
+          docker images | grep buddycompiler-base:v1.0
 
       # 9. Build Docker Image for Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
@@ -84,7 +84,7 @@ jobs:
             --cache-to=type=gha,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
             -f ci/Dockerfile.${{ matrix.configuration }} \
-            --output=type=docker \
+            --load \
             --progress=plain \
             .
 
