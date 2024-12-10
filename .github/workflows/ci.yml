@@ -30,27 +30,22 @@ jobs:
           driver: docker
           buildkitd-flags: --allow-insecure-entitlement security.insecure
 
-      # 3. Create and Use the Buildx Builder named 'buddybuilder'
+      # 3. Remove Existing Buildx Builder Named 'mybuilder' (if it exists)
+      - name: Remove existing Buildx Builder 'mybuilder'
+        run: |
+          docker buildx rm mybuilder || true
+
+      # 4. Create and Use the Buildx Builder named 'mybuilder'
       - name: Create Buildx Builder
         run: |
-          docker buildx create --name buddybuilder --driver docker --use
-          docker buildx inspect buddybuilder --bootstrap
+          docker buildx create --name mybuilder --driver docker --use
+          docker buildx inspect mybuilder --bootstrap
 
-      # 3.1. Inspect Buildx Builders
+      # 5. Inspect Buildx Builders to Confirm Configuration
       - name: Inspect Buildx Builders
-        run: |
-          docker buildx ls
+        run: docker buildx ls
 
-      # 3.2. Remove Conflicting Builders
-      - name: Remove Conflicting Builders
-        run: |
-          for builder in $(docker buildx ls --format '{{.Name}}'); do
-            if [ "$builder" != "buddybuilder" ]; then
-              docker buildx rm "$builder" || true
-            fi
-          done
-
-      # 4. Restore Buildx Cache
+      # 6. Restore Buildx Cache
       - name: Restore Buildx Cache
         uses: actions/cache@v3
         with:
@@ -59,11 +54,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-cache-
 
-      # 5. Build the Base Image with Buildx and Caching
+      # 7. Build the Base Image with Buildx and Caching
       - name: Build Base Image with Buildx and Caching
         run: |
           docker buildx build \
-            --builder buddybuilder \
+            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddycompiler-base:v1.0 \
@@ -71,16 +66,16 @@ jobs:
             --load \
             .
 
-      # 6. Verify Base Image Loaded
+      # 8. Verify Base Image Loaded
       - name: Verify Base Image Loaded
         run: |
           docker images | grep buddycompiler-base:v1.0
 
-      # 7. Build Docker Image for Matrix Configuration with Caching
+      # 9. Build Docker Image for Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
         run: |
           docker buildx build \
-            --builder buddybuilder \
+            --builder mybuilder \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
@@ -88,13 +83,13 @@ jobs:
             --load \
             .
 
-      # 8. Save the Updated Buildx Cache
+      # 10. Save the Updated Buildx Cache
       - name: Save Buildx Cache
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      # 9. Cache the Updated Buildx Cache for Future Runs
+      # 11. Cache the Updated Buildx Cache for Future Runs
       - name: Cache Buildx Cache
         uses: actions/cache@v3
         with:
@@ -103,7 +98,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-cache-
 
-      # 10. Configure Build Flags Based on Matrix Configuration
+      # 12. Configure Build Flags Based on Matrix Configuration
       - name: Configure Build Flags
         id: configure
         run: |
@@ -121,7 +116,7 @@ jobs:
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
           fi
 
-      # 11. Run Docker Container
+      # 13. Run Docker Container
       - name: Run Docker Container
         run: |
           docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
@@ -129,7 +124,7 @@ jobs:
             -w "/root/buddy-mlir" \
             buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
-      # 12. Initialize Nix Environment Inside the Container
+      # 14. Initialize Nix Environment Inside the Container
       - name: Initialize Nix Environment Inside the Container
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -137,7 +132,7 @@ jobs:
             nix develop -c bash -c 'echo Nix environment setup complete'
           "
 
-      # 13. Build LLVM Inside the Container
+      # 15. Build LLVM Inside the Container
       - name: Build LLVM
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -154,7 +149,7 @@ jobs:
             '
           "
 
-      # 14. Verify LLVM Build Directory Exists
+      # 16. Verify LLVM Build Directory Exists
       - name: Check LLVM Build Path
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -164,7 +159,7 @@ jobs:
             fi
           "
 
-      # 15. Build buddy-mlir Inside the Container
+      # 17. Build buddy-mlir Inside the Container
       - name: Build buddy-mlir
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -182,21 +177,21 @@ jobs:
             '
           "
 
-      # 16. Copy Build Artifacts from Container to Host
+      # 18. Copy Build Artifacts from Container to Host
       - name: Copy build artifacts to host
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/llvm
           docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/llvm/build ${GITHUB_WORKSPACE}/llvm/build
           docker cp buddy-mlir-ci-${{ matrix.configuration }}:/root/buddy-mlir/build ${GITHUB_WORKSPACE}/build
 
-      # 17. Stop and Remove Docker Container
+      # 19. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
         if: always()
         run: |
           docker stop buddy-mlir-ci-${{ matrix.configuration }}
           docker rm buddy-mlir-ci-${{ matrix.configuration }}
 
-      # 18. Upload Test Results if the Build Fails
+      # 20. Upload Test Results if the Build Fails
       - name: Upload Test Results
         if: failure()
         uses: actions/upload-artifact@v3
@@ -206,7 +201,7 @@ jobs:
             llvm/build/Testing/**/Testing/*.xml
             build/Testing/**/Testing/*.xml
 
-      # 19. Archive Build Artifacts Regardless of Success or Failure
+      # 21. Archive Build Artifacts Regardless of Success or Failure
       - name: Archive Build Artifacts
         if: always()
         uses: actions/upload-artifact@v3
