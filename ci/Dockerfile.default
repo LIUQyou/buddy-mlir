@@ -8,8 +8,8 @@ ENV HOME=/root
 WORKDIR /root
 
 # Clone your repository
-RUN git clone https://github.com/buddy-compiler/buddy-mlir.git
-WORKDIR /root/buddy-mlir
+
+# Set the working directory to /root
+WORKDIR /root
 
 # Initialize submodules
-RUN git submodule update --init

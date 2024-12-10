@@ -11,11 +11,7 @@ ENV USER=root
 ENV HOME=/root
 WORKDIR /root
 
-# Clone your repository
-RUN git clone https://github.com/buddy-compiler/buddy-mlir.git
-WORKDIR /root/buddy-mlir
-
-# Initialize submodules
-RUN git submodule update --init
+# Set the working directory to /root
+WORKDIR /root
 
 RUN pip3 install -r /root/buddy-mlir/requirements.txt
