@@ -82,7 +82,7 @@ jobs:
       # 11. Verify Matrix Image Loaded
       - name: Verify Matrix Image Loaded
         run: |
-          docker images | grep buddy-mlir-ci:${{ matrix.configuration }}
+          docker images | grep "^buddy-mlir-ci\s\+${{ matrix.configuration }}$"
 
       # 12. Configure Build Flags Based on Matrix Configuration
       - name: Configure Build Flags
