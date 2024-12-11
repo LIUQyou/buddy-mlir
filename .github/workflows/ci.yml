@@ -122,9 +122,9 @@ jobs:
             echo "Python versions installed:" && \
             ls /usr/bin/python* && \
             echo "Default python version:" && \
-            python --version && \
+            /usr/bin/python --version && \
             echo "Python3 version:" && \
-            python3 --version
+            /usr/bin/python3 --version
           '
 
       # 14. Initialize Nix Environment Inside the Container
