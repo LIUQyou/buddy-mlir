@@ -137,7 +137,7 @@ jobs:
       # 15. Build LLVM
       - name: Build LLVM
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-lld /bin/bash -c "
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
             set -e
             nix develop --command bash <<'EOF'
               mkdir -p llvm/build && cd llvm/build
@@ -146,8 +146,7 @@ jobs:
                 -DLLVM_TARGETS_TO_BUILD='host;RISCV' \
                 -DLLVM_ENABLE_ASSERTIONS=ON \
                 -DCMAKE_BUILD_TYPE=Release \
-                -DLLVM_USE_LINKER=lld \
-                -DPython3_EXECUTABLE=\$(which python3)
+                ${{ steps.configure.outputs.cmake_flags_llvm }}
               ninja check-mlir check-clang
             EOF
           "
