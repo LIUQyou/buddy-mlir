@@ -8,6 +8,7 @@
 , libpng
 , zlib-ng
 , ccls
+, pkgs
 }:
 let
   self = stdenv.mkDerivation {
@@ -52,8 +53,8 @@ let
     passthru = {
       devShell = self.overrideAttrs (old: {
         nativeBuildInputs = old.nativeBuildInputs ++ [
-          python310
-          python310Packages.numpy
+          pkgs.python310
+          pkgs.python310Packages.numpy
           libjpeg
           libpng
           zlib-ng
