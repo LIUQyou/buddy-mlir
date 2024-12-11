@@ -121,7 +121,9 @@ jobs:
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
             chown -R root:root /root/buddy-mlir
             set -e
-            nix develop -c bash -c 'echo Nix environment setup complete'
+            nix develop --command bash <<'EOF'
+              echo 'Nix environment setup complete'
+            EOF
           "
 
       # Install Python requirements for python-bindings configuration
@@ -135,18 +137,19 @@ jobs:
       # 15. Build LLVM
       - name: Build LLVM
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-lld /bin/bash -c "
             set -e
-            nix develop -c bash -c '
+            nix develop --command bash <<'EOF'
               mkdir -p llvm/build && cd llvm/build
               cmake -G Ninja ../llvm \
-                -DLLVM_ENABLE_PROJECTS=\"mlir;clang\" \
-                -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
+                -DLLVM_ENABLE_PROJECTS='mlir;clang' \
+                -DLLVM_TARGETS_TO_BUILD='host;RISCV' \
                 -DLLVM_ENABLE_ASSERTIONS=ON \
                 -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags_llvm }}
+                -DLLVM_USE_LINKER=lld \
+                -DPython3_EXECUTABLE=\$(which python3)
               ninja check-mlir check-clang
-            '
+            EOF
           "
 
       # 16. Verify LLVM Build Directory Exists
@@ -164,7 +167,7 @@ jobs:
         run: |
           docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
             set -e
-            nix develop -c bash -c '
+            nix develop --command bash <<'EOF'
               mkdir -p build && cd build
               cmake -G Ninja .. \
                 -DMLIR_DIR=\$PWD/../llvm/build/lib/cmake/mlir \
@@ -174,7 +177,7 @@ jobs:
                 ${{ steps.configure.outputs.cmake_flags_buddy }}
               ninja
               ninja check-buddy
-            '
+            EOF
           "
 
       # 18. Stop and Remove Docker Container
