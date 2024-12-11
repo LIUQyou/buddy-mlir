@@ -1,4 +1,4 @@
-FROM buddycompiler-base:v1.0
+FROM buddycompiler-base:v1.1
 
 ENV DEBIAN_FRONTEND=noninteractive
 

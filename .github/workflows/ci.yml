@@ -53,7 +53,7 @@ jobs:
           docker buildx build \
             --cache-from=type=gha \
             --cache-to=type=gha,mode=max \
-            -t buddycompiler-base:v1.0 \
+            -t buddycompiler-base:v1.1 \
             -f ci/Dockerfile.base \
             --load \
             --progress=plain \
