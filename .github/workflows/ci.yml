@@ -118,41 +118,33 @@ jobs:
       # 14. Initialize Nix Environment Inside the Container
       - name: Initialize Nix Environment Inside the Container
         run: |
-          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            chown -R root:root /root/buddy-mlir
-            set -e
-            nix develop --command bash <<'EOF'
-              echo 'Nix environment setup complete'
-            EOF
-          "
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            chown -R root:root /root/buddy-mlir && \
+            nix develop --command echo "Nix environment setup complete"
+          '
 
       # Install Python requirements for python-bindings configuration
       - name: Install Python Requirements
         if: ${{ matrix.configuration == 'python-bindings' }}
         run: |
-          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            set -e
-            nix develop --command bash <<'EOF'
-              pip3 install -r /root/buddy-mlir/requirements.txt
-            EOF
-          "
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            nix develop --command pip3 install -r /root/buddy-mlir/requirements.txt
+          '
 
       # 15. Build LLVM
-      - name: Build LLVM
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            set -e
-            nix develop --command bash <<'EOF'
-              mkdir -p llvm/build && cd llvm/build
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            nix develop --command bash -c "
+              mkdir -p llvm/build && cd llvm/build && \
               cmake -G Ninja ../llvm \
-                -DLLVM_ENABLE_PROJECTS='mlir;clang' \
-                -DLLVM_TARGETS_TO_BUILD='host;RISCV' \
+                -DLLVM_ENABLE_PROJECTS=\"mlir;clang\" \
+                -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
                 -DLLVM_ENABLE_ASSERTIONS=ON \
                 -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags_llvm }}
+                ${{ steps.configure.outputs.cmake_flags_llvm }} && \
               ninja check-mlir check-clang
-            EOF
-          "
+            "
+          '
 
       # 16. Verify LLVM Build Directory Exists
       - name: Check LLVM Build Path
@@ -167,20 +159,19 @@ jobs:
       # 17. Build buddy-mlir Inside the Container
       - name: Build buddy-mlir
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
-            set -e
-            nix develop --command bash <<'EOF'
-              mkdir -p build && cd build
+          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            nix develop --command bash -c "
+              mkdir -p build && cd build && \
               cmake -G Ninja .. \
                 -DMLIR_DIR=\$PWD/../llvm/build/lib/cmake/mlir \
                 -DLLVM_DIR=\$PWD/../llvm/build/lib/cmake/llvm \
                 -DLLVM_ENABLE_ASSERTIONS=ON \
                 -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags_buddy }}
-              ninja
+                ${{ steps.configure.outputs.cmake_flags_buddy }} && \
+              ninja && \
               ninja check-buddy
-            EOF
-          "
+            "
+          '
 
       # 18. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
