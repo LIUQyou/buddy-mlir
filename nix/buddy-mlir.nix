@@ -50,9 +50,10 @@ let
     ];
 
     passthru = {
-      llvm = buddy-llvm;
       devShell = self.overrideAttrs (old: {
         nativeBuildInputs = old.nativeBuildInputs ++ [
+          python310
+          python310Packages.numpy
           libjpeg
           libpng
           zlib-ng
