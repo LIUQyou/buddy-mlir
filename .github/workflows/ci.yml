@@ -115,14 +115,6 @@ jobs:
             -w "/root/buddy-mlir" \
             buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
-      # 13.5. Check Python Version Inside the Container
-      - name: Check Python Version Inside the Container
-        run: |
-          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
-            echo "Python versions installed:" && \
-            which python3
-          '
-
       # 14. Initialize Nix Environment Inside the Container
       - name: Initialize Nix Environment Inside the Container
         run: |
