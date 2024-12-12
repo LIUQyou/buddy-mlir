@@ -169,20 +169,20 @@ jobs:
           docker stop buddy-mlir-ci-${{ matrix.configuration }}
           docker rm buddy-mlir-ci-${{ matrix.configuration }}
 
-      # 18. Upload Test Results if the Build Fails
-      - name: Upload Test Results
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results-${{ matrix.configuration }}
-          path: |
-            llvm/build/Testing/**/Testing/*.xml
-            build/Testing/**/Testing/*.xml
+      # # 18. Upload Test Results if the Build Fails
+      # - name: Upload Test Results
+      #   if: failure()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-results-${{ matrix.configuration }}
+      #     path: |
+      #       llvm/build/Testing/**/Testing/*.xml
+      #       build/Testing/**/Testing/*.xml
 
-      # 19. Archive Build Artifacts Regardless of Success or Failure
-      - name: Archive Build Artifacts
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifacts-${{ matrix.configuration }}
-          path: build
+      # # 19. Archive Build Artifacts Regardless of Success or Failure
+      # - name: Archive Build Artifacts
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: build-artifacts-${{ matrix.configuration }}
+      #     path: build
