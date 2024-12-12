@@ -128,7 +128,7 @@ jobs:
         if: ${{ matrix.configuration == 'python-bindings' }}
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
-            nix develop --command pip3 install -r /root/buddy-mlir/requirements.txt
+            nix develop --command python3 -m pip install -r /root/buddy-mlir/requirements.txt
           '
 
       # 15. Build LLVM

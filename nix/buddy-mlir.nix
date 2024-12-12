@@ -54,7 +54,7 @@ let
       devShell = self.overrideAttrs (old: {
         nativeBuildInputs = old.nativeBuildInputs ++ [
           pkgs.python310
-          pkgs.python310Packages.numpy
+          pkgs.python310Packages.pip
           libjpeg
           libpng
           zlib-ng
