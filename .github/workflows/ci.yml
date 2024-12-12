@@ -115,39 +115,29 @@ jobs:
             -w "/root/buddy-mlir" \
             buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
-      # 14. Initialize Nix Environment Inside the Container
-      - name: Initialize Nix Environment Inside the Container
-        run: |
-          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
-            chown -R root:root /root/buddy-mlir && \
-            nix develop --command echo "Nix environment setup complete"
-          '
-
-      # Install Python requirements for python-bindings configuration
+      # 13.5 Install Python Requirements inside the Container
       - name: Install Python Requirements
         if: ${{ matrix.configuration == 'python-bindings' }}
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
-            nix develop --command python3 -m pip install -r /root/buddy-mlir/requirements.txt
+            python3 -m pip install -r /root/buddy-mlir/requirements.txt
           '
 
-      # 15. Build LLVM
+      # 14. Build LLVM
       - name: Build LLVM
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
-            nix develop --command bash -c "
-              mkdir -p llvm/build && cd llvm/build && \
-              cmake -G Ninja ../llvm \
-                -DLLVM_ENABLE_PROJECTS=\"mlir;clang\" \
-                -DLLVM_TARGETS_TO_BUILD=\"host;RISCV\" \
-                -DLLVM_ENABLE_ASSERTIONS=ON \
-                -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags_llvm }} && \
-              ninja check-mlir check-clang
-            "
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            mkdir -p llvm/build && cd llvm/build && \
+            cmake -G Ninja ../llvm \
+              -DLLVM_ENABLE_PROJECTS="mlir;clang" \
+              -DLLVM_TARGETS_TO_BUILD="host;RISCV" \
+              -DLLVM_ENABLE_ASSERTIONS=ON \
+              -DCMAKE_BUILD_TYPE=Release \
+              ${{ steps.configure.outputs.cmake_flags_llvm }} && \
+            ninja check-mlir check-clang
           '
 
-      # 16. Verify LLVM Build Directory Exists
+      # 15. Verify LLVM Build Directory Exists
       - name: Check LLVM Build Path
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
@@ -157,31 +147,29 @@ jobs:
             fi
           "
 
-      # 17. Build buddy-mlir Inside the Container
+      # 16. Build buddy-mlir Inside the Container
       - name: Build buddy-mlir
         run: |
-          docker exec -w "/root/buddy-mlir" buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
-            nix develop --command bash -c "
-              mkdir -p build && cd build && \
-              cmake -G Ninja .. \
-                -DMLIR_DIR=\$PWD/../llvm/build/lib/cmake/mlir \
-                -DLLVM_DIR=\$PWD/../llvm/build/lib/cmake/llvm \
-                -DLLVM_ENABLE_ASSERTIONS=ON \
-                -DCMAKE_BUILD_TYPE=Release \
-                ${{ steps.configure.outputs.cmake_flags_buddy }} && \
-              ninja && \
-              ninja check-buddy
-            "
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            mkdir -p build && cd build && \
+            cmake -G Ninja .. \
+              -DMLIR_DIR=/root/buddy-mlir/llvm/build/lib/cmake/mlir \
+              -DLLVM_DIR=/root/buddy-mlir/llvm/build/lib/cmake/llvm \
+              -DLLVM_ENABLE_ASSERTIONS=ON \
+              -DCMAKE_BUILD_TYPE=Release \
+              ${{ steps.configure.outputs.cmake_flags_buddy }} && \
+            ninja && \
+            ninja check-buddy
           '
 
-      # 18. Stop and Remove Docker Container
+      # 17. Stop and Remove Docker Container
       - name: Stop and Remove Docker Container
         if: always()
         run: |
           docker stop buddy-mlir-ci-${{ matrix.configuration }}
           docker rm buddy-mlir-ci-${{ matrix.configuration }}
 
-      # 19. Upload Test Results if the Build Fails
+      # 18. Upload Test Results if the Build Fails
       - name: Upload Test Results
         if: failure()
         uses: actions/upload-artifact@v3
@@ -191,7 +179,7 @@ jobs:
             llvm/build/Testing/**/Testing/*.xml
             build/Testing/**/Testing/*.xml
 
-      # 20. Archive Build Artifacts Regardless of Success or Failure
+      # 19. Archive Build Artifacts Regardless of Success or Failure
       - name: Archive Build Artifacts
         if: always()
         uses: actions/upload-artifact@v3

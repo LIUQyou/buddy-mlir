@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install necessary packages including Node.js
+# Install common build dependencies and Python 3.10
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -11,20 +11,25 @@ RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
     ca-certificates \
-    nodejs \
+    python3.10 \
+    python3.10-dev \
+    python3.10-distutils \
+    python3.10-venv \
+    python3-setuptools \
+    python3-pip \
+    libjpeg-dev \
+    libpng-dev \
+    zlib1g-dev \
+    ccls \
+    npm \
     && rm -rf /var/lib/apt/lists/*
+
+# Set python3 and pip3 to point to python3.10
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1 && \
+    update-alternatives --install /usr/bin/pip3 pip3 /usr/bin/pip3.10 1
 
 # Use Bash shell
 SHELL ["/bin/bash", "-c"]
-
-# Install Nix package manager
-RUN curl -L https://nixos.org/nix/install | sh -s -- --daemon
-
-# Add Nix to the PATH
-ENV PATH="/root/.nix-profile/bin:/root/.nix-profile/sbin:/nix/var/nix/profiles/default/bin:$PATH"
-
-# Enable Nix flakes
-RUN mkdir -p /etc/nix && echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
 
 # Set up the environment
 ENV USER=root
