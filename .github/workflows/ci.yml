@@ -127,6 +127,7 @@ jobs:
       - name: Build LLVM
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            rm -rf llvm/build && mkdir -p llvm/build && cd llvm/build && \
             mkdir -p llvm/build && cd llvm/build && \
             cmake -G Ninja ../llvm \
               -DLLVM_ENABLE_PROJECTS="mlir;clang" \
@@ -151,6 +152,7 @@ jobs:
       - name: Build buddy-mlir
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            rm -rf build && mkdir -p build && cd build && \
             mkdir -p build && cd build && \
             cmake -G Ninja .. \
               -DMLIR_DIR=/root/buddy-mlir/llvm/build/lib/cmake/mlir \
