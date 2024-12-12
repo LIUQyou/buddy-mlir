@@ -120,9 +120,7 @@ jobs:
         run: |
           docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
             echo "Python versions installed:" && \
-            ls /usr/bin/python* && \
-            echo "Python3 version:" && \
-            python3 --version
+            which python3
           '
 
       # 14. Initialize Nix Environment Inside the Container
