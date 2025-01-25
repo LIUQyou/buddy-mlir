@@ -95,8 +95,10 @@ jobs:
             echo "cmake_flags_llvm=-DLLVM_TARGETS_TO_BUILD='host;RISCV;NVPTX' -DMLIR_ENABLE_CUDA_RUNNER=ON" >> $GITHUB_OUTPUT
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
           elif [ "${{ matrix.configuration }}" == "python-bindings" ]; then
-            echo "cmake_flags_llvm=-DMLIR_ENABLE_BINDINGS_PYTHON=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
-            echo "cmake_flags_buddy=-DBUDDY_MLIR_ENABLE_PYTHON_PACKAGES=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
+            PYTHON_PATH="$(docker exec buddy-mlir-ci-${{ matrix.configuration }} which python3)"
+            echo "Found Python path inside the container: $PYTHON_PATH"
+            echo "cmake_flags_llvm=-DMLIR_ENABLE_BINDINGS_PYTHON=ON -DPython3_EXECUTABLE=${PYTHON_PATH}" >> $GITHUB_OUTPUT
+            echo "cmake_flags_buddy=-DBUDDY_MLIR_ENABLE_PYTHON_PACKAGES=ON -DPython3_EXECUTABLE=${PYTHON_PATH}" >> $GITHUB_OUTPUT
           elif [ "${{ matrix.configuration }}" == "lld" ]; then
             echo "cmake_flags_llvm=-DLLVM_USE_LINKER=lld" >> $GITHUB_OUTPUT
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
