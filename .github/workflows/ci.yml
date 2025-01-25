@@ -1,0 +1,188 @@
+name: CI
+
+on:
+  push:
+    branches: [CI-test]
+  pull_request:
+    branches: [CI-test]
+
+jobs:
+  build-and-test:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        configuration:
+          - default
+          - lld
+          - python-bindings
+
+    steps:
+      # Fix workspace permissions
+      - name: Fix Workspace Permissions
+        run: |
+          sudo chown -R $(id -u):$(id -g) /home/quliu/buddy-complier-workspace/actions-runner/_work/buddy-mlir/buddy-mlir
+
+      # 1. Checkout the Repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      # 2. Set up Docker Buildx with default docker driver
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver: docker
+          buildkitd-flags: --allow-insecure-entitlement security.insecure
+
+      # 3. Inspect Buildx Builders to Confirm Configuration
+      - name: Inspect Buildx Builders
+        run: docker buildx ls
+
+      # 4. Check Docker Daemon Status
+      - name: Check Docker Daemon Status
+        run: docker info
+
+      # 5. Detailed Builder Inspection (Removed --verbose)
+      - name: Detailed Builder Inspection
+        run: docker buildx inspect default
+
+      # 6. Build the Base Image with Buildx and Caching
+      - name: Build Base Image with Buildx and Caching
+        run: |
+          docker buildx build \
+            --cache-from=type=gha \
+            --cache-to=type=gha,mode=max \
+            -t buddycompiler-base:v1.1 \
+            -f ci/Dockerfile.base \
+            --load \
+            --progress=plain \
+            .
+
+      # 7. List Docker Images after Base Image Build (Debugging)
+      - name: List Docker Images after Base Build
+        run: docker images
+
+      # 8. Verify Base Image Loaded
+      - name: Verify Base Image Loaded
+        run: |
+          docker images | grep buddycompiler-base
+
+      # 9. Build Docker Image for Matrix Configuration with Caching
+      - name: Build Docker Image for Matrix Configuration with Caching
+        run: |
+          docker buildx build \
+            --cache-from=type=gha \
+            --cache-to=type=gha,mode=max \
+            -t buddy-mlir-ci:${{ matrix.configuration }} \
+            -f ci/Dockerfile.${{ matrix.configuration }} \
+            --load \
+            --progress=plain \
+            .
+
+      # 10. List Docker Images after Matrix Build (Debugging)
+      - name: List Docker Images after Matrix Build
+        run: docker images
+
+      # 11. Verify Matrix Image Loaded
+      - name: Verify Matrix Image Loaded
+        run: |
+          docker images | grep "^buddy-mlir-ci\s\+${{ matrix.configuration }}\s"
+
+      # 12. Configure Build Flags Based on Matrix Configuration
+      - name: Configure Build Flags
+        id: configure
+        run: |
+          if [ "${{ matrix.configuration }}" == "cuda" ]; then
+            echo "cmake_flags_llvm=-DLLVM_TARGETS_TO_BUILD='host;RISCV;NVPTX' -DMLIR_ENABLE_CUDA_RUNNER=ON" >> $GITHUB_OUTPUT
+            echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
+          elif [ "${{ matrix.configuration }}" == "python-bindings" ]; then
+            echo "cmake_flags_llvm=-DMLIR_ENABLE_BINDINGS_PYTHON=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
+            echo "cmake_flags_buddy=-DBUDDY_MLIR_ENABLE_PYTHON_PACKAGES=ON -DPython3_EXECUTABLE=$(which python3)" >> $GITHUB_OUTPUT
+          elif [ "${{ matrix.configuration }}" == "lld" ]; then
+            echo "cmake_flags_llvm=-DLLVM_USE_LINKER=lld" >> $GITHUB_OUTPUT
+            echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
+          else
+            echo "cmake_flags_llvm=" >> $GITHUB_OUTPUT
+            echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
+          fi
+
+      # 13. Run Docker Container
+      - name: Run Docker Container
+        run: |
+          docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
+            -v "${GITHUB_WORKSPACE}:/root/buddy-mlir" \
+            -w "/root/buddy-mlir" \
+            buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
+
+      # 13.5 Install Python Requirements inside the Container
+      - name: Install Python Requirements
+        if: ${{ matrix.configuration == 'python-bindings' }}
+        run: |
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            python3 -m pip install -r /root/buddy-mlir/requirements.txt
+          '
+
+      # 14. Build LLVM
+      - name: Build LLVM
+        run: |
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            rm -rf llvm/build && mkdir -p llvm/build && cd llvm/build && \
+            cmake -G Ninja ../llvm \
+              -DLLVM_ENABLE_PROJECTS="mlir;clang" \
+              -DLLVM_TARGETS_TO_BUILD="host;RISCV" \
+              -DLLVM_ENABLE_ASSERTIONS=ON \
+              -DCMAKE_BUILD_TYPE=Release \
+              ${{ steps.configure.outputs.cmake_flags_llvm }} && \
+            ninja check-mlir check-clang
+          '
+
+      # 15. Verify LLVM Build Directory Exists
+      - name: Check LLVM Build Path
+        run: |
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c "
+            if [ ! -d /root/buddy-mlir/llvm/build ]; then
+              echo 'LLVM build directory does not exist'
+              exit 1
+            fi
+          "
+
+      # 16. Build buddy-mlir Inside the Container
+      - name: Build buddy-mlir
+        run: |
+          docker exec buddy-mlir-ci-${{ matrix.configuration }} /bin/bash -c '
+            rm -rf build && mkdir -p build && cd build && \
+            cmake -G Ninja .. \
+              -DMLIR_DIR=/root/buddy-mlir/llvm/build/lib/cmake/mlir \
+              -DLLVM_DIR=/root/buddy-mlir/llvm/build/lib/cmake/llvm \
+              -DLLVM_ENABLE_ASSERTIONS=ON \
+              -DCMAKE_BUILD_TYPE=Release \
+              ${{ steps.configure.outputs.cmake_flags_buddy }} && \
+            ninja && \
+            ninja check-buddy
+          '
+
+      # 17. Stop and Remove Docker Container
+      - name: Stop and Remove Docker Container
+        if: always()
+        run: |
+          docker stop buddy-mlir-ci-${{ matrix.configuration }}
+          docker rm buddy-mlir-ci-${{ matrix.configuration }}
+
+      # # 18. Upload Test Results if the Build Fails
+      # - name: Upload Test Results
+      #   if: failure()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-results-${{ matrix.configuration }}
+      #     path: |
+      #       llvm/build/Testing/**/Testing/*.xml
+      #       build/Testing/**/Testing/*.xml
+
+      # # 19. Archive Build Artifacts Regardless of Success or Failure
+      # - name: Archive Build Artifacts
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: build-artifacts-${{ matrix.configuration }}
+      #     path: build

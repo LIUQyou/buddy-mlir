@@ -1,0 +1,37 @@
+FROM nvidia/cuda:11.7.1-devel-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    clang \
+    cmake \
+    ninja-build \
+    python3 \
+    python3-pip \
+    git \
+    curl \
+    gnupg \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Use Bash shell
+SHELL ["/bin/bash", "-c"]
+
+# Install Nix package manager
+RUN curl -L https://nixos.org/nix/install | sh -s -- --daemon
+
+# Add Nix to the PATH
+ENV PATH=/root/.nix-profile/bin:/root/.nix-profile/sbin:/nix/var/nix/profiles/default/bin:$PATH
+
+# Enable Nix flakes
+RUN mkdir -p /etc/nix && echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
+
+# Set up the environment
+ENV USER=root
+ENV HOME=/root
+WORKDIR /root
+
+# Initialize submodules
+RUN git submodule update --init

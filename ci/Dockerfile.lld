@@ -1,0 +1,17 @@
+FROM buddycompiler-base:v1.1
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install lld linker
+RUN apt-get update && apt-get install -y lld \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up the environment
+ENV USER=root
+ENV HOME=/root
+WORKDIR /root
+
+# Set the working directory to /root
+WORKDIR /root
+
+# Initialize submodules

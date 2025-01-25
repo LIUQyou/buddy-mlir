@@ -1,0 +1,37 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install common build dependencies and Python 3.10
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    ninja-build \
+    git \
+    curl \
+    gnupg \
+    ca-certificates \
+    python3.10 \
+    python3.10-dev \
+    python3.10-distutils \
+    python3.10-venv \
+    python3-setuptools \
+    python3-pip \
+    libjpeg-dev \
+    libpng-dev \
+    zlib1g-dev \
+    ccls \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set python3 and pip3 to point to python3.10
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1 && \
+    update-alternatives --install /usr/bin/pip3 pip3 /usr/bin/pip3.10 1
+
+# Use Bash shell
+SHELL ["/bin/bash", "-c"]
+
+# Set up the environment
+ENV USER=root
+ENV HOME=/root
+WORKDIR /root
