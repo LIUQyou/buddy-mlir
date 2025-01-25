@@ -134,7 +134,7 @@ jobs:
               -DLLVM_ENABLE_ASSERTIONS=ON \
               -DCMAKE_BUILD_TYPE=Release \
               ${{ steps.configure.outputs.cmake_flags_llvm }} && \
-            ninja check-mlir check-clang
+            ninja -j16 check-mlir check-clang
           '
 
       # 15. Verify LLVM Build Directory Exists
@@ -159,7 +159,7 @@ jobs:
               -DCMAKE_BUILD_TYPE=Release \
               ${{ steps.configure.outputs.cmake_flags_buddy }} && \
             ninja && \
-            ninja check-buddy
+            ninja -j16 check-buddy
           '
 
       # 17. Stop and Remove Docker Container
