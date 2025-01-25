@@ -87,7 +87,15 @@ jobs:
         run: |
           docker images | grep "^buddy-mlir-ci\s\+${{ matrix.configuration }}\s"
 
-      # 12. Configure Build Flags Based on Matrix Configuration
+      # 12. Run Docker Container
+      - name: Run Docker Container
+        run: |
+          docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
+            -v "${GITHUB_WORKSPACE}:/root/buddy-mlir" \
+            -w "/root/buddy-mlir" \
+            buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
+
+      # 13. Configure Build Flags Based on Matrix Configuration
       - name: Configure Build Flags
         id: configure
         run: |
@@ -106,14 +114,6 @@ jobs:
             echo "cmake_flags_llvm=" >> $GITHUB_OUTPUT
             echo "cmake_flags_buddy=" >> $GITHUB_OUTPUT
           fi
-
-      # 13. Run Docker Container
-      - name: Run Docker Container
-        run: |
-          docker run -d --name buddy-mlir-ci-${{ matrix.configuration }} \
-            -v "${GITHUB_WORKSPACE}:/root/buddy-mlir" \
-            -w "/root/buddy-mlir" \
-            buddy-mlir-ci:${{ matrix.configuration }} tail -f /dev/null
 
       # 13.5 Install Python Requirements inside the Container
       - name: Install Python Requirements
