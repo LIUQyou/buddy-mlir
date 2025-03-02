@@ -15,11 +15,6 @@ jobs:
           - python-bindings
 
     steps:
-      # Fix workspace permissions
-      - name: Fix Workspace Permissions
-        run: |
-          sudo chown -R $(id -u):$(id -g) /home/quliu/buddy-complier-workspace/actions-runner/_work/buddy-mlir/buddy-mlir
-
       # 1. Checkout the Repository
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -45,26 +40,18 @@ jobs:
       - name: Detailed Builder Inspection
         run: docker buildx inspect default
 
-      # 6. Build the Base Image with Buildx and Caching
-      - name: Build Base Image with Buildx and Caching
-        run: |
-          docker buildx build \
-            --cache-from=type=gha \
-            --cache-to=type=gha,mode=max \
-            -t buddycompiler-base:v1.1 \
-            -f ci/Dockerfile.base \
-            --load \
-            --progress=plain \
-            .
+      # New: Pull the prebuilt Buddycompiler Base Image
+      - name: Pull Buddycompiler Base Image
+        run: docker pull liuqun1006/buddycompiler-base:v1.1
 
-      # 7. List Docker Images after Base Image Build (Debugging)
+      # 7. List Docker Images after Base Build (Debugging)
       - name: List Docker Images after Base Build
         run: docker images
 
       # 8. Verify Base Image Loaded
       - name: Verify Base Image Loaded
         run: |
-          docker images | grep buddycompiler-base
+          docker images | grep liuqun1006/buddycompiler-base
 
       # 9. Build Docker Image for Matrix Configuration with Caching
       - name: Build Docker Image for Matrix Configuration with Caching
@@ -74,6 +61,7 @@ jobs:
             --cache-to=type=gha,mode=max \
             -t buddy-mlir-ci:${{ matrix.configuration }} \
             -f ci/Dockerfile.${{ matrix.configuration }} \
+            --build-arg BASE_IMAGE=liuqun1006/buddycompiler-base:v1.1 \
             --load \
             --progress=plain \
             .
