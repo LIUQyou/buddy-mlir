@@ -15,6 +15,11 @@ jobs:
           - python-bindings
 
     steps:
+      # Fix workspace permissions
+      - name: Fix Workspace Permissions
+        run: |
+          sudo chown -R $(id -u):$(id -g) /home/quliu/buddy-complier-workspace/actions-runner/_work/buddy-mlir/buddy-mlir
+
       # 1. Checkout the Repository
       - name: Checkout Code
         uses: actions/checkout@v3
